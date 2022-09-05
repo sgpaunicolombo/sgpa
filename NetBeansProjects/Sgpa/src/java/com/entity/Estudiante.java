@@ -5,6 +5,7 @@
  */
 package com.entity;
 
+import com.controller.FacesUtil;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +34,15 @@ public class Estudiante extends Usuario implements Serializable {
         this.codigo = codigo;
     }
 
+      public boolean validarEntregable() {
+        boolean valido = true;
+        
+        if (this.codigo.equals("") || this.matriculas.equals("")) {
+            FacesUtil.addErrorMessage("Estos campos son requeridos");
+            valido = false;
+        }
+        return valido;
+    }
     
     
     /**
