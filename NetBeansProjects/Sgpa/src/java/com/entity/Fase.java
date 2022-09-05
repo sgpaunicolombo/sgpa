@@ -50,6 +50,16 @@ public class Fase implements Serializable {
         this.programa = programa;
     }
 
+     public boolean validarFase() {
+        boolean valido = true;
+        if (this.fechaInicial.toString().equals("") || this.fechaFinal.toString().equals("") || this.numero==0) {
+            valido = false;
+        }
+        if (this.programa.equals("") || this.periodo.equals("") || this.avances.equals("")) {
+            valido = false;
+        }
+        return valido;
+    }
     
     
     public Long getId() {

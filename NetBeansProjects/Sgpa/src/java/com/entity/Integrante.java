@@ -59,6 +59,16 @@ public class Integrante implements Serializable {
         return hash;
     }
 
+    public boolean validarIntegrante() {
+        boolean valido = true;
+        if (this.matricula.toString().equals("") || this.proyecto.toString().equals("") || this.rol.equals("")) {
+            valido = false;
+        }
+        if (this.estado.equals("") || this.fechaIngreso.equals("") || this.fechaUltimaModificacion.equals("")) {
+            valido = false;
+        }
+        return valido;
+    }
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set

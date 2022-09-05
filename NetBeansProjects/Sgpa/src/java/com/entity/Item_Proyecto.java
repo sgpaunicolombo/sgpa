@@ -53,6 +53,16 @@ public class Item_Proyecto implements Serializable {
         return hash;
     }
 
+    public boolean validarItemProyecto() {
+        boolean valido = true;
+        if (this.tipo.toString().equals("") || this.contenido.toString().equals("") || this.fecharegistro.toString().equals("")) {
+            valido = false;
+        }
+        if (this.fechamodificacion.equals("") || this.editor.equals("") || this.proyecto.equals("")) {
+            valido = false;
+        }
+        return valido;
+    }
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
