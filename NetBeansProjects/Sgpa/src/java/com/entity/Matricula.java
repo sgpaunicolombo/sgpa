@@ -56,6 +56,20 @@ public class Matricula implements Serializable {
         this.proyecto_Aulas = proyecto_Aulas;
         this.item_Proyectos = item_Proyectos;
     }
+    
+    public boolean validarMatricula() {
+        boolean valido = true;
+        if (this.estudiante.toString().equals("") || this.programa.toString().equals("") || this.periodo.toString().equals("")) {
+            valido = false;
+        }
+        if (this.fecha.equals("") || this.estado.equals("") || this.proyecto_Aulas.equals("")) {
+            valido = false;
+        }
+        if (this.item_Proyectos.equals("") || this.integrantes.equals("")) {
+            valido = false;
+        }
+        return valido;
+    }
 
       
 
