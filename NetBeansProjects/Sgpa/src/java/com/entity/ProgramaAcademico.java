@@ -5,6 +5,7 @@
  */
 package com.entity;
 
+import com.controller.FacesUtil;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
@@ -54,7 +55,22 @@ public class ProgramaAcademico implements Serializable {
         this.coordinadorPA = coordinadorPA;
     }
     
-    
+     public boolean validar(){
+        boolean valido=true;
+        if(this.nombre.equals("")||this.nombreCompleto.equals("")|| this.getCodigo().equals("")){
+            valido=false;
+            FacesUtil.addErrorMessage("Estos campos son requeridos: (Nombre-NombreCompleto-Codigo");
+        }
+        try{
+        if(this.getCoordinador().getIdentificacion().equals("")){
+            valido=false;
+            FacesUtil.addErrorMessage("Debes Agregar un coordinador al programa");
+        }
+        }catch(java.lang.NullPointerException npe){
+            
+        }
+        return valido;
+    }
     
     public Long getId() {
         return id;
