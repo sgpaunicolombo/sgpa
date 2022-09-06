@@ -7,7 +7,38 @@
     </h:head>
     <h:body>
        Soy estudiante 
-       <h:commandButton action="#{usuarioController.salir()}" value="salir" />
+      
+       <div class="container">
+            <div class="ccentral"></div>
+            <div class="carriba"><h:commandButton action="#{usuarioController.salir()}" value="salir" /></div>
+            <div class="clogo"></div>
+            <div class="cperfil"></div>
+            <div class="copciones"></div>
+        </div>
     </h:body>
+     <style>
+        .container {  display: grid;
+                      grid-template-columns: 0.3fr 1.7fr;
+                      grid-template-rows: 60px 0.5fr 1.5fr;
+                      grid-auto-columns: 1fr;
+                      gap: 0px 0px;
+                      grid-auto-flow: row;
+                      grid-template-areas:
+                          "clogo carriba"
+                          "cperfil ccentral"
+                          "copciones ccentral";
+        }
+
+        .ccentral { grid-area: ccentral; }
+
+        .carriba { grid-area: carriba; }
+
+        .clogo { grid-area: clogo; }
+
+        .cperfil { grid-area: cperfil; }
+
+        .copciones { grid-area: copciones; }
+
+    </style>
 </html>
 
