@@ -6,24 +6,43 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet name="./css/default.css"/>
-        <h:outputStylesheet name="./css/cssLayout.css"/>
+       
         <title>Facelets Template</title>
     </h:head>
 
     <h:body>
 
-        <div id="top" class="top">
-            <ui:insert name="top"><h:commandButton action="#{usuarioController.salir()}" value="salir" /></ui:insert>
+        <div class="container">
+            <div class="ccentral"></div>
+            <div class="carriba"><h:commandButton action="#{usuarioController.salir()}" value="salir" /></div>
+            <div class="clogo"></div>
+            <div class="cperfil"></div>
+            <div class="copciones"></div>
         </div>
-        <div>
-            <div id="left">
-                <ui:insert name="left">Left</ui:insert>
-            </div>
-            <div id="content" class="left_content">
-                <ui:insert name="content">Content</ui:insert>
-            </div>
-        </div>
-    </h:body>
 
+    </h:body>
+    <style>
+        .container {  display: grid;
+                      grid-template-columns: 0.3fr 1.7fr;
+                      grid-template-rows: 60px 0.5fr 1.5fr;
+                      grid-auto-columns: 1fr;
+                      gap: 0px 0px;
+                      grid-auto-flow: row;
+                      grid-template-areas:
+                          "clogo carriba"
+                          "cperfil ccentral"
+                          "copciones ccentral";
+        }
+
+        .ccentral { grid-area: ccentral; }
+
+        .carriba { grid-area: carriba; }
+
+        .clogo { grid-area: clogo; }
+
+        .cperfil { grid-area: cperfil; }
+
+        .copciones { grid-area: copciones; }
+
+    </style>
 </html>
