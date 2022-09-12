@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -10,13 +11,16 @@
         <div class="conper">
             <div class="cperiodos">
                 <h:commandButton value="agregar" action="#{periodoController.registrarPeriodo()}" />
+                <br/><br/><br/>
+                
+                <p:separator />
+                
                 <p:dataTable var="per" value="#{periodoController.periodos}" >
                     <p:column headerText="Fecha Inicial">
-                        <p:inputMask id="datei" value="#{per.fechaInicial}" mask="99/99/9999" />                       
-                        
+                        <p:calendar id="datei" value="#{per.fechaInicial}"/>
                     </p:column>
                     <p:column headerText="Fecha Final">
-                        <p:inputMask id="datef" value="#{per.fechaFinal}" mask="99/99/9999" />   
+                        <p:calendar id="datef" value="#{per.fechaFinal}"/>   
                     </p:column>
                     <p:column headerText="Año">
                         #{per.anio}
@@ -39,8 +43,10 @@
                     <p:spinner value="#{periodoController.periodo.anio}" min="2022" max="2040" />
                     <h:outputText value="Periodo" />
                     <p:panel>
-                        <h:outputText id="vsl" value="#{periodoController.periodo.numero}"/>
-                        <p:slider for="cnp" animate="true" display="vsl" minValue="1" maxValue="2" />
+                        <p:selectOneButton value="#{periodoController.periodo.numero}">
+                            <f:selectItem itemLabel="I" itemValue="1"/>
+                            <f:selectItem itemLabel="II" itemValue="2"/>
+                        </p:selectOneButton>
                     </p:panel>
 
                     <p:inputText id="cnp" value="#{periodoController.periodo.numero}" rendered="false" />
@@ -48,6 +54,7 @@
             </div>
             <div class="cboton"></div>
         </div>
+        <p:growl/>
     </h:body>
     <style>
         .conper {  display: grid;

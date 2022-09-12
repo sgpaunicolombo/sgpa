@@ -5,13 +5,13 @@
  */
 package com.entity;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.context.FacesContext;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.servlet.ServletContext;
 
 /**
  *
@@ -53,6 +53,28 @@ public class Profesor extends Usuario implements Serializable {
         this.nivelacademico = nivelacademico;
     }
 
+    
+    public String imagenPerfil(){        
+        String img="";
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        String path = servletContext.getRealPath("/imagenInicial.jpeg").replace("imagenInicial.jpeg", "Imagenes\\Perfiles\\");
+        //this.setId(Long.getLong("5"));
+        String imagen=path+this.getId()+".png";
+        File f=new File(imagen);
+        System.out.println(""+f.toString()+" "+f.exists()+" "+f.length()+" ");
+        if(f.length()>0){
+            img=this.getId()+".png";;
+        }else{
+            if(this.getGenero().equals("Masculino")){
+                img="iperfilh.jpg";
+            }if(this.getGenero().equals("Femenino")){
+                img="iperfilm.jpg";
+            }
+            System.out.println(""+img);
+        }
+           return img;
+    }
+    
     
     /**
      * @return the perfil

@@ -5,6 +5,7 @@
  */
 package com.entity;
 
+import com.controller.FacesUtil;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -51,6 +52,20 @@ public class Periodo implements Serializable {
         this.anio = anio;
     }
 
+    public boolean validar(){
+        boolean valido=true;        
+        if(this.fechaInicial.after(this.fechaFinal)){
+            FacesUtil.addErrorMessage("La fecha inicial no puede ser inferior a la fecha final");
+            valido=false;
+        }if(this.anio<2022){
+            FacesUtil.addErrorMessage("El año correspondiente al periodo esta fuera de rango");
+            valido=false;
+        }if(this.numero<1 || this.numero>2){
+            FacesUtil.addErrorMessage("El periodo asignado esta fuera de rango");
+            valido=false;
+        }        
+        return valido;
+    }
     
     
     public Long getId() {

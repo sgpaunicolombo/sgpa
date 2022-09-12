@@ -18,6 +18,11 @@ import javax.persistence.OneToOne;
 @Entity
 public class Coordinador extends Usuario implements Serializable {
 
+    public Coordinador() {
+    }
+
+   
+
    
     
     
