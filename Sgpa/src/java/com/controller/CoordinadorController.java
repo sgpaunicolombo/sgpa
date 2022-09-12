@@ -28,11 +28,22 @@ public class CoordinadorController implements Serializable{
    //servicios
     CoordinadorServices coordser=new CoordinadorServices();
     
+   //variables de control
+    private String paginaActualC = "";
+    
     /**
      * Creates a new instance of CoordinadorController
      */
     public CoordinadorController() {
     }
+    
+      public void gprofesores(){
+        paginaActualC="/Profesor/GestorProfesores.xhtml";
+    }
+      public void gmatriculas(){
+        paginaActualC="/Coordinador/GestorMatricula.xhtml";
+    }
+    
     
     public void consultarCoordinadores(){
         setCoordinadores(coordser.consultarTodo(Coordinador.class));
@@ -48,7 +59,11 @@ public class CoordinadorController implements Serializable{
         }
     }
     
-    
+    public void obtenerCoordinador(Long id){
+        coordinador=coordser.consultar(Coordinador.class, id);
+    }
+     
+     
     /**
      * @return the coordinadores
      */
@@ -75,6 +90,20 @@ public class CoordinadorController implements Serializable{
      */
     public void setCoordinador(Coordinador coordinador) {
         this.coordinador = coordinador;
+    }
+
+    /**
+     * @return the paginaActualC
+     */
+    public String getPaginaActualC() {
+        return paginaActualC;
+    }
+
+    /**
+     * @param paginaActualC the paginaActualC to set
+     */
+    public void setPaginaActualC(String paginaActualC) {
+        this.paginaActualC = paginaActualC;
     }
     
 }

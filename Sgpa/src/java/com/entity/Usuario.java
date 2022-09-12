@@ -105,7 +105,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entity.Usuario[ id=" + getId() + " ]";
+        return this.getPrimerNombre()+" "+this.getSegundoNombre()+" "+this.getPrimerApellido()+" "+this.getSegundoApellido(); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

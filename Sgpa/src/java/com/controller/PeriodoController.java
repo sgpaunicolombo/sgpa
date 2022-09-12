@@ -7,6 +7,7 @@ package com.controller;
 
 import com.entity.Periodo;
 import com.services.PeriodoServices;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,31 +20,33 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class PeriodoController {
+public class PeriodoController implements Serializable{
 
-    private Periodo periodo=new Periodo();
-    
-    PeriodoServices perser=new PeriodoServices();
-    
-    private List<Periodo> periodos=new LinkedList();
-    
+    private Periodo periodo = new Periodo();
+
+    PeriodoServices perser = new PeriodoServices();
+
+    private List<Periodo> periodos = new LinkedList();
+
     /**
      * Creates a new instance of PeriodoController
      */
     public PeriodoController() {
     }
 
-    public void registrarPeriodo(){
+    public void registrarPeriodo() {
         periodo.setFecha(new Date());
-        periodo=perser.modificar(periodo);
-        obtenerPeriodos();
+        if (periodo.validar()) {
+            periodo = perser.modificar(periodo);
+            periodo = new Periodo();
+            obtenerPeriodos();
+        }
     }
-    
-    public void obtenerPeriodos(){
-        periodos=perser.consultarTodo(Periodo.class);
+
+    public void obtenerPeriodos() {
+        periodos = perser.consultarTodo(Periodo.class);
     }
-    
-    
+
     /**
      * @return the periodo
      */
@@ -71,5 +74,5 @@ public class PeriodoController {
     public void setPeriodos(List<Periodo> periodos) {
         this.periodos = periodos;
     }
-    
+
 }

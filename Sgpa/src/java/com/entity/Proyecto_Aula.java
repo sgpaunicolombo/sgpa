@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.entity;
-// un pequeño cambio para verificar esto
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;

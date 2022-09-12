@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    
+    <p:wizard>
+        <p:tab id="est" title="Estudiante">
+            <p:dataTable style="font-size: 10pt" var="est" value="#{estudianteController.estudiantes}">
+            <p:column  headerText="Tipo de Identificacion">
+                #{est.tipo_ide}
+            </p:column>
+                <p:column filterBy="#{est.identificacion}" headerText="Identificacion">
+                #{est.identificacion}
+            </p:column>
+                <p:column filterBy="#{est.primerNombre}" headerText="Primer Nombre">
+                #{est.primerNombre}
+            </p:column>
+                <p:column filterBy="#{est.segundoNombre}" headerText="Segundo Nombre">
+                    #{est.segundoNombre}
+            </p:column>
+                <p:column filterBy="#{est.primerApellido}" headerText="Primer Apellido">
+                #{est.primerApellido}
+            </p:column>
+                <p:column filterBy="#{est.segundoApellido}" headerText="Segundo Apellido">
+                #{est.segundoApellido}
+            </p:column>                
+            <p:column headerText="Genero">
+                #{est.genero}
+            </p:column>
+            <p:column headerText="Telefono">
+                #{est.telefono}
+            </p:column>
+            <p:column headerText="Email">
+                #{est.email}
+            </p:column>
+            <p:column headerText="Direccion">
+                #{est.direccion}
+            </p:column>
+            <p:column headerText="Tipo">
+                #{est.tipo}
+            </p:column>
+            <p:column headerText="Estado">
+                #{est.estado}
+            </p:column>
+            <p:column headerText="">
+                <h:commandButton value="+" action="#{matriculaController.agregarEstudianteMtricula(est)}"/>
+
+            </p:column>
+        </p:dataTable>
+            
+        </p:tab>
+        <p:tab id="tpro" title="Programas">
+            <h:outputText value="#{matriculaController.matricula.estudiante.toString()}"/>
+            <p:dataTable var="prog" value="#{programaController.programas}">
+                <p:column  headerText="Codigo">
+                #{prog.codigo}
+                </p:column>
+                
+                <p:column  headerText="Nombre">
+                #{prog.nombreCompleto}
+                </p:column>
+                
+                <p:column  headerText="Agregar Programa">
+                    <h:commandButton value="+" action="#{matriculaController.agregarPrograma(prog)}"/>
+                
+                </p:column>
+                
+            </p:dataTable>
+                
+            
+            
+            
+        </p:tab>
+        <p:tab id="test" title="Periodo">
+            <p:panelGrid columns="2">
+                <h:outputText value="#{matriculaController.matricula.estudiante.toString()}"/>
+                <h:outputText value="#{matriculaController.matricula.programa.nombreCompleto}"/>
+            </p:panelGrid>
+                <p:dataTable var="per" value="#{periodoController.periodos}">
+                    <p:column  headerText="Fecha Inicio">
+                    #{per.fechaInicial}
+                    </p:column>
+                    <p:column  headerText="fecha Fin">
+                    #{per.fechaFinal}
+                    </p:column>
+                    <p:column  headerText="Nombre">
+                    #{per.anio} - #{per.numero}
+                    </p:column>
+                    <p:column  headerText="">
+                        <h:commandButton value="+" action="#{matriculaController.agregarPeriodo(per)}"/>
+                    </p:column>
+                    
+                    
+                </p:dataTable>
+                
+           
+            
+        </p:tab>
+        <p:tab id="tmat" title="Matricular">
+            <p:panelGrid>
+                <h:outputText value="#{matriculaController.matricula.estudiante.toString()}"/>
+                <h:outputText value="#{matriculaController.matricula.programa.nombreCompleto}"/>
+                <h:outputText value="#{matriculaController.matricula.periodo.anio}-#{matriculaController.matricula.periodo.numero}"/>
+            </p:panelGrid>
+            
+        </p:tab>
+        
+    </p:wizard>
+    
+    
+            
+        
+    
+</html>
+

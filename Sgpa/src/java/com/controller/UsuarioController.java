@@ -42,9 +42,12 @@ public class UsuarioController implements Serializable {
     private CoordinadorController coorcon=new CoordinadorController();
     @ManagedProperty("#{programaController}")
     private ProgramaController procon=new ProgramaController();
-    
-    
-    
+    @ManagedProperty("#{periodoController}")
+    private PeriodoController percon=new PeriodoController();
+    @ManagedProperty("#{estudianteController}")
+    private EstudianteController estcon=new EstudianteController();
+    @ManagedProperty("#{profesorController}")
+    private ProfesorController profcon=new ProfesorController();
     
     /**
      * Creates a new instance of UsuarioController
@@ -56,20 +59,28 @@ public class UsuarioController implements Serializable {
         setUsuario(ususer.ingresar(getUsuario().getLogin(), getUsuario().getPassword()));
         if (!getUsuario().getIdentificacion().equals("")) {
             if (getUsuario().getTipo().equals("Coordinador")) {
+                coorcon.obtenerCoordinador(getUsuario().getId());
+                profcon.obtenerProfesores();
+                estcon.obtenerEstudiantes();
+                percon.obtenerPeriodos();
+                procon.consultarProgramas();
                 paginaActual = "/Coordinador/GUICoordinador.xhtml";
 
             }
             if (getUsuario().getTipo().equals("Estudiante")) {
+                estcon.obtenerEstudiante(getUsuario().getId());
                 paginaActual = "/Estudiante/GUIEstudiante.xhtml";
 
             }
             if (getUsuario().getTipo().equals("Profesor")) {
+                
                 paginaActual = "/Profesor/GUIProfesor.xhtml";
 
             }
             if (getUsuario().getTipo().equals("Super")) {
                 coorcon.consultarCoordinadores();
                 procon.consultarProgramas();
+                percon.obtenerPeriodos();
                 paginaActual = "/GUISuperUsuario.xhtml";
 
             }
@@ -78,8 +89,17 @@ public class UsuarioController implements Serializable {
         }
     }
 
-    public void gusuarios(){
-        paginaSU="/General/GestorUsuarios.xhtml";
+    public void gregistroEstudiantes(){
+         estcon.setMpanelInscripcion(true);
+         paginaActual = "/Estudiante/InscripcionEstudiante.xhtml";
+         mpanelLogin = false;
+    }
+    
+    
+    
+    
+    public void gcoordinadores(){
+        paginaSU="/General/GestorCoordinadores.xhtml";
     }
       public void gprogramas(){
         paginaSU="/General/GestorProgramas.xhtml";
@@ -189,6 +209,48 @@ public class UsuarioController implements Serializable {
      */
     public void setProcon(ProgramaController procon) {
         this.procon = procon;
+    }
+
+    /**
+     * @return the percon
+     */
+    public PeriodoController getPercon() {
+        return percon;
+    }
+
+    /**
+     * @param percon the percon to set
+     */
+    public void setPercon(PeriodoController percon) {
+        this.percon = percon;
+    }
+
+    /**
+     * @return the estcon
+     */
+    public EstudianteController getEstcon() {
+        return estcon;
+    }
+
+    /**
+     * @param estcon the estcon to set
+     */
+    public void setEstcon(EstudianteController estcon) {
+        this.estcon = estcon;
+    }
+
+    /**
+     * @return the profcon
+     */
+    public ProfesorController getProfcon() {
+        return profcon;
+    }
+
+    /**
+     * @param profcon the profcon to set
+     */
+    public void setProfcon(ProfesorController profcon) {
+        this.profcon = profcon;
     }
 
 }

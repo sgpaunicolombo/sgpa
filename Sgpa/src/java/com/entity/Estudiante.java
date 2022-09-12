@@ -34,16 +34,7 @@ public class Estudiante extends Usuario implements Serializable {
         this.codigo = codigo;
     }
 
-      public boolean validarEntregable() {
-        boolean valido = true;
-        
-        if (this.codigo.equals("") || this.matriculas.equals("")) {
-            FacesUtil.addErrorMessage("Estos campos son requeridos");
-            valido = false;
-        }
-        return valido;
-    }
-    
+   
     
     /**
      * @return the codigo

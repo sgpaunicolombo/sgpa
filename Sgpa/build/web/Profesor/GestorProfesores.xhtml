@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <div class="cgprofesores">
+            <div class="l1">Primer Nombre</div>
+            <div class="c1"><p:inputText value="#{profesorController.profesor.primerNombre}" /></div>
+            <div class="l2">Segundo Nombre</div>
+            <div class="c2"><p:inputText value="#{profesorController.profesor.segundoNombre}" /></div>
+            <div class="l3">Primer Apellido</div>
+            <div class="c3"><p:inputText value="#{profesorController.profesor.primerApellido}" /></div>
+            <div class="l4">Segundo Apellido</div>
+            <div class="c4"><p:inputText value="#{profesorController.profesor.segundoApellido}" /></div>
+            <div class="l5">Tipo Identificacion</div>
+            <div class="c5"> 
+                <p:selectOneMenu  value="#{profesorController.profesor.tipo_ide}">
+                    <f:selectItem itemLabel="Select One" itemValue=""/>
+                    <f:selectItem itemLabel="TI" itemValue="TI"/>
+                    <f:selectItem itemLabel="CC" itemValue="CC"/>
+                    <f:selectItem itemLabel="CE" itemValue="CE"/>                         
+                </p:selectOneMenu></div>
+            <div class="l6">Identificacion</div>
+            <div class="c6"><p:inputText value="#{profesorController.profesor.identificacion}" /></div>
+            <div class="l7">Username</div>
+            <div class="c7"><p:inputText value="#{profesorController.profesor.login}" /></div>
+            <div class="l8">Password</div>
+            <div class="c8"><p:inputText value="#{profesorController.profesor.password}" /></div>
+            <div class="l9">Genero</div>
+            <div class="c9"> 
+                <p:selectOneMenu  value="#{profesorController.profesor.genero}">
+                    <f:selectItem itemLabel="Select One" itemValue=""/>
+                    <f:selectItem itemLabel="Masculino" itemValue="Masculino"/>
+                    <f:selectItem itemLabel="Femenino" itemValue="Femenino"/>                    
+                </p:selectOneMenu>
+            </div>
+            <div class="l10">Telefono</div>
+            <div class="c10"><p:inputText value="#{profesorController.profesor.telefono}" /></div>
+            <div class="l11">Email</div>
+            <div class="c11"><p:inputText value="#{profesorController.profesor.email}" /></div>
+            <div class="l12">Tipo de Contrato</div>
+            <div class="c12">
+                <p:selectOneMenu  value="#{profesorController.profesor.tipocontrato}">
+                    <f:selectItem itemLabel="Select One" itemValue=""/>
+                    <f:selectItem itemLabel="Tiempo Completo" itemValue="Tiempo Completo"/>
+                    <f:selectItem itemLabel="Medio Tiempo" itemValue="Medio Tiempo"/>
+                    <f:selectItem itemLabel="3/4 de Tiempo" itemValue="3/4 de Tiempo"/> 
+                    <f:selectItem itemLabel="Catedra" itemValue="Catedra"/>                           
+                </p:selectOneMenu>
+            </div>
+            <div class="l13">Direccion</div>
+            <div class="c13"><p:inputText value="#{profesorController.profesor.direccion}" /></div>
+            <div class="cop"><h:commandButton action="#{profesorController.registrarprofesor()}" value="registrar" />  
+                <h:commandButton action="#{profesorController.probarPath()}" value="probar" />
+            </div>
+        </div>
+
+        <p:dataGrid var="prof" columns="4" rows="8" paginator="true" value="#{profesorController.profesores}" >
+            <p:panel header="#{prof.identificacion}">
+                <div class="cpanelprofe" style="font-size: 9pt" >
+                    <div class="ciprof"><p:graphicImage value="/Imagenes/Perfiles/#{prof.imagenPerfil()}" style="width: 120px;height: 90px "  /> </div>
+                    <div class="cd1prof">
+                        <h:outputText value="#{prof.primerNombre} #{prof.segundoNombre}" /><br/>
+                        <h:outputText value="#{prof.primerApellido} #{prof.segundoApellido}" />
+                    </div>
+                    <div class="cd2prof">
+                        <h:outputText value="#{prof.perfil}" />
+                    </div>
+                    <div class="copprof"></div>
+                    <div class="cd3prof">
+                        <h:outputText value="#{prof.tipocontrato}" />
+                    </div>
+                </div>
+            </p:panel>
+        </p:dataGrid>
+
+    </h:body>
+    <style>
+
+        .cpanelprofe {  display: grid;
+                        grid-template-columns: 60px 60px 100px;
+                        grid-template-rows: 60px 60px 60px;
+                        grid-auto-columns: 1fr;
+                        gap: 0px 0px;
+                        grid-auto-flow: row;
+                        grid-template-areas:
+                            "ciprof ciprof cd1prof"
+                            "ciprof ciprof cd2prof"
+                            "cd3prof cd3prof copprof";
+        }
+
+        .ciprof { grid-area: ciprof; }
+
+        .cd1prof { grid-area: cd1prof; }
+
+        .cd2prof { grid-area: cd2prof; }
+
+        .copprof { grid-area: copprof; }
+
+        .cd3prof { grid-area: cd3prof; }
+
+
+
+        .cgprofesores {  display: grid; 
+                         grid-template-columns: 150px 250px 150px 250px; 
+                         grid-template-rows: 60px 60px 60px 60px 60px 60px 60px; 
+                         gap: 0px 0px; 
+                         grid-template-areas: 
+                             "l1 c1 l2 c2"
+                             "l3 c3 l4 c4"
+                             "l5 c5 l6 c6"
+                             "l7 c7 l8 c8"
+                             "l9 c9 l10 c10"
+                             "l11 c11 l12 c12"
+                             "l13 c13 cop cop"; 
+        }
+        .l1 { grid-area: l1; }
+        .c1 { grid-area: c1; }
+        .l2 { grid-area: l2; }
+        .c2 { grid-area: c2; }
+        .l3 { grid-area: l3; }
+        .c3 { grid-area: c3; }
+        .l4 { grid-area: l4; }
+        .c4 { grid-area: c4; }
+        .l5 { grid-area: l5; }
+        .c5 { grid-area: c5; }
+        .l6 { grid-area: l6; }
+        .c6 { grid-area: c6; }
+        .l7 { grid-area: l7; }
+        .c7 { grid-area: c7; }
+        .l8 { grid-area: l8; }
+        .c8 { grid-area: c8; }
+        .l9 { grid-area: l9; }
+        .c9 { grid-area: c9; }
+        .l10 { grid-area: l10; }
+        .c10 { grid-area: c10; }
+        .l11 { grid-area: l11; }
+        .c11 { grid-area: c11; }
+        .l12 { grid-area: l12; }
+        .c12 { grid-area: c12; }
+        .l13 { grid-area: l13; }
+        .c13 { grid-area: c13; }
+        .cop { grid-area: cop; }
+
+    </style>
+</html>
+

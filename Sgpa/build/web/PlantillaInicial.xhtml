@@ -15,7 +15,9 @@
             <div class="login">                
                 <h:inputText value="#{usuarioController.usuario.login}"  styleClass="campot" /><br/><br/>
                 <h:inputText value="#{usuarioController.usuario.password}" styleClass="campot" /><br/>
-                <h:commandButton action="#{usuarioController.iniciar()}" value="Login" styleClass="boton" />
+                <h:commandButton action="#{usuarioController.iniciar()}" value="Login" styleClass="boton" /><br/>
+                <h:commandButton action="#{usuarioController.gregistroEstudiantes()}" value="Registrarme" styleClass="boton" /><br/>
+                
             </div>
     </h:body>
     <style>
