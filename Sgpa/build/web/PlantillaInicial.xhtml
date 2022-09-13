@@ -1,192 +1,45 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    
+    
     <h:head>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <link rel="stylesheet" href="Estilos/style.css"></link>
+        <script src="https://kit.fontawesome.com/6f2a08f515.js" crossorigin="anonymous"></script>
         <title>Facelet Title</title>
+        
+        
     </h:head>
     <h:body>
-        <div class="body"></div>
-        <div class="grad"></div>
-        <div class="header">
-            <div>SGPA<span>UniColombo</span></div>
+        <div class="inicio">
+        <div class="lado-izquierdo">
+            
+            <h:graphicImage class="logo-sgpa-inicio" value="/resources/img/logo sgpa.png"/>
         </div>
-        <br/>
-            <div class="login">                
-                <h:inputText value="#{usuarioController.usuario.login}"  styleClass="campot" /><br/><br/>
-                <h:inputText value="#{usuarioController.usuario.password}" styleClass="campot" /><br/>
-                <h:commandButton action="#{usuarioController.iniciar()}" value="Login" styleClass="boton" /><br/>
-                <h:commandButton action="#{usuarioController.gregistroEstudiantes()}" value="Registrarme" styleClass="boton" /><br/>
+        <div class="lado-derecho">
+            <div class="cont-login">
+                <h3 class="loginh3">Login</h3>
+                <div class="nickname">
+                    <p:inputText  placeholder="Nickname" value="#{usuarioController.usuario.login}"   class=" inputs-login" /><i class="fas fa-user input-i"></i>
+                </div>
+                <div class="password ">
+                    <p:inputText placeholder="Password" value="#{usuarioController.usuario.password}"  class=" inputs-login"  /><i class="fas fa-key input-i"></i>
+                </div>
+                <a href=""><span class="forgot">Forgot password?</span></a>
                 
             </div>
+            
+            <h:commandButton action="#{usuarioController.iniciar()}" value="Login" class="boton-login" />
+            <span class="registrarme">Aún no tienes Cuenta? :<h:commandButton action="#{usuarioController.gregistroEstudiantes()}" value="Registrarme" class="registrarme-boton" /></span>
+            <h:graphicImage class="wave-down" value="/resources/img/wave-down.svg"/>
+            <h:graphicImage class="wave-up" value="/resources/img/wave-up.svg"/>
+            
+        </div>
+    </div>
+        
     </h:body>
-    <style>
-        body{
-            margin: 0;
-            padding: 0;
-            background: #fff;
-
-            color: #fff;
-            font-family: Arial;
-            font-size: 12px;
-        }
-
-        .body{
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            right: -40px;
-            bottom: -40px;
-            width: auto;
-            height: auto;
-            background-image: url(../Imagenes/imagenInicial.jpg);
-            background-size: cover;
-            -webkit-filter: blur(5px);
-            z-index: 0;
-        }
-
-        .grad{
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            right: -40px;
-            bottom: -40px;
-            width: auto;
-            height: auto;
-            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
-            z-index: 1;
-            opacity: 0.7;
-        }
-
-        .header{
-            position: absolute;
-            top: calc(50% - 35px);
-            left: calc(50% - 255px);
-            z-index: 2;
-        }
-
-        .header div{
-            float: left;
-            color: #fff;
-            font-family: 'Exo', sans-serif;
-            font-size: 35px;
-            font-weight: 200;
-        }
-
-        .header div span{
-            color: red !important;
-        }
-
-        .login{
-            position: absolute;
-            top: calc(50% - 75px);
-            left: calc(60% - 50px);
-            height: 150px;
-            width: 350px;
-            padding: 10px;
-            z-index: 2;
-        }
-
-        .campot{
-            width: 250px;
-            height: 30px;
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.6);
-            border-radius: 2px;
-            color: #fff;
-            font-family: 'Exo', sans-serif;
-            font-size: 16px;
-            font-weight: 400;
-            padding: 4px;
-        }
-        
-        .login input[type=text]{
-            width: 250px;
-            height: 30px;
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.6);
-            border-radius: 2px;
-            color: #fff;
-            font-family: 'Exo', sans-serif;
-            font-size: 16px;
-            font-weight: 400;
-            padding: 4px;
-        }
-        
-        .login input[type=password]{
-            width: 250px;
-            height: 30px;
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.6);
-            border-radius: 2px;
-            color: #fff;
-            font-family: 'Exo', sans-serif;
-            font-size: 16px;
-            font-weight: 400;
-            padding: 4px;
-            margin-top: 10px;
-        }
-
-        .boton{
-             width: 260px;
-            height: 35px;
-            background: #fff;
-            border: 1px solid #fff;
-            cursor: pointer;
-            border-radius: 2px;
-            color: #a18d6c;
-            font-family: 'Exo', sans-serif;
-            font-size: 16px;
-            font-weight: 400;
-            padding: 6px;
-            margin-top: 10px;
-        }
-        
-        .login input[type=button]{
-            width: 260px;
-            height: 35px;
-            background: #fff;
-            border: 1px solid #fff;
-            cursor: pointer;
-            border-radius: 2px;
-            color: #a18d6c;
-            font-family: 'Exo', sans-serif;
-            font-size: 16px;
-            font-weight: 400;
-            padding: 6px;
-            margin-top: 10px;
-        }
-
-        .login input[type=button]:hover{
-            opacity: 0.8;
-        }
-
-        .login input[type=button]:active{
-            opacity: 0.6;
-        }
-
-        .login input[type=text]:focus{
-            outline: none;
-            border: 1px solid rgba(255,255,255,0.9);
-        }
-
-        .login input[type=password]:focus{
-            outline: none;
-            border: 1px solid rgba(255,255,255,0.9);
-        }
-
-        .login input[type=button]:focus{
-            outline: none;
-        }
-
-        ::-webkit-input-placeholder{
-            color: rgba(255,255,255,0.6);
-        }
-
-        ::-moz-input-placeholder{
-            color: rgba(255,255,255,0.6);
-        }
-    </style>
-
+    
 </html>
-
