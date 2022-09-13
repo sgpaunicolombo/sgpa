@@ -49,49 +49,38 @@
             <div class="c13"><p:inputText value="#{coordinadorController.coordinador.direccion}" /></div>
             <div class="cop"><h:commandButton action="#{coordinadorController.registrar()}" value="registrar" />   </div>
         </div>
-        <p:dataTable var="usu" value="#{coordinadorController.coordinadores}">
-            <p:column headerText="Tipo de Identificacion">
-                #{usu.tipo_ide}
-            </p:column>
-            <p:column headerText="Identificacion">
+        <p:dataTable class="tabla-reporte" var="usu" value="#{coordinadorController.coordinadores}">
+            
+            <p:column  class="thead" headerText="Identificacion">
                 #{usu.identificacion}
             </p:column>
             <p:column headerText="Primer Nombre">
                 #{usu.primerNombre}
             </p:column>
-            <p:column headerText="Segundo Nombre">
-                #{usu.segundoApellido}
-            </p:column>
+            
             <p:column headerText="Primer Apellido">
                 #{usu.primerApellido}
             </p:column>
-            <p:column headerText="Segundo Apellido">
-                #{usu.segundoApellido}
-            </p:column>                
+                        
             <p:column headerText="Genero">
                 #{usu.genero}
             </p:column>
             <p:column headerText="Telefono">
                 #{usu.telefono}
             </p:column>
-            <p:column headerText="Email">
-                #{usu.email}
-            </p:column>
-            <p:column headerText="Direccion">
-                #{usu.direccion}
-            </p:column>
+            
+            
             <p:column headerText="Tipo">
                 #{usu.tipo}
             </p:column>
             <p:column headerText="Estado">
                 #{usu.estado}
             </p:column>
-            <p:column headerText="">
-
-            </p:column>
+            
         </p:dataTable>
     </h:body>
     <style>
+        
         .layout {
             width: 1366px;
             height: 768px;
