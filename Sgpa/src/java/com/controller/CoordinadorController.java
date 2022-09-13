@@ -5,7 +5,9 @@
  */
 package com.controller;
 
+import com.entity.Area;
 import com.entity.Coordinador;
+import com.services.AreaServices;
 import com.services.CoordinadorServices;
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -25,8 +27,13 @@ public class CoordinadorController implements Serializable{
     private List<Coordinador> coordinadores=new LinkedList();
     private Coordinador coordinador=new Coordinador();
 
+    
+    // Areas
+    private List<Area> areas = new LinkedList();
+    private Area area = new Area();
    //servicios
     CoordinadorServices coordser=new CoordinadorServices();
+    AreaServices areaser = new AreaServices();
     
    //variables de control
     private String paginaActualC = "";
@@ -43,19 +50,38 @@ public class CoordinadorController implements Serializable{
       public void gmatriculas(){
         paginaActualC="/Coordinador/GestorMatricula.xhtml";
     }
+    public void gareas(){
+        paginaActualC ="/General/GestorAreas.xhtml";
+    }
     
     
     public void consultarCoordinadores(){
         setCoordinadores(coordser.consultarTodo(Coordinador.class));
     }
+    public void consultarAreas(){
+        setAreas(areaser.consultarTodo(Area.class));
+    }
+    public void EliminarArea(Area area){
+        areaser.eliminar(area);
+        consultarAreas();
+    }
 
-     public void registrar() {
+    public void registrar() {
         if (coordinador.validarUsuario()) {
             coordinador.setEstado("Activo");
             coordinador.setTipo("Coordinador");
             coordser.crear(coordinador);
             coordinador = new Coordinador();
             consultarCoordinadores();
+        }
+    }
+    public void registrarArea() {
+        if (coordinador.validarUsuario()) {
+            area.setEstado("Activo");
+            areaser.crear(area);
+            area = new Area();
+            consultarAreas();
+            
         }
     }
     
@@ -78,6 +104,14 @@ public class CoordinadorController implements Serializable{
         this.coordinadores = coordinadores;
     }
 
+    public List<Area> getAreas() {
+        return areas;
+    }
+
+    public void setAreas(List<Area> areas) {
+        this.areas = areas;
+    }
+
     /**
      * @return the coordinador
      */
@@ -90,6 +124,14 @@ public class CoordinadorController implements Serializable{
      */
     public void setCoordinador(Coordinador coordinador) {
         this.coordinador = coordinador;
+    }
+    
+    public Area getArea() {
+        return area;
+    }
+
+    public void setArea(Area area) {
+        this.area = area;
     }
 
     /**

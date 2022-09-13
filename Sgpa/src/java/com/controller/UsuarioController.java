@@ -64,6 +64,7 @@ public class UsuarioController implements Serializable {
                 estcon.obtenerEstudiantes();
                 percon.obtenerPeriodos();
                 procon.consultarProgramas();
+                coorcon.consultarAreas();
                 paginaActual = "/Coordinador/GUICoordinador.xhtml";
 
             }
