@@ -5,6 +5,7 @@
  */
 package com.entity;
 
+import com.controller.FacesUtil;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -34,7 +35,8 @@ public class Matricula implements Serializable {
     @ManyToOne
     private Periodo periodo;
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fecha;    
+    private Date fecha;  
+    private String semestre;
     private String estado;//Pre-Matricula -  Matricula 
     @OneToMany(mappedBy = "estudianteLider")
     private List<Proyecto_Aula> proyecto_Aulas;
@@ -59,13 +61,17 @@ public class Matricula implements Serializable {
     
     public boolean validarMatricula() {
         boolean valido = true;
-        if (this.estudiante.toString().equals("") || this.programa.toString().equals("") || this.periodo.toString().equals("")) {
+        if (this.estudiante.toString().equals("") || this.programa.getNombreCompleto().equals("")) {
+            FacesUtil.addErrorMessage("No hay informacion de los siguientes entes:(estudiante o programa)");
             valido = false;
         }
-        if (this.fecha.equals("") || this.estado.equals("") || this.proyecto_Aulas.equals("")) {
+        if (this.fecha.equals("") || this.estado.equals("")) {
+            FacesUtil.addErrorMessage("no se han suministrado los siguientes datos(fecha o estado)");
             valido = false;
         }
-        if (this.item_Proyectos.equals("") || this.integrantes.equals("")) {
+        
+        if(Integer.parseInt(this.semestre)<1 || Integer.parseInt(this.semestre)>10){
+            FacesUtil.addErrorMessage("el valor del semestre esta fuera de rango");
             valido = false;
         }
         return valido;
@@ -189,6 +195,20 @@ public class Matricula implements Serializable {
      */
     public void setPeriodo(Periodo periodo) {
         this.periodo = periodo;
+    }
+
+    /**
+     * @return the semestre
+     */
+    public String getSemestre() {
+        return semestre;
+    }
+
+    /**
+     * @param semestre the semestre to set
+     */
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
     }
     
 }

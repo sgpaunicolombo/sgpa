@@ -11,38 +11,52 @@ import com.entity.Periodo;
 import com.entity.ProgramaAcademico;
 import com.services.MatriculaServices;
 import java.io.Serializable;
+import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 /**
  *
- * @author USUARIO
+ * @author jcmm
  */
 @ManagedBean
 @SessionScoped
-public class MatriculaController implements Serializable{
+public class MatriculaController implements Serializable {
 
+    //objetos de negocio
     private Matricula matricula = new Matricula();
-    
-    
-    // servicios
+
+    //servicios
     MatriculaServices matser = new MatriculaServices();
-    
-    
+
+    /**
+     * Creates a new instance of MatriculaController
+     */
     public MatriculaController() {
+
     }
-    
-    public void agregarEstudianteMtricula(Estudiante estudiante){
-        getMatricula().setEstudiante(estudiante);
+
+    public void agregarEstudiante(Estudiante e) {
+        getMatricula().setEstudiante(e);
     }
-    
-    public void agregarPrograma(ProgramaAcademico pa){
+
+    public void agregarPrograma(ProgramaAcademico pa) {
         getMatricula().setPrograma(pa);
     }
-    public void agregarPeriodo(Periodo p){
+
+    public void agregarPeriodo(Periodo p) {
         getMatricula().setPeriodo(p);
     }
 
+    public void matricular(){
+        matricula.setEstado("Activa");
+        matricula.setFecha(new Date());        
+        if(matricula.validarMatricula()){
+            matser.crear(matricula);
+            matricula = new Matricula();
+        }
+    }
+    
     /**
      * @return the matricula
      */
@@ -56,4 +70,5 @@ public class MatriculaController implements Serializable{
     public void setMatricula(Matricula matricula) {
         this.matricula = matricula;
     }
+
 }
