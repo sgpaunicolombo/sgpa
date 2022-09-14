@@ -20,7 +20,11 @@
            </div>
             <div class="carriba"><h:outputText value="#{estudianteController.estudiante.toString()}" /><h:commandButton action="#{usuarioController.salir()}" value="salir" /></div>
             <div class="clogo"></div>
-            <div class="cperfil"></div>
+            <div class="cperfil">
+                <p:panel header="Periodo">
+                    #{periodoController.periodoActual.anio}-#{periodoController.periodoActual.numero}
+                </p:panel>
+            </div>
             <div class="copciones">
                
             </div>

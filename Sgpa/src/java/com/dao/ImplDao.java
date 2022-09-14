@@ -109,12 +109,7 @@ public class ImplDao<T, ID> implements IDao<T, ID> {
         ent=em.merge(entity);
         et.commit();
         
-//            em.getTransaction();
-//            et.begin();
-//            ent=em.merge(entity);
-//            et.commit();
-        
-        FacesUtil.addInfoMessage("Se Actualizó en el sistema el siguiente Elemento: "+entity.getClass().getSimpleName());
+       // FacesUtil.addInfoMessage("Se Actualizó en el sistema el siguiente Elemento: "+entity.getClass().getSimpleName());
         }catch(PersistenceException pe){   
             FacesUtil.addErrorMessage("Error de Persistencia: "+pe.getMessage());
             if(et.isActive()){
