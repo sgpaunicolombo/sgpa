@@ -48,7 +48,10 @@
                 <div class="c12"><p:inputText value="#{estudianteController.estudiante.telefono}" /></div>
                 <div class="l13">Direccion</div>
                 <div class="c13"><p:inputText value="#{estudianteController.estudiante.direccion}" /></div>
-                <div class="cop"><h:commandButton action="#{estudianteController.inscribirEstudiante()}" value="registrar" />   </div>
+                <div class="cop">
+                    <h:commandButton action="#{estudianteController.inscribirEstudiante()}" value="registrar" />   
+                <h:commandButton action="#{usuarioController.salir()}" value="regresar" />   
+                </div>
             </div>
         </p:panel>
         <p:panel rendered="#{!estudianteController.mpanelInscripcion}">

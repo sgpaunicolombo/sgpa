@@ -20,9 +20,25 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class PeriodoController implements Serializable{
+public class PeriodoController implements Serializable {
+
+    /**
+     * @return the periodoActual
+     */
+    public Periodo getPeriodoActual() {
+        return periodoActual;
+    }
+
+    /**
+     * @param periodoActual the periodoActual to set
+     */
+    public void setPeriodoActual(Periodo periodoActual) {
+        this.periodoActual = periodoActual;
+    }
 
     private Periodo periodo = new Periodo();
+    private Periodo periodoActual=new Periodo();
+    
 
     PeriodoServices perser = new PeriodoServices();
 
@@ -35,12 +51,33 @@ public class PeriodoController implements Serializable{
     }
 
     public void registrarPeriodo() {
-        periodo.setFecha(new Date());
-        if (periodo.validar()) {
-            periodo = perser.modificar(periodo);
-            periodo = new Periodo();
+        getPeriodo().setFecha(new Date());
+        if (getPeriodo().validar()) {
+            setPeriodo(perser.modificar(getPeriodo()));
+            setPeriodo(new Periodo());
             obtenerPeriodos();
         }
+    }
+
+    public void establecerPeriodoActual(){
+        periodoActual=perser.obtenerPeriodoActual();
+    }
+    
+    public void desactivarPeriodos() {
+       // obtenerPeriodos();
+        for (Periodo p : periodos) {
+            if (p.isActual()) {
+                p.setActual(false);
+                perser.modificar(p);
+            }
+        }
+    }
+
+    public void activarPeriodo(Periodo p) {
+        desactivarPeriodos();
+        p.setActual(true);
+        p = perser.modificar(p);
+        obtenerPeriodos();
     }
 
     public void obtenerPeriodos() {

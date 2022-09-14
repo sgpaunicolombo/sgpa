@@ -35,6 +35,7 @@ public class Periodo implements Serializable {
     private Date fechaFinal;
     private int numero;
     private int anio;
+    private boolean actual;
     @OneToMany(mappedBy = "periodo")
     private List<Matricula> matriculas;
     @OneToMany(mappedBy = "periodo")
@@ -183,6 +184,20 @@ public class Periodo implements Serializable {
      */
     public void setAnio(int anio) {
         this.anio = anio;
+    }
+
+    /**
+     * @return the actual
+     */
+    public boolean isActual() {
+        return actual;
+    }
+
+    /**
+     * @param actual the actual to set
+     */
+    public void setActual(boolean actual) {
+        this.actual = actual;
     }
     
 }

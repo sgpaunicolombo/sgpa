@@ -59,11 +59,11 @@ public class Profesor extends Usuario implements Serializable {
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         String path = servletContext.getRealPath("/imagenInicial.jpeg").replace("imagenInicial.jpeg", "Imagenes\\Perfiles\\");
         //this.setId(Long.getLong("5"));
-        String imagen=path+this.getId()+".png";
+        String imagen=path+this.getId()+".jpg";
         File f=new File(imagen);
         System.out.println(""+f.toString()+" "+f.exists()+" "+f.length()+" ");
         if(f.length()>0){
-            img=this.getId()+".png";;
+            img=this.getId()+".jpg";;
         }else{
             if(this.getGenero().equals("Masculino")){
                 img="iperfilh.jpg";

@@ -59,7 +59,8 @@
                         #{per.numero}
                     </p:column>
                     <p:column headerText="">
-
+                        <h:commandButton rendered="#{!per.actual}" action="#{periodoController.activarPeriodo(per)}" value="Activar" />
+                        <h:outputText rendered="#{per.actual}" value="Actual" />
                     </p:column>
                 </p:dataTable>
         
