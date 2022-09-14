@@ -7,7 +7,10 @@
         <title>Facelet Title</title>
     </h:head>
     
-    <p:wizard>
+    <section class="contenido-contenedor">
+        <div class="border contenedor top">
+             <h1 class="tittle">Gestor MATRICULAS</h1>
+             <p:wizard>
         <p:tab id="est" title="Estudiante">
             <p:dataTable style="font-size: 10pt" var="est" value="#{estudianteController.estudiantes}">
             <p:column  headerText="Tipo de Identificacion">
@@ -111,6 +114,10 @@
         
     </p:wizard>
     
+    
+
+        </div>
+    </section>
     
             
         

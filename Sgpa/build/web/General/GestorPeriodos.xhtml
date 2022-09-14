@@ -8,14 +8,44 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <div class="conper">
+        <section class="contenido-contenedor">
+        <div class="border contenedor top">
+             <h1 class="tittle">Gestor de Periodos</h1>
+           <div class="conper">
+            
             <div class="cperiodos">
+                
                 <h:commandButton value="agregar" action="#{periodoController.registrarPeriodo()}" />
-                <br/><br/><br/>
                 
-                <p:separator />
+                <p:panelGrid  columns="2">
+                    <h:outputText value="Año" />
+                    <p:spinner value="#{periodoController.periodo.anio}" min="2022" max="2040" />
+                    <h:outputText value="Periodo" />
+                    <p:panel>
+                        <p:selectOneButton value="#{periodoController.periodo.numero}">
+                            <f:selectItem itemLabel="I" itemValue="1"/>
+                            <f:selectItem itemLabel="II" itemValue="2"/>
+                        </p:selectOneButton>
+                    </p:panel>
+
+                    <p:inputText id="cnp" value="#{periodoController.periodo.numero}" rendered="false" />
+                </p:panelGrid>   
+                 
+                <div class="lfechai">Fecha Inicial</div>
+            <div class="lfechaf">Fecha Final</div>
+            <div class="cfechai"><p:calendar value="#{periodoController.periodo.fechaInicial}" /></div>
+            <div class="cfechaf"><p:calendar value="#{periodoController.periodo.fechaFinal}" /></div>
+            <div class="cinfp">
+                            
+            </div>
+            <div class="cboton"><h:commandButton value="agregar" action="#{periodoController.registrarPeriodo()}" /></div>
+               
                 
-                <p:dataTable var="per" value="#{periodoController.periodos}" >
+                
+            </div>
+            
+        </div>
+        <p:dataTable class="tabla-reporte" var="per" value="#{periodoController.periodos}" >
                     <p:column headerText="Fecha Inicial">
                         <p:calendar id="datei" value="#{per.fechaInicial}"/>
                     </p:column>
@@ -32,56 +62,20 @@
 
                     </p:column>
                 </p:dataTable>
-            </div>
-            <div class="lfechai">Fecha Inicial</div>
-            <div class="lfechaf">Fecha Final</div>
-            <div class="cfechai"><p:calendar value="#{periodoController.periodo.fechaInicial}" /></div>
-            <div class="cfechaf"><p:calendar value="#{periodoController.periodo.fechaFinal}" /></div>
-            <div class="cinfp">
-                <p:panelGrid columns="2">
-                    <h:outputText value="Año" />
-                    <p:spinner value="#{periodoController.periodo.anio}" min="2022" max="2040" />
-                    <h:outputText value="Periodo" />
-                    <p:panel>
-                        <p:selectOneButton value="#{periodoController.periodo.numero}">
-                            <f:selectItem itemLabel="I" itemValue="1"/>
-                            <f:selectItem itemLabel="II" itemValue="2"/>
-                        </p:selectOneButton>
-                    </p:panel>
+        
+    
 
-                    <p:inputText id="cnp" value="#{periodoController.periodo.numero}" rendered="false" />
-                </p:panelGrid>                
-            </div>
-            <div class="cboton"></div>
         </div>
-        <p:growl/>
+    </section>
+
+        
     </h:body>
     <style>
-        .conper {  display: grid;
-                   grid-template-columns: 160.5px 300px 300px;
-                   grid-template-rows: 60px 60px 1fr;
-                   grid-auto-columns: 1fr;
-                   gap: 0px 0px;
-                   grid-auto-flow: row;
-                   grid-template-areas:
-                       "lfechai cfechai cinfp"
-                       "lfechaf cfechaf cboton"
-                       "cperiodos cperiodos cperiodos";
+        .cperiodos{
+           
+            display:flex;  
         }
-
-        .cperiodos { grid-area: cperiodos; }
-
-        .lfechai { grid-area: lfechai; }
-
-        .lfechaf { grid-area: lfechaf; }
-
-        .cfechai { grid-area: cfechai; }
-
-        .cfechaf { grid-area: cfechaf; }
-
-        .cinfp { grid-area: cinfp; }
-
-        .cboton { grid-area: cboton; }
     </style>
+       
 </html>
 
