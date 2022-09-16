@@ -8,8 +8,10 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        
-        <div class="cpest">
+        <section class="contenido-contenedor">
+        <div class="border contenedor top">
+             <h1 class="tittle">Gestor de Areas</h1>
+             <div class="cpest">
             <div class="cimgperfil">
                 <p:graphicImage value="/Imagenes/Perfiles/#{estudianteController.estudiante.imagenPerfil()}" style="width: 200px;height: 220px "  /><br/>
                 <p:fileUpload value="#{estudianteController.iestudiante}" mode="simple" skinSimple="true"/>
@@ -64,9 +66,11 @@
             <div class="copciones"></div>
         </div>
 
+    
 
-
-
+        </div>
+    </section>
+ 
     </h:body>
     <style>
         .cpest { display: grid; 
