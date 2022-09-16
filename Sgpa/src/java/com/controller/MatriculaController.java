@@ -9,6 +9,7 @@ import com.entity.Estudiante;
 import com.entity.Matricula;
 import com.entity.Periodo;
 import com.entity.ProgramaAcademico;
+import com.services.EstudianteServices;
 import com.services.MatriculaServices;
 import java.io.Serializable;
 import java.util.Date;
@@ -28,6 +29,7 @@ public class MatriculaController implements Serializable {
 
     //servicios
     MatriculaServices matser = new MatriculaServices();
+    EstudianteServices estser = new EstudianteServices();
 
     /**
      * Creates a new instance of MatriculaController
@@ -48,15 +50,17 @@ public class MatriculaController implements Serializable {
         getMatricula().setPeriodo(p);
     }
 
-    public void matricular(){
+    public void matricular() {
         matricula.setEstado("Activa");
-        matricula.setFecha(new Date());        
-        if(matricula.validarMatricula()){
+        matricula.setFecha(new Date());
+        if (matricula.validarMatricula()) {
             matser.crear(matricula);
+            matricula.getEstudiante().generarCodigo(matricula);
+            matricula.setEstudiante(estser.modificar(matricula.getEstudiante()));
             matricula = new Matricula();
         }
     }
-    
+
     /**
      * @return the matricula
      */

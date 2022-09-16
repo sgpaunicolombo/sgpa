@@ -7,7 +7,9 @@ package com.controller;
 
 import com.entity.Coordinador;
 import com.entity.Estudiante;
+import com.entity.Periodo;
 import com.entity.Profesor;
+import com.entity.ProgramaAcademico;
 import com.entity.Usuario;
 import com.services.UsuarioServices;
 import java.io.Serializable;
@@ -67,7 +69,7 @@ public class UsuarioController implements Serializable {
                 profcon.obtenerProfesores();
                 estcon.obtenerEstudiantes();
                 percon.obtenerPeriodos();
-                procon.consultarProgramas();
+                procon.consultarProgramasXCoordinador(coorcon.getCoordinador());
                 coorcon.consultarAreas();
                 paginaActual = "/Coordinador/GUICoordinador.xhtml";
 
@@ -79,6 +81,7 @@ public class UsuarioController implements Serializable {
             }
             if (getUsuario().getTipo().equals("Profesor")) {
                 profcon.obtenerPrtofesor(getUsuario().getId());
+                procon.obtenerProgramaCoordinadorPA(profcon.getProfesor());
                 paginaActual = "/Profesor/GUIProfesor.xhtml";
 
             }
@@ -118,6 +121,8 @@ public class UsuarioController implements Serializable {
         estcon.setEstudiante(new Estudiante());
         coorcon.setCoordinador(new Coordinador());
         profcon.setProfesor(new Profesor());
+        procon.setPrograma(new ProgramaAcademico());
+        percon.setPeriodo(new Periodo());
         usuario = new Usuario();
     }
 

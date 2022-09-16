@@ -23,6 +23,9 @@
                  <p:panel header="Periodo">
                     #{periodoController.periodoActual.anio}-#{periodoController.periodoActual.numero}
                 </p:panel>
+                <p:panel header="Programa" rendered="#{not empty programaController.programa.coordinadorPA}">
+                    #{programaController.programa.nombre}
+                </p:panel>
             </div>
             <div class="copciones">
                 

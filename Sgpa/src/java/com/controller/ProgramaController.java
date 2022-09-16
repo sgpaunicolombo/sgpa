@@ -6,6 +6,7 @@
 package com.controller;
 
 import com.entity.Coordinador;
+import com.entity.Profesor;
 import com.entity.ProgramaAcademico;
 import com.services.ProgramaAcademicoServices;
 import java.io.Serializable;
@@ -37,21 +38,36 @@ public class ProgramaController implements Serializable{
     public void consultarprograma(ProgramaAcademico p){
         programa=p;
     }
+    public void seleccionarCoordinadorPA(Profesor p){
+        programa.setCoordinadorPA(p);
+    }
+    
+    public void obtenerProgramaCoordinadorPA(Profesor p){
+        programa=paserv.obtenerProgramaAcademicoxCoordinadorPA(p);
+    }
     
     public void consultarProgramas(){
         programas=paserv.consultarTodo(ProgramaAcademico.class);
+    }
+     public void consultarProgramasXCoordinador(Coordinador c){
+        programas=paserv.listarProgramasXCoordinador(c);
     }
     
     public void agregarCoordinador(Coordinador c){
         programa.setCoordinador(c);
     }
     
+    public void asignarCoordinadorPA(){
+        programa=paserv.modificar(programa);
+        FacesUtil.addInfoMessage("Se asigno el profesor: "+programa.getCoordinadorPA().toString()+" al Programa: "+programa.getNombreCompleto());
+    }
+    
     public void registrar(){
         if(programa.validar()){
             programa.setEstado("Activo");
             programa=paserv.modificar(programa);
+            consultarProgramasXCoordinador(programa.getCoordinador());
             programa = new ProgramaAcademico();
-            consultarProgramas();
         }
     }
     

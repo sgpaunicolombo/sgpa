@@ -22,11 +22,9 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class CoordinadorController implements Serializable{
-
     
     private List<Coordinador> coordinadores=new LinkedList();
     private Coordinador coordinador=new Coordinador();
-
     
     // Areas
     private List<Area> areas = new LinkedList();
@@ -53,7 +51,9 @@ public class CoordinadorController implements Serializable{
     public void gareas(){
         paginaActualC ="/General/GestorAreas.xhtml";
     }
-    
+    public void gcoordinadorPA(){
+        paginaActualC="/Coordinador/AsignarCoordinacionPA.xhtml";
+    }
     
     public void consultarCoordinadores(){
         setCoordinadores(coordser.consultarTodo(Coordinador.class));

@@ -6,11 +6,14 @@
 package com.entity;
 
 import com.controller.FacesUtil;
+import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.faces.context.FacesContext;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.servlet.ServletContext;
 
 /**
  *
@@ -18,6 +21,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Estudiante extends Usuario implements Serializable {
+
     private String codigo;
     @OneToMany(mappedBy = "estudiante")
     private List<Matricula> matriculas;
@@ -34,8 +38,34 @@ public class Estudiante extends Usuario implements Serializable {
         this.codigo = codigo;
     }
 
-   
+    public void generarCodigo(Matricula m) {
+        this.codigo = m.getPrograma().getCodigo() + this.getIdentificacion().substring(0, 5) + this.getId();
+    }
     
+    
+    public String imagenPerfil(){        
+        String img="";
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        String path = servletContext.getRealPath("/imagenInicial.jpeg").replace("imagenInicial.jpeg", "Imagenes\\Perfiles\\");
+        //this.setId(Long.getLong("5"));
+        String imagen=path+this.getId()+".jpg";
+        File f=new File(imagen);
+        System.out.println(""+f.toString()+" "+f.exists()+" "+f.length()+" ");
+        if(f.length()>0){
+            img=this.getId()+".jpg";;
+        }else{
+            if(this.getGenero().equals("Masculino")){
+                img="iperfilh.jpg";
+            }if(this.getGenero().equals("Femenino")){
+                img="iperfilm.jpg";
+            }
+            System.out.println(""+img);
+        }
+           return img;
+    }
+    
+    
+
     /**
      * @return the codigo
      */
@@ -49,6 +79,5 @@ public class Estudiante extends Usuario implements Serializable {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-        
 
 }

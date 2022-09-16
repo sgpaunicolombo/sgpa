@@ -7,11 +7,18 @@ package com.controller;
 
 import com.entity.Estudiante;
 import com.services.EstudianteServices;
+import com.utilidades.ImageUtils;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+import org.primefaces.model.file.UploadedFile;
 
 /**
  *
@@ -29,6 +36,8 @@ public class EstudianteController implements Serializable{
     //variable de control
     private boolean mpanelInscripcion = true;
     private String paginaActualE = "";
+    private UploadedFile iestudiante;
+
     /**
      * Creates a new instance of EstudianteController
      */
@@ -44,6 +53,26 @@ public class EstudianteController implements Serializable{
             mpanelInscripcion = false;
         }
     }
+    
+     public void subirImagenProfesor() {
+        try {  
+//               File destFile= new File(event.getFile().getFileName());           
+               System.out.println(""+iestudiante.getFileName());
+               ServletContext servletContext = (ServletContext) 
+               FacesContext.getCurrentInstance().getExternalContext().getContext();
+               String path=servletContext.getRealPath("/imagenInicial.jpg").replace("imagenInicial.jpg", "Imagenes\\Perfiles\\");
+               ImageUtils.copyFile(estudiante.getId()+".jpg", iestudiante.getInputStream(),path);
+               System.out.println(""+path);
+                //getEstudiante().getEstudiante().setImagenC(path+event.getFile().getFileName()+".jpg");               
+        } catch (IOException ex) {
+            Logger.getLogger(EstudianteController.class.getName()).log(Level.SEVERE, null, ex);
+        }	
+    }
+    
+    public void miperfil() {
+        paginaActualE = "/Estudiante/PerfilEstudiante.xhtml";
+    }
+    
     
     public void obtenerEstudiantes(){
         estudiantes=estser.consultarTodo(Estudiante.class);
@@ -107,6 +136,20 @@ public class EstudianteController implements Serializable{
      */
     public void setEstudiantes(List<Estudiante> estudiantes) {
         this.estudiantes = estudiantes;
+    }
+
+    /**
+     * @return the iestudiante
+     */
+    public UploadedFile getIestudiante() {
+        return iestudiante;
+    }
+
+    /**
+     * @param iestudiante the iestudiante to set
+     */
+    public void setIestudiante(UploadedFile iestudiante) {
+        this.iestudiante = iestudiante;
     }
 
 }
