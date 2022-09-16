@@ -8,7 +8,10 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <div>Nombre</div>
+        <section class="contenido-contenedor">
+        <div class="border contenedor top">
+             <h1 class="tittle">Tipo de item</h1>
+              <div>Nombre</div>
         <div><p:inputText value="#{tipo_itemController.tipo_item.nombre}" /></div><br/>
         <div>Descripcion</div>
         <div><p:inputText value="#{tipo_itemController.tipo_item.descripcion}" /></div>
@@ -27,6 +30,10 @@
                         <h:commandButton value="Eliminar" action="#{tipo_itemController.eliminartipo_Item(te)}" /><br/>
                     </p:column>
                 </p:dataTable>
+    
+
+        </div>
+    </section>
     </h:body>
     
        

@@ -10,40 +10,16 @@
         
         <title>Facelet Title</title>
         
-        
-        
-        
+ 
     </h:head>
     <h:body>
-       Soy profesor
-        <div class="container">
-            <div class="ccentral">
-                <p:panel>
-                    <ui:include src="#{profesorController.paginaActualP}" />
-                </p:panel>
-                
-            </div>
-            <div class="carriba"><h:commandButton action="#{usuarioController.salir()}" value="salir" /></div>
-            <div class="clogo"></div>
-            <div class="cperfil">
-                <p:graphicImage value="/Imagenes/Perfiles/#{profesorController.profesor.imagenPerfil()}" style="width: 110px;height: 130px "  /><br/>
-                 <p:panel header="Periodo">
-                    #{periodoController.periodoActual.anio}-#{periodoController.periodoActual.numero}
-                </p:panel>
-                <p:panel header="Programa" rendered="#{not empty programaController.programa.coordinadorPA}">
-                    #{programaController.programa.nombre}
-                    
-                      <h:commandButton value="Gestionar Tipo Entregable" action="#{profesorController.gtipo_Entregable()}" /><br/>
-                       <h:commandButton value="Gestion de Tutores"  /><br/>
-                         <h:commandButton value="Revisar ProyectoAulas"  /><br/>
-                         <h:commandButton value="Tipos de Item " action="#{profesorController.gtipo_Item()}"  /><br/>
-                        
-                </p:panel>
-            </div>
-            <div class="copciones">
-              
-                <h:commandButton action="#{profesorController.miperfil()}"  value="Mi perfil" />
-
+       <header>
+        
+        <div class="nav-up contenedor ">
+            <a href="index.xhtml"><h:graphicImage class="logo-sgpa" value="/resources/img/logo sgpa.png"/></a>
+            <div class="buscador">
+                <input type="search" placeholder="Search..."></input>
+                <i class="fas fa-search input-i"></i>
             </div>
             <a href="https://unicolombo.edu.co/"><h:graphicImage class="logo-unico" value="/resources/img/logo unico.png"/></a>
                 <div class="perfil">
@@ -95,20 +71,15 @@
                     </div> 
                 </div>
                 
-                <!--<div class="cop ">
+                <div class="cop ">
                     <div class="linea"></div>
-                    <div class="op-v"><h:graphicImage  value="/resources/img/lapiz.png"/><h:commandButton value="Gestionar Cordinadores" class="botones-v" action="#{usuarioController.gcoordinadores()}"></h:commandButton></div>
+                    <div class="op-v"><h:graphicImage  value="/resources/img/lapiz.png"/><h:commandButton value="Tipo Entregable" class="botones-v" action="#{profesorController.gtipo_Entregable()}"></h:commandButton></div>
                 </div>
                 <div class="cop">
                     <div class="linea"></div>
-                    <div class="op-v"><h:graphicImage  value="/resources/img/libro.png"/><h:commandButton value="Gestionar Programas" class="botones-v" action="#{usuarioController.gprogramas()}"></h:commandButton></div>
+                    <div class="op-v"><h:graphicImage  value="/resources/img/libro.png"/><h:commandButton value="Tipos de Item " class="botones-v" action="#{profesorController.gtipo_Item()}"></h:commandButton></div>
                 </div>
-                
-                <div class="cop">
-                    <div class="linea "></div>
-                    <div class="op-v"><h:graphicImage  value="/resources/img/plus.png"/><h:commandButton value="Gestionar Periodos" class="botones-v" action="#{usuarioController.gperiodos()}"></h:commandButton></div>
-                </div>-->
-                
+                               
                 
                 
                 
