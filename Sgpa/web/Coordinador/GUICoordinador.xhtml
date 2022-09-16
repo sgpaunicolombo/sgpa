@@ -27,16 +27,19 @@
                 <div class="perfil">
                     <div class="informacion-perfil">
                         <span>Coordinador</span>
-                        <span>#{coordinadorController.coordinador.primerNombre}</span>
-                        <span>#{coordinadorController.coordinador.direccion}</span>
+                        <span>#{coordinadorController.coordinador.toString()}</span>
+                        <span>#{periodoController.periodoActual.anio}-#{periodoController.periodoActual.numero}</span>
                     </div>
                     <div class="foto-perfil">
                         <div class="imagen-perfil">
-                            <h:graphicImage class="logo-unico" value="/resources/img/imagen-perfil.jpg"/>
+                            
                             <div class="conectado"></div>
                         </div>
                         <h:commandButton action="#{usuarioController.salir()}" class="log-out" value="Log out" />
                     </div>
+                    <div class="botones-perfil">
+                        
+                        </div>
                 </div>
         </div>
 
