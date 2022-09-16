@@ -28,6 +28,7 @@ public class Tipo_Entregable implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String descripcion;
+    private String nombre;
 
     public Tipo_Entregable() {
     }
@@ -67,6 +68,15 @@ public class Tipo_Entregable implements Serializable {
         }
         return true;
     }
+     public boolean validar(){
+         boolean valido=true;
+        if(this.getNombre().equals("")||this.descripcion.equals("") ){
+            valido=false;
+          
+        }
+        return valido;
+     }
+
 
     @Override
     public String toString() {
@@ -99,6 +109,20 @@ public class Tipo_Entregable implements Serializable {
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     
 }

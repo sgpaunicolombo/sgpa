@@ -30,6 +30,8 @@ public class Tipo_Item implements Serializable {
     private String nombre;
     private String descripcion;
 
+    public Tipo_Item() {
+    }
     public Long getId() {
         return id;
     }
@@ -57,6 +59,14 @@ public class Tipo_Item implements Serializable {
         }
         return true;
     }
+     public boolean validar(){
+         boolean valido=true;
+        if(this.getNombre().equals("")||this.descripcion.equals("") ){
+            valido=false;
+          
+        }
+        return valido;
+     }
 
     @Override
     public String toString() {

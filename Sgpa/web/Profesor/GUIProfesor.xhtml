@@ -25,10 +25,16 @@
                 </p:panel>
                 <p:panel header="Programa" rendered="#{not empty programaController.programa.coordinadorPA}">
                     #{programaController.programa.nombre}
+                    
+                      <h:commandButton value="Gestionar Tipo Entregable" action="#{profesorController.gtipo_Entregable()}" /><br/>
+                       <h:commandButton value="Gestion de Tutores"  /><br/>
+                         <h:commandButton value="Revisar ProyectoAulas"  /><br/>
+                         <h:commandButton value="Tipos de Item " action="#{profesorController.gtipo_Item()}"  /><br/>
+                        
                 </p:panel>
             </div>
             <div class="copciones">
-                
+              
                 <h:commandButton action="#{profesorController.miperfil()}"  value="Mi perfil" />
             </div>
         </div>

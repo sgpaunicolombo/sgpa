@@ -76,6 +76,16 @@ public class ProfesorController implements Serializable {
         }	
     }
     
+     public void gtipo_Entregable(){
+        paginaActualP= "/Profesor/GestorTipo_Entregable.xhtml";
+    }
+     
+     public void gtipo_Item(){
+        paginaActualP= "/Profesor/GestorTipo_Item.xhtml";
+    }
+
+    
+    
     public void miperfil() {
         paginaActualP = "/Profesor/PerfilProfesor.xhtml";
     }
