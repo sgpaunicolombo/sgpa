@@ -14,8 +14,9 @@
               <div>Nombre</div>
         <div><p:inputText value="#{tipo_EntregableController.tipo_entregable.nombre}" /></div><br/>
         <div>Descripcion</div>
-        <div><p:inputTextarea rows ="6" value="#{tipo_EntregableController.tipo_entregable.descripcion}" /></div>
-s
+
+        <div><p:inputTextarea rows="6" cols="33" value="#{tipo_EntregableController.tipo_entregable.descripcion}"/></div>
+
                 <h:commandButton value="agregar" action="#{tipo_EntregableController.registrarTipo_Entregable()}" />
                 <br/><br/>
                 
