@@ -73,6 +73,10 @@ public class EstudianteController implements Serializable{
         paginaActualE = "/Estudiante/PerfilEstudiante.xhtml";
     }
     
+    public void g_propuesta(){
+        paginaActualE= "/Estudiante/Gestor_Propuestas.xhtml";
+    }
+    
     
     public void obtenerEstudiantes(){
         estudiantes=estser.consultarTodo(Estudiante.class);
