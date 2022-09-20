@@ -26,7 +26,6 @@ public class MatriculaController implements Serializable {
 
     //objetos de negocio
     private Matricula matricula = new Matricula();
-
     //servicios
     MatriculaServices matser = new MatriculaServices();
     EstudianteServices estser = new EstudianteServices();
@@ -38,6 +37,11 @@ public class MatriculaController implements Serializable {
 
     }
 
+    
+    public void consultarMatriculaXEstudianteEnPeriodo(Estudiante e, Periodo p){
+        matricula=matser.obtenerMatriculaXPeriodo(p, e);
+    }
+    
     public void agregarEstudiante(Estudiante e) {
         getMatricula().setEstudiante(e);
     }

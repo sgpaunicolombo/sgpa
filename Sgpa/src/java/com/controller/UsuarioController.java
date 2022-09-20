@@ -76,6 +76,8 @@ public class UsuarioController implements Serializable {
             }
             if (getUsuario().getTipo().equals("Estudiante")) {
                 estcon.obtenerEstudiante(getUsuario().getId());
+                estcon.setPeriodo(percon.getPeriodoActual());
+                estcon.consultarMatriculaEstudiante();
                 paginaActual = "/Estudiante/GUIEstudiante.xhtml";
 
             }

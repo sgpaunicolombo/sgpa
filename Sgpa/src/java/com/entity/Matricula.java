@@ -77,7 +77,13 @@ public class Matricula implements Serializable {
         return valido;
     }
 
-      
+    public boolean habilitarProyecto(){
+        boolean habilitado=true;
+        if(this.estado.equals("Financiera")){
+            habilitado=false;
+        }        
+        return habilitado;
+    } 
 
     public Long getId() {
         return id;

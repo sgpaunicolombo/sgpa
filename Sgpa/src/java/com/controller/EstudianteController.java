@@ -6,6 +6,7 @@
 package com.controller;
 
 import com.entity.Estudiante;
+import com.entity.Periodo;
 import com.services.EstudianteServices;
 import com.utilidades.ImageUtils;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
@@ -28,9 +30,20 @@ import org.primefaces.model.file.UploadedFile;
 @SessionScoped
 public class EstudianteController implements Serializable{
 
+    
+    //objetos de negocio
     private Estudiante estudiante = new Estudiante();
-
+    private Periodo periodo=new Periodo();//para almacenar el el periodo actual
+    
+    
+    //controlladores
+    @ManagedProperty("#{matriculaController}")
+    private MatriculaController matcont=new MatriculaController();
+    
+    //Servicios
     EstudianteServices estser = new EstudianteServices();
+    
+    //colecciones    
     private List<Estudiante> estudiantes = new LinkedList();
 
     //variable de control
@@ -38,6 +51,11 @@ public class EstudianteController implements Serializable{
     private String paginaActualE = "";
     private UploadedFile iestudiante;
 
+    
+    public void consultarMatriculaEstudiante(){
+        matcont.consultarMatriculaXEstudianteEnPeriodo(estudiante, periodo);
+    }
+    
     /**
      * Creates a new instance of EstudianteController
      */
@@ -154,6 +172,34 @@ public class EstudianteController implements Serializable{
      */
     public void setIestudiante(UploadedFile iestudiante) {
         this.iestudiante = iestudiante;
+    }
+
+    /**
+     * @return the periodo
+     */
+    public Periodo getPeriodo() {
+        return periodo;
+    }
+
+    /**
+     * @param periodo the periodo to set
+     */
+    public void setPeriodo(Periodo periodo) {
+        this.periodo = periodo;
+    }
+
+    /**
+     * @return the matcont
+     */
+    public MatriculaController getMatcont() {
+        return matcont;
+    }
+
+    /**
+     * @param matcont the matcont to set
+     */
+    public void setMatcont(MatriculaController matcont) {
+        this.matcont = matcont;
     }
 
 }

@@ -11,8 +11,25 @@
        <section class="contenido-contenedor">
         <div class="border contenedor top">
              <h1 class="tittle">Gestor Propuestas</h1>
-              <div>Nombre</div>
-        <div><p:inputText value="#{tipo_EntregableController.tipo_entregable.nombre}" /></div><br/>
+             <p:accordionPanel widgetVar="basic">
+                 <p:tab title="Informacion Basica del Proyecto">
+                     
+                 </p:tab>
+                 <p:tab title="Itenes del Proyecto">
+                     
+                 </p:tab>
+                 <p:tab title="Integrantes">
+                     
+                 </p:tab>
+             </p:accordionPanel>
+             
+             
+             
+            <!--  <div>Nombre</div>
+        <div>
+            
+            
+            <p:inputText value="#{tipo_EntregableController.tipo_entregable.nombre}" /></div><br/>
         <div>Descripcion</div>
         <div><p:inputTextarea rows="6" cols="33" value="#{tipo_EntregableController.tipo_entregable.descripcion}"/></div>
 
@@ -30,7 +47,9 @@
                         <h:commandButton value="Eliminar" action="#{tipo_EntregableController.eliminartipo_Entregable(per)}" /><br/>
                     </p:column>
                 </p:dataTable>
-    
+                
+                -->
+                
 
         </div>
     </section>
