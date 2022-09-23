@@ -5,6 +5,7 @@
  */
 package com.controller;
 
+import com.entity.Periodo;
 import com.entity.Profesor;
 import com.services.ProfesorServices;
 import com.utilidades.GestorImagenes;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
@@ -30,11 +32,18 @@ import org.primefaces.model.file.UploadedFile;
 public class ProfesorController implements Serializable {
 
     private Profesor profesor = new Profesor();
+    private Periodo periodo=new Periodo();//para almacenar el el periodo actual
 
     ProfesorServices profser = new ProfesorServices();
 
     private List<Profesor> profesores = new LinkedList();
 
+    //controladores
+    @ManagedProperty("#{proyectoAulaController}")
+    private ProyectoAulaController proacon = new ProyectoAulaController();
+    @ManagedProperty("#{matriculaController}")
+    private MatriculaController matcont = new MatriculaController();
+    
     //variables de control
     private String paginaActualP = "";
     private UploadedFile iprofesor;
@@ -45,6 +54,15 @@ public class ProfesorController implements Serializable {
     public ProfesorController() {
     }
 
+    public void limpiarDatos() {
+        paginaActualP = "";
+        profesor = new Profesor();
+    }
+
+    public void consultarMatriculasXPeriodo(){
+        matcont.consultarEstudiantesMatriculadosXPeriodo(periodo);
+    }
+    
     public void registrarprofesor() {
         profesor.setTipo("Profesor");
         profesor.setEstado("Activo");
@@ -54,38 +72,46 @@ public class ProfesorController implements Serializable {
             obtenerProfesores();
         }
     }
-     public void actualizarprofesor() {        
+
+    public void actualizarprofesor() {
         profesor.setEstado("Activo");
         if (profesor.validarUsuario()) {
-            profesor=profser.modificar(profesor);           
+            profesor = profser.modificar(profesor);
         }
     }
 
+    public void guardarProyectoAula(){
+        proacon.getProyecto().setPeriodo(periodo);
+       // proacon.getProyecto().setProfesorLider(profesor);
+        proacon.guardar();
+    }
+    
     public void subirImagenProfesor() {
-        try {  
+        try {
 //               File destFile= new File(event.getFile().getFileName());           
-               System.out.println(""+iprofesor.getFileName());
-               ServletContext servletContext = (ServletContext) 
-               FacesContext.getCurrentInstance().getExternalContext().getContext();
-               String path=servletContext.getRealPath("/imagenInicial.jpg").replace("imagenInicial.jpg", "Imagenes\\Perfiles\\");
-               ImageUtils.copyFile(profesor.getId()+".jpg", iprofesor.getInputStream(),path);
-               System.out.println(""+path);
-                //getEstudiante().getEstudiante().setImagenC(path+event.getFile().getFileName()+".jpg");               
+            System.out.println("" + iprofesor.getFileName());
+            ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+            String path = servletContext.getRealPath("/imagenInicial.jpg").replace("imagenInicial.jpg", "Imagenes\\Perfiles\\");
+            ImageUtils.copyFile(profesor.getId() + ".jpg", iprofesor.getInputStream(), path);
+            System.out.println("" + path);
+            //getEstudiante().getEstudiante().setImagenC(path+event.getFile().getFileName()+".jpg");               
         } catch (IOException ex) {
             Logger.getLogger(ProfesorController.class.getName()).log(Level.SEVERE, null, ex);
-        }	
-    }
-    
-     public void gtipo_Entregable(){
-        paginaActualP= "/Profesor/GestorTipo_Entregable.xhtml";
-    }
-     
-     public void gtipo_Item(){
-        paginaActualP= "/Profesor/GestorTipo_Item.xhtml";
+        }
     }
 
-    
-    
+    public void gtipo_Entregable() {
+        paginaActualP = "/Profesor/GestorTipo_Entregable.xhtml";
+    }
+
+    public void gtipo_Item() {
+        paginaActualP = "/Profesor/GestorTipo_Item.xhtml";
+    }
+
+    public void ggrupos() {
+        paginaActualP = "/Profesor/GestorGrupos.xhtml";
+    }
+
     public void miperfil() {
         paginaActualP = "/Profesor/PerfilProfesor.xhtml";
     }
@@ -155,6 +181,48 @@ public class ProfesorController implements Serializable {
      */
     public void setIprofesor(UploadedFile iprofesor) {
         this.iprofesor = iprofesor;
+    }
+
+    /**
+     * @return the proacon
+     */
+    public ProyectoAulaController getProacon() {
+        return proacon;
+    }
+
+    /**
+     * @param proacon the proacon to set
+     */
+    public void setProacon(ProyectoAulaController proacon) {
+        this.proacon = proacon;
+    }
+
+    /**
+     * @return the matcont
+     */
+    public MatriculaController getMatcont() {
+        return matcont;
+    }
+
+    /**
+     * @param matcont the matcont to set
+     */
+    public void setMatcont(MatriculaController matcont) {
+        this.matcont = matcont;
+    }
+
+    /**
+     * @return the periodo
+     */
+    public Periodo getPeriodo() {
+        return periodo;
+    }
+
+    /**
+     * @param periodo the periodo to set
+     */
+    public void setPeriodo(Periodo periodo) {
+        this.periodo = periodo;
     }
 
 }

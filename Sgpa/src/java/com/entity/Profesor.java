@@ -145,6 +145,7 @@ public class Profesor extends Usuario implements Serializable {
     public void setNivelacademico(String nivelacademico) {
         this.nivelacademico = nivelacademico;
     }
-    
+
+  
   
 }

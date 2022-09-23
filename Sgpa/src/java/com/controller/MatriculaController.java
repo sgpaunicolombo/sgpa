@@ -13,6 +13,8 @@ import com.services.EstudianteServices;
 import com.services.MatriculaServices;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -30,6 +32,8 @@ public class MatriculaController implements Serializable {
     MatriculaServices matser = new MatriculaServices();
     EstudianteServices estser = new EstudianteServices();
 
+    private List<Matricula> matriculas=new LinkedList();
+    
     /**
      * Creates a new instance of MatriculaController
      */
@@ -37,6 +41,9 @@ public class MatriculaController implements Serializable {
 
     }
 
+    public void consultarEstudiantesMatriculadosXPeriodo(Periodo p){
+        matriculas=matser.obtenerMatriculasXperiodo(p);
+    }
     
     public void consultarMatriculaXEstudianteEnPeriodo(Estudiante e, Periodo p){
         matricula=matser.obtenerMatriculaXPeriodo(p, e);
@@ -77,6 +84,20 @@ public class MatriculaController implements Serializable {
      */
     public void setMatricula(Matricula matricula) {
         this.matricula = matricula;
+    }
+
+    /**
+     * @return the matriculas
+     */
+    public List<Matricula> getMatriculas() {
+        return matriculas;
+    }
+
+    /**
+     * @param matriculas the matriculas to set
+     */
+    public void setMatriculas(List<Matricula> matriculas) {
+        this.matriculas = matriculas;
     }
 
 }

@@ -37,9 +37,7 @@ public class Matricula implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;  
     private String semestre;
-    private String estado;//Pre-Matricula -  Matricula 
-    @OneToMany(mappedBy = "estudianteLider")
-    private List<Proyecto_Aula> proyecto_Aulas;
+    private String estado;//Pre-Matricula -  Matricula     
     @OneToMany(mappedBy = "editor")
     private List<Item_Proyecto> item_Proyectos;
     @OneToMany(mappedBy = "matricula")
@@ -48,16 +46,18 @@ public class Matricula implements Serializable {
     public Matricula() {
     }
 
-    public Matricula(Long id, Estudiante estudiante, ProgramaAcademico programa, Periodo periodo, Date fecha, String estado, List<Proyecto_Aula> proyecto_Aulas, List<Item_Proyecto> item_Proyectos) {
+    public Matricula(Long id, Estudiante estudiante, ProgramaAcademico programa, Periodo periodo, Date fecha, String semestre, String estado, List<Item_Proyecto> item_Proyectos, List<Integrante> integrantes) {
         this.id = id;
         this.estudiante = estudiante;
         this.programa = programa;
         this.periodo = periodo;
         this.fecha = fecha;
+        this.semestre = semestre;
         this.estado = estado;
-        this.proyecto_Aulas = proyecto_Aulas;
         this.item_Proyectos = item_Proyectos;
+        this.integrantes = integrantes;
     }
+
     
     public boolean validarMatricula() {
         boolean valido = true;

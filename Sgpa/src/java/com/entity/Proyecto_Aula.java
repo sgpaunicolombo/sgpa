@@ -5,8 +5,10 @@
  */
 package com.entity;
 
+import com.controller.FacesUtil;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,21 +29,27 @@ public class Proyecto_Aula implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String estado;//Propuesta - Aprobado -rechazado - Finalizado
+    private String estado;//Propuesta - Aprobado - Cancelado - Produccion -  Para Sustentar - Finalizado
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha_inicio;
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fecha_ingreso;    
+    private Date fecha_ingreso;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha_aprobacion;
     @ManyToOne
-    private Profesor coordinadorPA;    
+    private Profesor coordinadorPA;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha_finalizacion;
     @ManyToOne
-    private Matricula estudianteLider;
+    private LiderPA profesorLider;
     private String titulo;
     private String problematica;
+    private String codigo;
+    private String semestre;
+    @ManyToOne
+    private ProgramaAcademico programa;
+    @ManyToOne
+    private Periodo periodo;
     @OneToMany(mappedBy = "proyecto")
     private List<Item_Proyecto> item_Proyectos;
     @OneToMany(mappedBy = "proyecto")
@@ -56,7 +64,7 @@ public class Proyecto_Aula implements Serializable {
     public Proyecto_Aula() {
     }
 
-    public Proyecto_Aula(Long id, String estado, Date fecha_inicio, Date fecha_ingreso, Date fecha_aprobacion, Profesor coordinadorPA, Date fecha_finalizacion, Matricula estudianteLider, String titulo, String problematica) {
+    public Proyecto_Aula(Long id, String estado, Date fecha_inicio, Date fecha_ingreso, Date fecha_aprobacion, Profesor coordinadorPA, Date fecha_finalizacion, LiderPA profesorLider, String titulo, String problematica, String codigo, String semestre, ProgramaAcademico programa, Periodo periodo, List<Item_Proyecto> item_Proyectos, List<Integrante> integrantes, List<Avance> avances, List<Tutor> tutors, List<Tutoria> tutorias) {
         this.id = id;
         this.estado = estado;
         this.fecha_inicio = fecha_inicio;
@@ -64,14 +72,55 @@ public class Proyecto_Aula implements Serializable {
         this.fecha_aprobacion = fecha_aprobacion;
         this.coordinadorPA = coordinadorPA;
         this.fecha_finalizacion = fecha_finalizacion;
-        this.estudianteLider = estudianteLider;
+        this.profesorLider = profesorLider;
         this.titulo = titulo;
         this.problematica = problematica;
+        this.codigo = codigo;
+        this.semestre = semestre;
+        this.programa = programa;
+        this.periodo = periodo;
+        this.item_Proyectos = item_Proyectos;
+        this.integrantes = integrantes;
+        this.avances = avances;
+        this.tutors = tutors;
+        this.tutorias = tutorias;
+    }
+
+    
+    
+    public boolean esvalido(){
+        boolean valido=true;
+        try{
+        if(this.periodo.getId()<=0){
+            valido=false;
+            FacesUtil.addErrorMessage("No se le ha asignado el periodo al grupo");
+        } 
+        if(this.programa.getId()<=0){
+            valido=false;
+            FacesUtil.addErrorMessage("No se le ha asignado el Programa academico al grupo");
+        } if(this.semestre.equals("")){
+            valido=false;
+            FacesUtil.addErrorMessage("No se le ha asignado el Semestre al grupo");
+        } 
+        if( this.getProfesorLider().getId()<=0){
+            valido=false;
+            FacesUtil.addErrorMessage("El proyecto no posee Profesor Lider ");
+        } if(this.estado.equals("")){
+            valido=false;
+            FacesUtil.addErrorMessage("El estado del proyecto no puede ser Null");
+        }   
+        }catch(java.lang.NullPointerException npe){
+            
+        }
+        return valido;
     }
     
-    
-    
-    
+  
+
+    public void generarCodigo() {
+        this.codigo = this.getPrograma().getCodigo() + this.semestre + this.getPeriodo().getAnio() + this.getId();
+    }
+
     public Long getId() {
         return id;
     }
@@ -204,20 +253,6 @@ public class Proyecto_Aula implements Serializable {
     }
 
     /**
-     * @return the estudianteLider
-     */
-    public Matricula getEstudianteLider() {
-        return estudianteLider;
-    }
-
-    /**
-     * @param estudianteLider the estudianteLider to set
-     */
-    public void setEstudianteLider(Matricula estudianteLider) {
-        this.estudianteLider = estudianteLider;
-    }
-
-    /**
      * @return the titulo
      */
     public String getTitulo() {
@@ -244,5 +279,77 @@ public class Proyecto_Aula implements Serializable {
     public void setProblematica(String problematica) {
         this.problematica = problematica;
     }
-    
+
+    /**
+     * @return the codigo
+     */
+    public String getCodigo() {
+        return codigo;
+    }
+
+    /**
+     * @param codigo the codigo to set
+     */
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    /**
+     * @return the semestre
+     */
+    public String getSemestre() {
+        return semestre;
+    }
+
+    /**
+     * @param semestre the semestre to set
+     */
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
+    }
+
+  
+
+    /**
+     * @return the programa
+     */
+    public ProgramaAcademico getPrograma() {
+        return programa;
+    }
+
+    /**
+     * @param programa the programa to set
+     */
+    public void setPrograma(ProgramaAcademico programa) {
+        this.programa = programa;
+    }
+
+    /**
+     * @return the periodo
+     */
+    public Periodo getPeriodo() {
+        return periodo;
+    }
+
+    /**
+     * @param periodo the periodo to set
+     */
+    public void setPeriodo(Periodo periodo) {
+        this.periodo = periodo;
+    }
+
+    /**
+     * @return the profesorLider
+     */
+    public LiderPA getProfesorLider() {
+        return profesorLider;
+    }
+
+    /**
+     * @param profesorLider the profesorLider to set
+     */
+    public void setProfesorLider(LiderPA profesorLider) {
+        this.profesorLider = profesorLider;
+    }
+
 }

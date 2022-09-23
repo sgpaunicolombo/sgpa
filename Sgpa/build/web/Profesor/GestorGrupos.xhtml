@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <section class="contenido-contenedor">
+            <div class="border contenedor top">
+                <h1 class="tittle">Gestor Grupos</h1>
+                <div class="contproy">
+
+                    <div class="cestudiantes">
+
+                        <p:dataTable rows="10" paginator="true" style="font-size: 10pt" var="est" value="#{matriculaController.matriculas}">
+                            <p:column filterBy="#{est.estudiante.identificacion}" headerText="Identificacion">
+                                #{est.estudiante.identificacion}
+                            </p:column>                        
+                            <p:column filterBy="#{est.estudiante.primerNombre}" headerText="Primer Nombre">
+                                #{est.estudiante.primerNombre}
+                            </p:column>
+                            <p:column filterBy="#{est.estudiante.segundoNombre}" headerText="Segundo Nombre">
+                                #{est.estudiante.segundoNombre}
+                            </p:column>
+                            <p:column filterBy="#{est.estudiante.primerApellido}" headerText="Primer Apellido">
+                                #{est.estudiante.primerApellido}
+                            </p:column>
+                            <p:column filterBy="#{est.estudiante.segundoApellido}" headerText="Segundo Apellido">
+                                #{est.estudiante.segundoApellido}
+                            </p:column>
+                            <p:column headerText="">
+                                <h:commandButton value="+" action="#{proyectoAulaController.agregarIntegrante(est)}" />
+                            </p:column>
+                        </p:dataTable>
+
+                    </div>
+                    <div class="cintegrantes">
+                        <h1 class="tittle">Integrantes Actuales</h1>
+                        <p:dataGrid rows="5"  columns="5" var="inte" value="#{proyectoAulaController.integrantes}">
+                            <p:panel header="#{inte.matricula.estudiante.identificacion}">
+                                <div class="continte">
+                                    <div class="cimg">
+                                        <p:graphicImage value="/Imagenes/Perfiles/#{inte.matricula.estudiante.imagenPerfil()}" style="width: 130px;height: 130px "  />
+                                    </div>
+                                    <div class="cnom"><h:outputText value="#{inte.matricula.estudiante.toString()}" /></div>
+                                    <div class="cop1">
+                                        <h:commandButton value="-" action="#{proyectoAulaController.quitarIntegrante(inte)}" />
+                                    </div>
+                                    <div class="cop2"></div>
+                                    <div class="cop3"></div>
+                                    <div class="cop4"></div>
+                                </div>
+                            </p:panel>
+                        </p:dataGrid>
+                        <h:commandButton value="Guardar" action="#{profesorController.guardarProyectoAula()}"  />
+
+                    </div>
+                    <div class="cgrupos">
+                         <h1 class="tittle">Grupos Creados Para el periodo</h1>
+
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </section>
+    </h:body>
+
+    <style>
+        .continte {  display: grid;
+                     grid-template-columns: 100px 100px 80px;
+                     grid-template-rows: 50px 50px 50px 50px;
+                     grid-auto-columns: 1fr;
+                     gap: 0px 0px;
+                     grid-auto-flow: row;
+                     grid-template-areas:
+                         "cimg cimg cop1"
+                         "cimg cimg cop2"
+                         "cimg cimg cop3"
+                         "cnom cnom cop4";
+        }
+
+        .cimg { grid-area: cimg; }
+
+        .cnom { grid-area: cnom; }
+
+        .cop1 { grid-area: cop1; }
+
+        .cop2 { grid-area: cop2; }
+
+        .cop3 { grid-area: cop3; }
+
+        .cop4 { grid-area: cop4; }
+
+
+
+        .contproy {  display: grid; 
+                     grid-auto-columns: 1fr; 
+                     grid-template-columns: 1fr 1fr; 
+                     grid-template-rows: 1fr 1.1fr 0.9fr; 
+                     gap: 0px 0px; 
+                     grid-template-areas: 
+                         "cestudiantes cestudiantes"
+                         "cintegrantes cintegrantes"
+                         "cgrupos cgrupos"; 
+        }
+        .cestudiantes { grid-area: cestudiantes; }
+        .cintegrantes { grid-area: cintegrantes; }
+        .cgrupos { grid-area: cgrupos; }
+    </style>
+</html>
+

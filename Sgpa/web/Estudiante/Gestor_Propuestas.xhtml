@@ -8,54 +8,64 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-       <section class="contenido-contenedor">
-        <div class="border contenedor top">
-             <h1 class="tittle">Gestor Propuestas</h1>
-             <p:accordionPanel widgetVar="basic">
-                 <p:tab title="Informacion Basica del Proyecto">
-                     
-                 </p:tab>
-                 <p:tab title="Itenes del Proyecto">
-                     
-                 </p:tab>
-                 <p:tab title="Integrantes">
-                     
-                 </p:tab>
-             </p:accordionPanel>
-             
-             
-             
-            <!--  <div>Nombre</div>
-        <div>
-            
-            
-            <p:inputText value="#{tipo_EntregableController.tipo_entregable.nombre}" /></div><br/>
-        <div>Descripcion</div>
-        <div><p:inputTextarea rows="6" cols="33" value="#{tipo_EntregableController.tipo_entregable.descripcion}"/></div>
+        <section class="contenido-contenedor">
+            <div class="border contenedor top">
+                <h1 class="tittle">Gestor Propuestas</h1>
+                <p:accordionPanel widgetVar="basic">
+                    <p:tab title="Informacion Basica del Proyecto">
+                        <div class="contaproy">
+                            <div class="ctitulo">
+                                <p:inputText placeholder="Titulo" size="100" value="#{proyectoAulaController.proyecto.titulo}"/>
+                            </div>
+                            <div class="cdescrip">
+                                <p:inputTextarea placeholder="Problematica" cols="100" value="#{proyectoAulaController.proyecto.problematica}" />
+                            </div>                           
+                            <div align="right" class="cfech">
+                                <p:calendar value="#{proyectoAulaController.proyecto.fecha_inicio}" />
+                            </div>
+                        </div>
+                    </p:tab>
+                    <p:tab title="Itenes del Proyecto">
 
-                <h:commandButton value="agregar" action="#{tipo_EntregableController.registrarTipo_Entregable()}" />
-                <br/><br/>
-                
-                <p:dataTable var="per" value="#{tipo_EntregableController.tipo_Entregables}" >
-                    <p:column headerText="Nombre">
-                        #{per.nombre}
-                      </p:column>
-                    <p:column headerText="Descripcion">
-                        #{per.descripcion}
-                     </p:column>
-                    <p:column >
-                        <h:commandButton value="Eliminar" action="#{tipo_EntregableController.eliminartipo_Entregable(per)}" /><br/>
-                    </p:column>
-                </p:dataTable>
-                
-                -->
-                
+                    </p:tab>
+                    <p:tab title="Integrantes">
 
-        </div>
-    </section>
+                    </p:tab>
+                </p:accordionPanel>
+                <p:panelGrid columns="4">
+                    <h:commandButton value="Cerrar" />
+                    <h:commandButton value="Guardar" action="#{proyectoAulaController.guardar()}" />
+                    <h:commandButton value="Publicar" />
+                </p:panelGrid>
+
+
+
+            </div>
+        </section>
     </h:body>
-    
-       
+
+    <style>
+        .contaproy {  display: grid;
+                      grid-template-columns: 150px 150px 150px 150px;
+                      grid-template-rows: 60px 60px 60px;
+                      grid-auto-columns: 1fr;
+                      gap: 0px 0px;
+                      grid-auto-flow: row;
+                      grid-template-areas:
+                          "clider clider cfech cfech"
+                          "ctitulo ctitulo ctitulo ctitulo"
+                          "cdescrip cdescrip cdescrip cdescrip";
+        }
+
+        .ctitulo { grid-area: ctitulo; }
+
+        .cdescrip { grid-area: cdescrip; }
+
+        .clider { grid-area: clider; }
+
+        .cfech { grid-area: cfech; }
+
+    </style>
 
 </html>
 

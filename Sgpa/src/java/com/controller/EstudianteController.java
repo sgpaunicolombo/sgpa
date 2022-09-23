@@ -6,7 +6,9 @@
 package com.controller;
 
 import com.entity.Estudiante;
+import com.entity.Matricula;
 import com.entity.Periodo;
+import com.entity.Proyecto_Aula;
 import com.services.EstudianteServices;
 import com.utilidades.ImageUtils;
 import java.io.IOException;
@@ -39,6 +41,8 @@ public class EstudianteController implements Serializable{
     //controlladores
     @ManagedProperty("#{matriculaController}")
     private MatriculaController matcont=new MatriculaController();
+    @ManagedProperty("#{proyectoAulaController}")
+    private ProyectoAulaController proacon=new ProyectoAulaController();
     
     //Servicios
     EstudianteServices estser = new EstudianteServices();
@@ -62,6 +66,11 @@ public class EstudianteController implements Serializable{
     public EstudianteController() {
     }
        
+    public void limpiarDatos(){       
+        matcont.setMatricula(new Matricula());
+        proacon.setProyecto(new Proyecto_Aula());
+    }
+    
     public void inscribirEstudiante() {
         estudiante.setTipo("Estudiante");
         estudiante.setEstado("Pre-Matricula");
@@ -200,6 +209,20 @@ public class EstudianteController implements Serializable{
      */
     public void setMatcont(MatriculaController matcont) {
         this.matcont = matcont;
+    }
+
+    /**
+     * @return the proacon
+     */
+    public ProyectoAulaController getProacon() {
+        return proacon;
+    }
+
+    /**
+     * @param proacon the proacon to set
+     */
+    public void setProacon(ProyectoAulaController proacon) {
+        this.proacon = proacon;
     }
 
 }

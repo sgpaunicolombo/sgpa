@@ -77,13 +77,15 @@ public class UsuarioController implements Serializable {
             if (getUsuario().getTipo().equals("Estudiante")) {
                 estcon.obtenerEstudiante(getUsuario().getId());
                 estcon.setPeriodo(percon.getPeriodoActual());
-                estcon.consultarMatriculaEstudiante();
+                estcon.consultarMatriculaEstudiante();               
                 paginaActual = "/Estudiante/GUIEstudiante.xhtml";
 
             }
             if (getUsuario().getTipo().equals("Profesor")) {
                 profcon.obtenerPrtofesor(getUsuario().getId());
+                profcon.setPeriodo(percon.getPeriodoActual());
                 procon.obtenerProgramaCoordinadorPA(profcon.getProfesor());
+                profcon.consultarMatriculasXPeriodo();
                 paginaActual = "/Profesor/GUIProfesor.xhtml";
 
             }
@@ -121,8 +123,10 @@ public class UsuarioController implements Serializable {
         paginaActual = "";
         mpanelLogin = true;
         estcon.setEstudiante(new Estudiante());
+        estcon.limpiarDatos();
         coorcon.setCoordinador(new Coordinador());
         profcon.setProfesor(new Profesor());
+        profcon.limpiarDatos();
         procon.setPrograma(new ProgramaAcademico());
         percon.setPeriodo(new Periodo());
         usuario = new Usuario();
