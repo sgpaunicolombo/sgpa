@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/entity/Proyecto_Aula.java</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/ProfesorController.java</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/services/IntegranteServices.java</file>
@@ -10,6 +11,17 @@
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/ProyectoAulaController.java</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/UsuarioController.java</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/web/Profesor/GestorGrupos.xhtml</file>
+=======
+            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/src/java/com/controller/ProfesorController.java</file>
+            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/web/Profesor/GestorProfesorLider.xhtml</file>
+            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/src/java/com/entity/Profesor.java</file>
+            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/src/java/com/controller/LiderPAController.java</file>
+            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/src/java/com/controller/MatriculaController.java</file>
+            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/src/java/com/entity/Area.java</file>
+            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/src/java/com/entity/LiderPA.java</file>
+            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/src/java/com/controller/UsuarioController.java</file>
+            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/web/Coordinador/GestorMatricula.xhtml</file>
+>>>>>>> 22632deac031a3bdbd3b4c3c26df21423ca4d873
         </group>
     </open-files>
 </project-private>

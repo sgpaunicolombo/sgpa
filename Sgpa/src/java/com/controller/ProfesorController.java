@@ -8,6 +8,7 @@ package com.controller;
 import com.entity.LiderPA;
 import com.entity.Periodo;
 import com.entity.Profesor;
+import com.entity.ProgramaAcademico;
 import com.services.LiderPAServices;
 import com.services.ProfesorServices;
 import com.utilidades.GestorImagenes;
@@ -59,6 +60,10 @@ public class ProfesorController implements Serializable {
      * Creates a new instance of ProfesorController
      */
     public ProfesorController() {
+    }
+    
+    public void consultarProfesores(){
+        setProfesores(profser.consultarTodo(Profesor.class));
     }
 
     public void limpiarDatos() {
@@ -124,6 +129,10 @@ public class ProfesorController implements Serializable {
     public void ggrupos() {
         paginaActualP = "/Profesor/GestorGrupos.xhtml";
     }
+    public void gproflider() {
+        paginaActualP = "/Profesor/GestorProfesorLider.xhtml";
+    }
+    
 
     public void miperfil() {
         paginaActualP = "/Profesor/PerfilProfesor.xhtml";
@@ -237,6 +246,7 @@ public class ProfesorController implements Serializable {
     public void setPeriodo(Periodo periodo) {
         this.periodo = periodo;
     }
+    
 
     /**
      * @return the liderPa

@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+
+    <section class="contenido-contenedor">
+        <div class="border contenedor top">
+            <h1 class="tittle">Gestor Profesor Lider</h1>
+            <p:wizard>
+                <p:tab id="test" title="Profesores">
+                    <p:dataTable style="background: grey" var="prof" value="#{profesorController.profesores}" >
+                        <p:column filterBy="#{prof.primerNombre}" headerText="Primer Nombre">
+                            #{prof.primerNombre}
+                        </p:column>
+                        <p:column filterBy="#{prof.segundoNombre}" headerText="Segundo Nombre">
+                            #{prof.segundoApellido}
+                        </p:column>
+                        <p:column filterBy="#{prof.primerApellido}" headerText="Primer Apellido">
+                            #{prof.primerApellido}
+                        </p:column>
+                        <p:column filterBy="#{prof.segundoApellido}" headerText="Segundo Apellido">
+                            #{prof.segundoApellido}
+                        </p:column>
+                        <p:column headerText="">
+                            <h:commandButton value="+" action="#{liderPAController.agregarProfesor(prof)}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:tab>
+                <p:tab id="tpro" title="Programa">
+                    <h:outputText value="#{liderPAController.liderPA.profesor.toString()}" />
+                    
+                    <p:dataTable var="prog" value="#{programaController.programas}">
+                        <p:column headerText="Codigo">
+                            #{prog.codigo}
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            #{prog.nombreCompleto}
+                        </p:column>
+                        <p:column headerText="">
+                            <h:commandButton value="+" action="#{liderPAController.agregarPrograma(prog)}" />
+                        </p:column>
+                    </p:dataTable>
+
+                </p:tab>
+                <p:tab id="tper" title="Periodo">
+                    <p:panelGrid columns="2">
+                        <h:outputText value="#{liderPAController.liderPA.profesor.toString()}" />
+                        <h:outputText value="#{liderPAController.liderPA.programa.nombreCompleto}" />
+                    </p:panelGrid>
+                    <p:dataTable var="per" value="#{periodoController.periodos}" >
+                        <p:column headerText="Fecha Inicio">
+                            #{per.fechaInicial}
+                        </p:column>
+                        <p:column headerText="fecha Fin">
+                            #{per.fechaFinal}
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            #{per.anio}-#{per.numero}
+                        </p:column>
+                        <p:column headerText="">
+                            <h:commandButton value="+" action="#{liderPAController.agregarPeriodo(per)}" />
+                        </p:column>
+                    </p:dataTable> 
+                </p:tab>
+                <p:tab id="tmat" title="Matricular">
+                    <p:panelGrid columns="3">
+                        <h:outputText value="#{liderPAController.liderPA.profesor.toString()}" />
+                        <h:outputText value="#{liderPAController.liderPA.programa.nombreCompleto}" />
+                        <h:outputText value="#{liderPAController.liderPA.periodo.anio}-#{liderPAController.liderPA.periodo.numero}" />
+                        <p:panelGrid columns="2">
+                            <h:outputText value="Semestre" />
+                            <p:spinner min="1" max="10" value="#{liderPAController.liderPA.semestre}" />
+                        </p:panelGrid> 
+                        <h:commandButton value="Registrar" action="#{liderPAController.registrarLiderPA()}" />
+                    </p:panelGrid>
+                </p:tab>
+            </p:wizard>
+        </div>
+        </section>
+      
+</html>
+
