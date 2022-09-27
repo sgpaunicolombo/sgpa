@@ -3,18 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/web/Profesor/GUIProfesor.xhtml</file>
-            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/src/conf/persistence.xml</file>
             <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/src/java/com/controller/ProfesorController.java</file>
-            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/web/Estudiante/GUIEstudiante.xhtml</file>
-            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/web/Estudiante/Gestor_Propuestas.xhtml</file>
-            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/src/java/com/controller/FacesUtil.java</file>
-            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/web/index.xhtml</file>
-            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/web/GUISuperUsuario.xhtml</file>
-            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/web/Estudiante/PerfilEstudiante.xhtml</file>
-            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/web/Profesor/GestorTipo_Entregable.xhtml</file>
-            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/src/java/com/controller/EstudianteController.java</file>
+            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/web/Profesor/GestorProfesorLider.xhtml</file>
+            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/src/java/com/entity/Profesor.java</file>
+            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/src/java/com/controller/LiderPAController.java</file>
+            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/src/java/com/controller/MatriculaController.java</file>
+            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/src/java/com/entity/Area.java</file>
+            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/src/java/com/entity/LiderPA.java</file>
             <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/src/java/com/controller/UsuarioController.java</file>
+            <file>file:/C:/Users/sgpaAdmin2/Desktop/SGPA/Sgpa/web/Coordinador/GestorMatricula.xhtml</file>
         </group>
     </open-files>
 </project-private>

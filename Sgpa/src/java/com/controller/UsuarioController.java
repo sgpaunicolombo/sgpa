@@ -86,6 +86,9 @@ public class UsuarioController implements Serializable {
                 profcon.setPeriodo(percon.getPeriodoActual());
                 procon.obtenerProgramaCoordinadorPA(profcon.getProfesor());
                 profcon.consultarMatriculasXPeriodo();
+                profcon.consultarProfesores();
+                procon.consultarProgramas();
+                percon.obtenerPeriodos();
                 paginaActual = "/Profesor/GUIProfesor.xhtml";
 
             }
