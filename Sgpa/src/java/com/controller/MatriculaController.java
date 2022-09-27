@@ -63,6 +63,7 @@ public class MatriculaController implements Serializable {
 
     public void matricular() {
         matricula.setEstado("Activa");
+        matricula.setEstadoPA("Libre");
         matricula.setFecha(new Date());
         if (matricula.validarMatricula()) {
             matser.crear(matricula);

@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -117,8 +118,9 @@ public class Proyecto_Aula implements Serializable {
     
   
 
-    public void generarCodigo() {
-        this.codigo = this.getPrograma().getCodigo() + this.semestre + this.getPeriodo().getAnio() + this.getId();
+     public void generarCodigo() {
+        Random aleatorio=new Random();
+        this.codigo = this.getPrograma().getCodigo() + this.semestre + this.getPeriodo().getAnio()+aleatorio.nextInt(1000);
     }
 
     public Long getId() {
@@ -350,6 +352,20 @@ public class Proyecto_Aula implements Serializable {
      */
     public void setProfesorLider(LiderPA profesorLider) {
         this.profesorLider = profesorLider;
+    }
+
+    /**
+     * @return the integrantes
+     */
+    public List<Integrante> getIntegrantes() {
+        return integrantes;
+    }
+
+    /**
+     * @param integrantes the integrantes to set
+     */
+    public void setIntegrantes(List<Integrante> integrantes) {
+        this.integrantes = integrantes;
     }
 
 }
