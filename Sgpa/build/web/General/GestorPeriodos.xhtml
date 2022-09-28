@@ -11,40 +11,40 @@
         <section class="contenido-contenedor">
         <div class="border contenedor top">
              <h1 class="tittle">Gestor de Periodos</h1>
-           <div class="conper">
-            
-            <div class="cperiodos">
-                
-                <h:commandButton value="agregar" action="#{periodoController.registrarPeriodo()}" />
-                
-                <p:panelGrid  columns="2">
-                    <h:outputText value="Año" />
-                    <p:spinner value="#{periodoController.periodo.anio}" min="2022" max="2040" />
-                    <h:outputText value="Periodo" />
-                    <p:panel>
-                        <p:selectOneButton value="#{periodoController.periodo.numero}">
+             <span class="aviso">Crear Periodo</span>
+             <div class="contenedor-form periodos">
+                 
+                    <div class="input-form-200">
+                    Año
+                    <p:spinner class="iform" value="#{periodoController.periodo.anio}" min="2022" max="2040" />
+                    </div>
+                    <div class="input-form-310">
+                        Periodo
+                        <p:selectOneButton class="iform" value="#{periodoController.periodo.numero}">
                             <f:selectItem itemLabel="I" itemValue="1"/>
                             <f:selectItem itemLabel="II" itemValue="2"/>
                         </p:selectOneButton>
-                    </p:panel>
-
-                    <p:inputText id="cnp" value="#{periodoController.periodo.numero}" rendered="false" />
-                </p:panelGrid>   
-                 
-                <div class="lfechai">Fecha Inicial</div>
-            <div class="lfechaf">Fecha Final</div>
-            <div class="cfechai"><p:calendar value="#{periodoController.periodo.fechaInicial}" /></div>
-            <div class="cfechaf"><p:calendar value="#{periodoController.periodo.fechaFinal}" /></div>
-            <div class="cinfp">
-                            
-            </div>
+                    </div>
+                    <div class="input-form-200">
+                        Fecha Inicial
+                        <p:calendar class="iform" value="#{periodoController.periodo.fechaInicial}" />
+                    </div>
+                    <div class="input-form-200">
+                        Fecha Final
+                        <p:calendar class="iform" value="#{periodoController.periodo.fechaFinal}" />
+                    </div> 
+                </div>
+                 <div class="tanone">
+                     <h:commandButton class="boton" value="agregar" action="#{periodoController.registrarPeriodo()}" />
+                 </div>
             
                
                 
                 
-            </div>
             
-        </div>
+               
+            
+        <span class="aviso">Periodos</span>
         <p:dataTable class="tabla-reporte" var="per" value="#{periodoController.periodos}" >
                     <p:column headerText="Fecha Inicial">
                         <p:calendar id="datei" value="#{per.fechaInicial}"/>
@@ -58,9 +58,16 @@
                     <p:column headerText="Periodo">
                         #{per.numero}
                     </p:column>
-                    <p:column headerText="">
-                        <h:commandButton rendered="#{!per.actual}" action="#{periodoController.activarPeriodo(per)}" value="Activar" />
+                    <p:column headerText="Estado">
+                        
+                        
                         <h:outputText rendered="#{per.actual}" value="Actual" />
+                    </p:column>
+                    <p:column headerText="Activador">
+                        <div class="accion">
+                            <i class="fa fa-toggle-on" style="color: #004F9E"></i><h:commandButton  class="icono" rendered="#{!per.actual}" action="#{periodoController.activarPeriodo(per)}" value="." />
+                        </div>
+                        
                     </p:column>
                 </p:dataTable>
         
@@ -72,10 +79,7 @@
         
     </h:body>
     <style>
-        .cperiodos{
-           
-            display:flex;  
-        }
+        
     </style>
        
 </html>
