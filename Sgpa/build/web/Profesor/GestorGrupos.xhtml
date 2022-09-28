@@ -31,7 +31,7 @@
                                 #{est.estudiante.segundoApellido}
                             </p:column>
                             <p:column headerText="">
-                                <h:commandButton value="+" action="#{proyectoAulaController.agregarIntegrante(est)}" />
+                                <h:commandButton rendered="#{est.habilitarVinculoGrupo()}" value="+" action="#{proyectoAulaController.agregarIntegrante(est)}" />
                             </p:column>
                         </p:dataTable>
 
@@ -59,7 +59,30 @@
                     </div>
                     <div class="cgrupos">
                          <h1 class="tittle">Grupos Creados Para el periodo</h1>
-
+                         <p:dataTable var="proa" value="#{proyectoAulaController.proyectos}">
+                             <p:column headerText="Codigo">
+                                 #{proa.codigo}
+                             </p:column>
+                             <p:column headerText="Fecha Ingreso">
+                                 #{proa.fecha_ingreso}
+                             </p:column>                             
+                             <p:column headerText="Integrantes">
+                                 <p:dataTable style="font-size: 10pt" var="integ" value="#{proa.integrantes}">
+                                     <p:column headerText="">
+                                         <p:graphicImage value="/Imagenes/Perfiles/#{integ.matricula.estudiante.imagenPerfil()}" style="width: 40px;height: 40px "  />
+                                     </p:column>
+                                     <p:column headerText="">
+                                         <h:outputText value="#{integ.matricula.estudiante.toString()}" /> 
+                                     </p:column>
+                                     <p:column headerText="">
+                                         <h:commandButton value="-" />
+                                     </p:column>
+                                 </p:dataTable>                                 
+                             </p:column>
+                             <p:column headerText="Opciones">
+                                  <h:commandButton value="-" />
+                             </p:column>  
+                         </p:dataTable>
                     </div>
 
 

@@ -69,7 +69,7 @@ public class Usuario implements Serializable {
         if (this.identificacion.equals("") || this.login.equals("") || this.password.equals("")) {
             valido = false;
         }
-        if (this.primerApellido.equals("") || this.segundoApellido.equals("") || this.primerNombre.equals("") || this.segundoNombre.equals("")) {
+        if (this.primerApellido.equals("") || this.segundoApellido.equals("") || this.primerNombre.equals("")) {
             valido = false;
         }
         return valido;

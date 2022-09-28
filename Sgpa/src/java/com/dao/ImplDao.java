@@ -115,7 +115,7 @@ public class ImplDao<T, ID> implements IDao<T, ID> {
             if(et.isActive()){
                 et.rollback();            
             }
-            //pe.printStackTrace();
+            pe.printStackTrace();
         }
         catch(Exception e){
             if(e instanceof com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException){

@@ -22,6 +22,7 @@
     <class>com.entity.Tutor</class>
     <class>com.entity.Tutoria</class>
     <class>com.entity.Usuario</class>
+    <class>com.entity.LiderPA</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sgpa?zeroDateTimeBehavior=convertToNull"/>
