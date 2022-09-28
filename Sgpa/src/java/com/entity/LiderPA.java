@@ -5,6 +5,7 @@
  */
 package com.entity;
 
+import com.controller.FacesUtil;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,6 +31,17 @@ public class LiderPA implements Serializable {
     @ManyToOne
     private Periodo periodo;
     private String semestre;
+    
+    
+    public boolean validarliderPA() {
+        boolean valido = true;
+        if (this.profesor.equals("") || this.programa.equals("") || this.periodo.equals("") || this.semestre.equals("")) {
+            FacesUtil.addErrorMessage("Estos campos son requeridos");
+            valido = false;
+        }
+        return valido;
+    }
+    
 
     public Long getId() {
         return id;

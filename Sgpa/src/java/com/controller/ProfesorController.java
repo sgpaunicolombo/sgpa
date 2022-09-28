@@ -5,8 +5,11 @@
  */
 package com.controller;
 
+import com.entity.LiderPA;
 import com.entity.Periodo;
 import com.entity.Profesor;
+import com.entity.ProgramaAcademico;
+import com.services.LiderPAServices;
 import com.services.ProfesorServices;
 import com.utilidades.GestorImagenes;
 import com.utilidades.ImageUtils;
@@ -30,14 +33,19 @@ import org.primefaces.model.file.UploadedFile;
 @ManagedBean
 @SessionScoped
 public class ProfesorController implements Serializable {
-
+    //objetos de negocio
     private Profesor profesor = new Profesor();
     private Periodo periodo=new Periodo();//para almacenar el el periodo actual
-
+    private LiderPA liderPa;// para conocer si el profesor es lider
     ProfesorServices profser = new ProfesorServices();
 
+    
+    //Colecciones
     private List<Profesor> profesores = new LinkedList();
 
+    //Servicios
+    LiderPAServices lidpaser=new LiderPAServices();
+    
     //controladores
     @ManagedProperty("#{proyectoAulaController}")
     private ProyectoAulaController proacon = new ProyectoAulaController();
@@ -53,12 +61,23 @@ public class ProfesorController implements Serializable {
      */
     public ProfesorController() {
     }
+    
+    public void consultarProfesores(){
+        setProfesores(profser.consultarTodo(Profesor.class));
+    }
 
     public void limpiarDatos() {
         paginaActualP = "";
         profesor = new Profesor();
     }
 
+    public void esLiderPA(){
+        liderPa=lidpaser.obtenerLiderPAXProfesor(profesor, periodo);
+        proacon.setLider(liderPa);
+        proacon.consultarProyectosXPrograma_Periodo();
+        proacon.obtenerIntegrantesXProyectos();
+    }
+    
     public void consultarMatriculasXPeriodo(){
         matcont.consultarEstudiantesMatriculadosXPeriodo(periodo);
     }
@@ -81,9 +100,8 @@ public class ProfesorController implements Serializable {
     }
 
     public void guardarProyectoAula(){
-        proacon.getProyecto().setPeriodo(periodo);
-       // proacon.getProyecto().setProfesorLider(profesor);
-        proacon.guardar();
+        proacon.getProyecto().setPeriodo(periodo);       
+        proacon.guardarPA();
     }
     
     public void subirImagenProfesor() {
@@ -111,6 +129,10 @@ public class ProfesorController implements Serializable {
     public void ggrupos() {
         paginaActualP = "/Profesor/GestorGrupos.xhtml";
     }
+    public void gproflider() {
+        paginaActualP = "/Profesor/GestorProfesorLider.xhtml";
+    }
+    
 
     public void miperfil() {
         paginaActualP = "/Profesor/PerfilProfesor.xhtml";
@@ -223,6 +245,21 @@ public class ProfesorController implements Serializable {
      */
     public void setPeriodo(Periodo periodo) {
         this.periodo = periodo;
+    }
+    
+
+    /**
+     * @return the liderPa
+     */
+    public LiderPA getLiderPa() {
+        return liderPa;
+    }
+
+    /**
+     * @param liderPa the liderPa to set
+     */
+    public void setLiderPa(LiderPA liderPa) {
+        this.liderPa = liderPa;
     }
 
 }

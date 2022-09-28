@@ -37,7 +37,8 @@ public class Matricula implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;  
     private String semestre;
-    private String estado;//Pre-Matricula -  Matricula     
+    private String estado;//Pre-Matricula -  Matricula  
+    private String estadoPA;//Asignado - Libre
     @OneToMany(mappedBy = "editor")
     private List<Item_Proyecto> item_Proyectos;
     @OneToMany(mappedBy = "matricula")
@@ -77,6 +78,18 @@ public class Matricula implements Serializable {
         return valido;
     }
 
+     public boolean habilitarVinculoGrupo() {
+        boolean habilitado = false;
+        try{
+        if (this.getEstadoPA().equals("Libre")) {
+            habilitado = true;
+        }
+        }catch(java.lang.NullPointerException npe){
+            
+        }
+        return habilitado;
+    }
+    
     public boolean habilitarProyecto(){
         boolean habilitado=true;
         if(this.estado.equals("Financiera")){
@@ -215,6 +228,20 @@ public class Matricula implements Serializable {
      */
     public void setSemestre(String semestre) {
         this.semestre = semestre;
+    }
+
+    /**
+     * @return the estadoPA
+     */
+    public String getEstadoPA() {
+        return estadoPA;
+    }
+
+    /**
+     * @param estadoPA the estadoPA to set
+     */
+    public void setEstadoPA(String estadoPA) {
+        this.estadoPA = estadoPA;
     }
     
 }
