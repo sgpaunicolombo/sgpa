@@ -56,7 +56,17 @@ public class ProyectoAulaController implements Serializable {
         proyectos = proaser.obtenerProyectosXPeriodo_Programa(lider.getPeriodo(), lider.getPrograma());
     }
 
+    public void obtenerProyectoAulaXMatricula(Matricula m) {
+        proyecto = proaser.consultar(Proyecto_Aula.class, inteser.obtenerIntegranteXMatricula(m).getProyecto().getId());
+        proyecto.setIntegrantes(inteser.obtenerIntegrantesProyecto(proyecto));
+    }
+
     public void guardarPA() {
+        proyecto.setEstado("Guardado");        
+        proyecto = proaser.modificar(proyecto);
+    }
+
+    public void crearPA() {
         proyecto.setEstado("Guardado");
         proyecto.setFecha_ingreso(new Date());
         if (validarIntegrantes()) {

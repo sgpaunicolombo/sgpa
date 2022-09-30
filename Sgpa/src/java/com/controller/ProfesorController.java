@@ -103,7 +103,7 @@ public class ProfesorController implements Serializable {
 
     public void guardarProyectoAula(){
         proacon.getProyecto().setPeriodo(periodo);       
-        proacon.guardarPA();
+        proacon.crearPA();
     }
     
     public void desvincularIntegrante(Integrante inte,Proyecto_Aula pa){
