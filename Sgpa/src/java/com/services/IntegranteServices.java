@@ -24,7 +24,7 @@ public class IntegranteServices extends ImplDao<Integrante, Long> implements IIn
          try {             
              EntityManager em =getEntityManagger();
              em.getTransaction().begin();               
-             String q="select i from Integrante i where i.proyecto.periodo.id = ?1 and pa.proyecto.programa.id = ?2";        
+             String q="select i from Integrante i where i.proyecto.periodo.id = ?1 and i.proyecto.programa.id = ?2";        
              System.out.println(" Consulta: "+q);
              Query qu=em.createQuery(q)
                      .setParameter(1, p.getId())
