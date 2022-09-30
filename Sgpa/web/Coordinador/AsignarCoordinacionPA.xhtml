@@ -11,15 +11,10 @@
         <section class="contenido-contenedor">
             <div class="border contenedor top">
                 <h1 class="tittle">Asignar Coordinador de Proyectos de Aula</h1>
-                <div class="cprosel">
-                    <div class="c1"></div>
-                    <div class="c2">#{programaController.programa.nombreCompleto}</div>
-                    <div class="c3">#{programaController.programa.coordinadorPA.toString()}</div>
-                    <div class="c4"><h:commandButton action="#{programaController.asignarCoordinadorPA()}" value="Asignar" rendered="#{not empty programaController.programa.coordinadorPA}" /></div>
-                </div>
-                <p:panelGrid columns="1">
-                    <p:panel header="Programas">                        
-                        <p:dataTable var="pro" value="#{programaController.programas}" >
+                
+                
+                    <span class="aviso">Programas</span>                   
+                        <p:dataTable class="tabla-reporte" var="pro" value="#{programaController.programas}" >
                             <p:column headerText="Codigo">
                                 #{pro.codigo}
                             </p:column>
@@ -29,60 +24,55 @@
                             <p:column headerText="Coordinador Proyectos de Aula">
                                 #{pro.coordinadorPA.toString()}
                             </p:column>
-                            <p:column headerText="">
-                                <h:commandButton value="seleccionar" action="#{programaController.consultarprograma(pro)}" />
+                            <p:column headerText="Seleccionar">
+                                <div class="Acciones">
+                                    <div class="accion">
+                                        <i class="fa fa-hand-pointer" style="color: #005CB9"></i><h:commandButton class="icono" value="." action="#{programaController.consultarprograma(pro)}" />
+                                    </div>
+                                </div>    
                             </p:column>
                         </p:dataTable>
-                    </p:panel>
-                    <p:panel header="Profesores">
-                        <p:dataGrid var="prof" columns="4" rows="4" paginator="true" value="#{profesorController.profesores}" >
-                            <p:panel>
-                                <f:facet name="header">
-                                    <h:outputText value="#{prof.identificacion}"/>
-                                    <h:commandButton value="seleccionar" action="#{programaController.seleccionarCoordinadorPA(prof)}" />
-                                </f:facet>
-                                <div class="cpanelprofe" style="font-size: 9pt" >
-                                    <div class="ciprof"><p:graphicImage value="/Imagenes/Perfiles/#{prof.imagenPerfil()}" style="width: 120px;height: 90px "  /> </div>
-                                    <div class="cd1prof">
-                                        <h:outputText value="#{prof.primerNombre} #{prof.segundoNombre}" /><br/>
-                                        <h:outputText value="#{prof.primerApellido} #{prof.segundoApellido}" />
-                                    </div>
-                                    <div class="cd2prof">
-                                        <h:outputText value="#{prof.perfil}" />
-                                    </div>
-                                    <div class="copprof"></div>
-                                    <div class="cd3prof">
-                                        <h:outputText value="#{prof.tipocontrato}" />
-                                    </div>
-                                </div>
-                            </p:panel>
+                    <span class="aviso">Programa Seleccionado</span>  
+                    <div class="cdc" >
+                            <div >
+                                #{programaController.programa.nombreCompleto}
+                            </div>
+                            <div >
+                                #{programaController.programa.coordinadorPA.toString()}
+                            </div>       
+                    </div>
+                    
+                    <span class="aviso">Seleccionar Coordinador PA</span> 
+                        <p:dataGrid class=" periodos" var="prof" columns="4" rows="4" paginator="true" value="#{profesorController.profesores}" >
+                            <div class="cdppa">
+                                <h:commandButton class="cdpbtn" value="seleccionar" action="#{programaController.seleccionarCoordinadorPA(prof)}" />
+                <div class="id-carta"><span>#{prof.identificacion}</span></div>
+                
+                <div class="img-nombre">
+                    <div ><p:graphicImage value="/Imagenes/Perfiles/#{prof.imagenPerfil()}" style="width: 80px;height: 80px; margin-left: 5px; border-radius: 50px;"  /> </div>
+                    <div style="margin-left: 10px;">
+                        <h:outputText value="#{prof.primerNombre} #{prof.segundoNombre}" /><br></br>
+                        <h:outputText value="#{prof.primerApellido} #{prof.segundoApellido}" />
+                    </div> 
+                </div>
+                 
+                <div class="contrato-carta"><span>#{prof.tipocontrato}</span></div>
+                <!--<div>
+                    <h:outputText value="" />
+                 </div> !-->
+            </div>
+            
                         </p:dataGrid>
-                    </p:panel>
-                </p:panelGrid>
+                    
+                <div class="tanone">
+                 <h:commandButton class="boton  " action="#{programaController.asignarCoordinadorPA()}" value="Asignar" rendered="#{not empty programaController.programa.coordinadorPA}" />
+             </div>
 
             </div>
         </section>
 
     </h:body>
-    <style>
-        .cprosel {  display: grid;
-                    grid-template-columns: 1fr 1fr 1fr 1fr;
-                    grid-template-rows: 80px;
-                    grid-auto-columns: 1fr;
-                    gap: 0px 0px;
-                    grid-auto-flow: row;
-                    grid-template-areas:
-                        "c1 c2 c3 c4";
-        }
-
-        .c1 { grid-area: c1; }
-
-        .c2 { grid-area: c2; }
-
-        .c3 { grid-area: c3; }
-
-        .c4 { grid-area: c4; }
-
-    </style>
+    
+        
 </html>
 
