@@ -61,7 +61,7 @@ public class Profesor extends Usuario implements Serializable {
         //this.setId(Long.getLong("5"));
         String imagen=path+this.getId()+".jpg";
         File f=new File(imagen);
-        System.out.println(""+f.toString()+" "+f.exists()+" "+f.length()+" ");
+        //System.out.println(""+f.toString()+" "+f.exists()+" "+f.length()+" ");
         if(f.length()>0){
             img=this.getId()+".jpg";;
         }else{
@@ -70,7 +70,7 @@ public class Profesor extends Usuario implements Serializable {
             }if(this.getGenero().equals("Femenino")){
                 img="iperfilm.jpg";
             }
-            System.out.println(""+img);
+            //System.out.println(""+img);
         }
            return img;
     }

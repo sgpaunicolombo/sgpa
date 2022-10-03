@@ -20,6 +20,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -55,7 +56,17 @@ public class ProyectoAulaController implements Serializable {
         proyectos = proaser.obtenerProyectosXPeriodo_Programa(lider.getPeriodo(), lider.getPrograma());
     }
 
+    public void obtenerProyectoAulaXMatricula(Matricula m) {
+        proyecto = proaser.consultar(Proyecto_Aula.class, inteser.obtenerIntegranteXMatricula(m).getProyecto().getId());
+        proyecto.setIntegrantes(inteser.obtenerIntegrantesProyecto(proyecto));
+    }
+
     public void guardarPA() {
+        proyecto.setEstado("Guardado");        
+        proyecto = proaser.modificar(proyecto);
+    }
+
+    public void crearPA() {
         proyecto.setEstado("Guardado");
         proyecto.setFecha_ingreso(new Date());
         if (validarIntegrantes()) {
@@ -74,15 +85,47 @@ public class ProyectoAulaController implements Serializable {
         }
     }
 
+    public void seleccionarProyecto(Proyecto_Aula pa) {
+        proyecto = pa;
+        integrantes = pa.getIntegrantes();
+    }
+
+    public void eliminarProyecto(Proyecto_Aula pa) {
+        ListIterator it = pa.getIntegrantes().listIterator();
+        while (it.hasNext()) {
+            Integrante inte = (Integrante) it.next();
+            Matricula mat = inte.getMatricula();
+            mat.setEstadoPA("Libre");
+            matser.modificar(mat);
+        }
+        proaser.eliminar(pa);
+        proyectos.remove(pa);
+    }
+
+    public void eliminarIntegrante(Integrante inte, Proyecto_Aula pa) {
+        Matricula mat = inte.getMatricula();
+        mat.setEstadoPA("Libre");
+        matser.modificar(mat);
+        inteser.eliminar(inte);
+        pa.getIntegrantes().remove(inte);
+    }
+
     public void obtenerIntegrantesXProyectos() {
-        integrantes = inteser.obtenerIntegrantesProyectosXPeriodo_Programa(lider.getPeriodo(), lider.getPrograma());
-        for (int i=0;i<proyectos.size();i++ ) {
-            for (Integrante inte : integrantes) {
-                if (inte.getProyecto().getId().equals(proyectos.get(i).getId())) {
-                    proyectos.get(i).getIntegrantes().add(inte);
-                    integrantes.remove(inte);
+        try {
+            integrantes = inteser.obtenerIntegrantesProyectosXPeriodo_Programa(lider.getPeriodo(), lider.getPrograma());
+            for (int i = 0; i < proyectos.size(); i++) {
+                ListIterator it = integrantes.listIterator();
+                proyectos.get(i).setIntegrantes(new LinkedList());
+                while (it.hasNext()) {
+                    Integrante inte = (Integrante) it.next();
+                    if (inte.getProyecto().getId().equals(proyectos.get(i).getId())) {
+                        proyectos.get(i).getIntegrantes().add(inte);
+                        it.remove();
+                    }
                 }
             }
+        } catch (java.util.ConcurrentModificationException cme) {
+            cme.printStackTrace();
         }
     }
 

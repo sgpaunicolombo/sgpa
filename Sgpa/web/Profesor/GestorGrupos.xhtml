@@ -11,10 +11,8 @@
             <div class="border contenedor top">
                 <h1 class="tittle">Gestor Grupos</h1>
                 <div class="contproy">
-
                     <div class="cestudiantes">
-
-                        <p:dataTable rows="10" paginator="true" style="font-size: 10pt" var="est" value="#{matriculaController.matriculas}">
+                        <p:dataTable rows="5" paginator="true" style="font-size: 10pt" var="est" value="#{matriculaController.matriculas}">
                             <p:column filterBy="#{est.estudiante.identificacion}" headerText="Identificacion">
                                 #{est.estudiante.identificacion}
                             </p:column>                        
@@ -34,7 +32,6 @@
                                 <h:commandButton rendered="#{est.habilitarVinculoGrupo()}" value="+" action="#{proyectoAulaController.agregarIntegrante(est)}" />
                             </p:column>
                         </p:dataTable>
-
                     </div>
                     <div class="cintegrantes">
                         <h1 class="tittle">Integrantes Actuales</h1>
@@ -58,36 +55,33 @@
 
                     </div>
                     <div class="cgrupos">
-                         <h1 class="tittle">Grupos Creados Para el periodo</h1>
-                         <p:dataTable var="proa" value="#{proyectoAulaController.proyectos}">
-                             <p:column headerText="Codigo">
-                                 #{proa.codigo}
-                             </p:column>
-                             <p:column headerText="Fecha Ingreso">
-                                 #{proa.fecha_ingreso}
-                             </p:column>                             
-                             <p:column headerText="Integrantes">
-                                 <p:dataTable style="font-size: 10pt" var="integ" value="#{proa.integrantes}">
-                                     <p:column headerText="">
-                                         <p:graphicImage value="/Imagenes/Perfiles/#{integ.matricula.estudiante.imagenPerfil()}" style="width: 40px;height: 40px "  />
-                                     </p:column>
-                                     <p:column headerText="">
-                                         <h:outputText value="#{integ.matricula.estudiante.toString()}" /> 
-                                     </p:column>
-                                     <p:column headerText="">
-                                         <h:commandButton value="-" />
-                                     </p:column>
-                                 </p:dataTable>                                 
-                             </p:column>
-                             <p:column headerText="Opciones">
-                                  <h:commandButton value="-" />
-                             </p:column>  
-                         </p:dataTable>
+                        <h1 class="tittle">Grupos Creados Para el periodo</h1>
+                        <p:dataTable var="proa" value="#{proyectoAulaController.proyectos}">
+                            <p:column headerText="Codigo">
+                                #{proa.codigo}
+                            </p:column>
+                            <p:column headerText="Fecha Ingreso">
+                                #{proa.fecha_ingreso}
+                            </p:column>                             
+                            <p:column width="500" headerText="Integrantes">
+                                <p:dataTable style="font-size: 10pt" var="integ" value="#{proa.integrantes}">
+                                    <p:column headerText="">
+                                        <p:graphicImage value="/Imagenes/Perfiles/#{integ.matricula.estudiante.imagenPerfil()}" style="width: 40px;height: 40px "  />
+                                    </p:column>
+                                    <p:column width="300" headerText="">
+                                        <h:outputText  value="#{integ.matricula.estudiante.toString()}" /> 
+                                    </p:column>
+                                    <p:column headerText="">
+                                        <h:commandButton value="-" action="#{profesorController.desvincularIntegrante(integ,proa)}"  />
+                                    </p:column>
+                                </p:dataTable>                                 
+                            </p:column>
+                            <p:column headerText="Opciones">
+                                <h:commandButton value="#" action="#{proyectoAulaController.seleccionarProyecto(proa)}" />
+                                <h:commandButton value="-" action="#{profesorController.eliminarProyectoAula(proa)}" />
+                            </p:column>  
+                        </p:dataTable>
                     </div>
-
-
-
-
 
                 </div>
             </div>
@@ -95,46 +89,19 @@
     </h:body>
 
     <style>
-        .continte {  display: grid;
-                     grid-template-columns: 100px 100px 80px;
-                     grid-template-rows: 50px 50px 50px 50px;
-                     grid-auto-columns: 1fr;
-                     gap: 0px 0px;
-                     grid-auto-flow: row;
-                     grid-template-areas:
-                         "cimg cimg cop1"
-                         "cimg cimg cop2"
-                         "cimg cimg cop3"
-                         "cnom cnom cop4";
+        .continte { display: grid; 
+                    grid-auto-columns: 1fr; 
+                    grid-template-columns: auto; 
+                    grid-template-rows: auto auto auto; 
+                    gap: 0px 0px; 
+                    grid-template-areas: 
+                        "cestudiantes"
+                        "cintegrantes"
+                        "cgrupos"; 
         }
-
-        .cimg { grid-area: cimg; }
-
-        .cnom { grid-area: cnom; }
-
-        .cop1 { grid-area: cop1; }
-
-        .cop2 { grid-area: cop2; }
-
-        .cop3 { grid-area: cop3; }
-
-        .cop4 { grid-area: cop4; }
-
-
-
-        .contproy {  display: grid; 
-                     grid-auto-columns: 1fr; 
-                     grid-template-columns: 1fr 1fr; 
-                     grid-template-rows: 1fr 1.1fr 0.9fr; 
-                     gap: 0px 0px; 
-                     grid-template-areas: 
-                         "cestudiantes cestudiantes"
-                         "cintegrantes cintegrantes"
-                         "cgrupos cgrupos"; 
-        }
-        .cestudiantes { grid-area: cestudiantes; }
-        .cintegrantes { grid-area: cintegrantes; }
         .cgrupos { grid-area: cgrupos; }
+        .cintegrantes { grid-area: cintegrantes; }
+        .cestudiantes { grid-area: cestudiantes; }
     </style>
 </html>
 

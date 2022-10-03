@@ -14,27 +14,45 @@
                 <p:accordionPanel widgetVar="basic">
                     <p:tab title="Informacion Basica del Proyecto">
                         <div class="contaproy">
-                            <div class="ctitulo">
-                                <p:inputText placeholder="Titulo" size="100" value="#{proyectoAulaController.proyecto.titulo}"/>
-                            </div>
-                            <div class="cdescrip">
-                                <p:inputTextarea placeholder="Problematica" cols="100" value="#{proyectoAulaController.proyecto.problematica}" />
-                            </div>                           
-                            <div align="right" class="cfech">
-                                <p:calendar value="#{proyectoAulaController.proyecto.fecha_inicio}" />
-                            </div>
+                            <div class="container">
+                                <div class="cinfo">
+                                    <p:panelGrid style="font-size: 10pt" columns="8">
+                                        <h:outputText value="Codigo proyecto" />
+                                        <h:outputText value="#{proyectoAulaController.proyecto.codigo}" />
+                                        <h:outputText value="Semestre" />
+                                        <h:outputText value="#{proyectoAulaController.proyecto.semestre}" />
+                                        <h:outputText value="Fecha Inicial" />
+                                        <p:calendar size="10"  value="#{proyectoAulaController.proyecto.fecha_inicio}" />
+                                        <h:outputText value="Fecha Finalizacion" />
+                                        <p:calendar size="10"  value="#{proyectoAulaController.proyecto.fecha_finalizacion}" />
+                                    </p:panelGrid>
+                                </div>
+                                <div class="ctitulo">
+                                    <p:inputText placeholder="Titulo" size="100" value="#{proyectoAulaController.proyecto.titulo}"/>
+                                </div>
+                                <div class="cdescr">
+                                    <p:inputTextarea placeholder="Problematica" cols="100" value="#{proyectoAulaController.proyecto.problematica}" />
+                                </div>
+                            </div>             
                         </div>
                     </p:tab>
                     <p:tab title="Itenes del Proyecto">
 
                     </p:tab>
                     <p:tab title="Integrantes">
-
+                        <p:dataTable style="font-size: 10pt" var="integ" value="#{proyectoAulaController.proyecto.integrantes}">
+                            <p:column headerText="">
+                                <p:graphicImage value="/Imagenes/Perfiles/#{integ.matricula.estudiante.imagenPerfil()}" style="width: 40px;height: 40px "  />
+                            </p:column>
+                            <p:column width="300" headerText="">
+                                <h:outputText  value="#{integ.matricula.estudiante.toString()}" /> 
+                            </p:column>                            
+                        </p:dataTable>   
                     </p:tab>
                 </p:accordionPanel>
                 <p:panelGrid columns="4">
                     <h:commandButton value="Cerrar" />
-                    <h:commandButton value="Guardar" action="#{proyectoAulaController.guardar()}" />
+                    <h:commandButton value="Guardar" action="#{estudianteController.guardarProyectoAula()}" />
                     <h:commandButton value="Publicar" />
                 </p:panelGrid>
 
@@ -45,26 +63,14 @@
     </h:body>
 
     <style>
-        .contaproy {  display: grid;
-                      grid-template-columns: 150px 150px 150px 150px;
-                      grid-template-rows: 60px 60px 60px;
-                      grid-auto-columns: 1fr;
-                      gap: 0px 0px;
-                      grid-auto-flow: row;
-                      grid-template-areas:
-                          "clider clider cfech cfech"
-                          "ctitulo ctitulo ctitulo ctitulo"
-                          "cdescrip cdescrip cdescrip cdescrip";
+        .contaproy {  display: grid; 
+                      grid-auto-columns: 1fr; 
+                      grid-template-rows: auto auto auto; 
+                      gap: 0px 0px; 
         }
-
-        .ctitulo { grid-area: ctitulo; }
-
-        .cdescrip { grid-area: cdescrip; }
-
-        .clider { grid-area: clider; }
-
-        .cfech { grid-area: cfech; }
-
+        .cinfo { grid-area: 1 / 1 / 2 / 2; }
+        .ctitulo { grid-area: 2 / 1 / 3 / 2; }
+        .cdescr { grid-area: 3 / 1 / 4 / 2; }
     </style>
 
 </html>

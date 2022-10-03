@@ -5,10 +5,12 @@
  */
 package com.controller;
 
+import com.entity.Integrante;
 import com.entity.LiderPA;
 import com.entity.Periodo;
 import com.entity.Profesor;
 import com.entity.ProgramaAcademico;
+import com.entity.Proyecto_Aula;
 import com.services.LiderPAServices;
 import com.services.ProfesorServices;
 import com.utilidades.GestorImagenes;
@@ -101,7 +103,17 @@ public class ProfesorController implements Serializable {
 
     public void guardarProyectoAula(){
         proacon.getProyecto().setPeriodo(periodo);       
-        proacon.guardarPA();
+        proacon.crearPA();
+    }
+    
+    public void desvincularIntegrante(Integrante inte,Proyecto_Aula pa){
+        proacon.eliminarIntegrante(inte, pa);
+        matcont.consultarEstudiantesMatriculadosXPeriodo(periodo);
+    }
+    
+    public void eliminarProyectoAula(Proyecto_Aula pa){
+       proacon.eliminarProyecto(pa);       
+       matcont.consultarEstudiantesMatriculadosXPeriodo(periodo);
     }
     
     public void subirImagenProfesor() {

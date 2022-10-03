@@ -60,6 +60,10 @@ public class EstudianteController implements Serializable{
         matcont.consultarMatriculaXEstudianteEnPeriodo(estudiante, periodo);
     }
     
+    public void consultarProyectoXMatricula(){
+        proacon.obtenerProyectoAulaXMatricula(matcont.getMatricula());
+    }
+    
     /**
      * Creates a new instance of EstudianteController
      */
@@ -79,6 +83,10 @@ public class EstudianteController implements Serializable{
             estudiante = new Estudiante();
             mpanelInscripcion = false;
         }
+    }
+    
+    public void guardarProyectoAula(){             
+        proacon.guardarPA();
     }
     
      public void subirImagenProfesor() {
