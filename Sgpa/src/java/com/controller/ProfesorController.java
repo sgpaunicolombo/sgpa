@@ -39,6 +39,7 @@ public class ProfesorController implements Serializable {
     private Profesor profesor = new Profesor();
     private Periodo periodo=new Periodo();//para almacenar el el periodo actual
     private LiderPA liderPa;// para conocer si el profesor es lider
+    private ProgramaAcademico coordinadorPa;// para conocer si el profesor es coordinador
     ProfesorServices profser = new ProfesorServices();
 
     
@@ -266,12 +267,27 @@ public class ProfesorController implements Serializable {
     public LiderPA getLiderPa() {
         return liderPa;
     }
+    
+    /**
+     * @return the coordinadorPa
+     */
+     public ProgramaAcademico getcoordinadorPa() {
+        return coordinadorPa;
+    }
 
     /**
      * @param liderPa the liderPa to set
      */
     public void setLiderPa(LiderPA liderPa) {
         this.liderPa = liderPa;
+    }
+
+    public ProgramaAcademico getCoordinadorPa() {
+        return coordinadorPa;
+    }
+
+    public void setCoordinadorPa(ProgramaAcademico coordinadorPa) {
+        this.coordinadorPa = coordinadorPa;
     }
 
 }
