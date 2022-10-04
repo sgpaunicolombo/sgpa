@@ -13,65 +13,73 @@
                 <h1 class="tittle">Gestor Propuestas</h1>
                 <p:accordionPanel widgetVar="basic">
                     <p:tab title="Informacion Basica del Proyecto">
-                        <div class="contaproy">
-                            <div class="container">
-                                <div class="cinfo">
-                                    <p:panelGrid style="font-size: 10pt" columns="8">
-                                        <h:outputText value="Codigo proyecto" />
-                                        <h:outputText value="#{proyectoAulaController.proyecto.codigo}" />
-                                        <h:outputText value="Semestre" />
-                                        <h:outputText value="#{proyectoAulaController.proyecto.semestre}" />
-                                        <h:outputText value="Fecha Inicial" />
-                                        <p:calendar size="10"  value="#{proyectoAulaController.proyecto.fecha_inicio}" />
-                                        <h:outputText value="Fecha Finalizacion" />
-                                        <p:calendar size="10"  value="#{proyectoAulaController.proyecto.fecha_finalizacion}" />
-                                    </p:panelGrid>
-                                </div>
-                                <div class="ctitulo">
+                        <div class="contpro">
+        
+                                    <div class="codse">
+                                        <i class="fa fa-solid fa-thumbtack ic"></i>
+                                        <div class="codseitem">
+                                            <h:outputText value="Codigo Proyecto" /><br></br>
+                                            <span>#{proyectoAulaController.proyecto.codigo}</span>
+                                        </div>
+                                        <div class="codseitem">
+                                            <h:outputText value="Semestre" /><br></br>
+                                            <span>#{proyectoAulaController.proyecto.semestre}</span>
+                                        </div>
+                                    </div>
+                            <span class="aviso">Establezca la fecha del proyecto</span>
+                            <div class="fechas codse" style="gap:20px;">
+                                
+                                <div class="input-form-200">
+                                        Fecha Inicial
+                                        <p:calendar   value="#{proyectoAulaController.proyecto.fecha_inicio}" />
+                                        </div>
+                                
+                                <div class="input-form-200">
+                                        Fecha Finalizacion
+                                        <p:calendar   value="#{proyectoAulaController.proyecto.fecha_finalizacion}" />
+                                </div>        
+                            </div>
+                                <span class="aviso ">Titulo Del proyecto</span>
+                                <div class="fechas codse" style="gap:20px;">
+                                    
                                     <p:inputText placeholder="Titulo" size="100" value="#{proyectoAulaController.proyecto.titulo}"/>
                                 </div>
-                                <div class="cdescr">
+                                <span class="aviso">Problematica Del proyecto</span>
+                                <div class="fechas codse" style="gap:20px;">
                                     <p:inputTextarea placeholder="Problematica" cols="100" value="#{proyectoAulaController.proyecto.problematica}" />
                                 </div>
-                            </div>             
+                            
+                                
+                                         
                         </div>
                     </p:tab>
                     <p:tab title="Itenes del Proyecto">
 
                     </p:tab>
                     <p:tab title="Integrantes">
-                        <p:dataTable style="font-size: 10pt" var="integ" value="#{proyectoAulaController.proyecto.integrantes}">
-                            <p:column headerText="">
+                        <p:dataTable class="tabla-reporte" style="text-align: left !important;" var="integ" value="#{proyectoAulaController.proyecto.integrantes}">
+                            <p:column style="text-align: left !important;" headerText="Perfil">
                                 <p:graphicImage value="/Imagenes/Perfiles/#{integ.matricula.estudiante.imagenPerfil()}" style="width: 40px;height: 40px "  />
                             </p:column>
-                            <p:column width="300" headerText="">
+                            <p:column style="text-align: left !important;" width="300" headerText="Nombre" >
                                 <h:outputText  value="#{integ.matricula.estudiante.toString()}" /> 
                             </p:column>                            
                         </p:dataTable>   
                     </p:tab>
                 </p:accordionPanel>
-                <p:panelGrid columns="4">
-                    <h:commandButton value="Cerrar" />
-                    <h:commandButton value="Guardar" action="#{estudianteController.guardarProyectoAula()}" />
-                    <h:commandButton value="Publicar" />
-                </p:panelGrid>
-
+                <div class="tanone" >
+                   <h:commandButton class="boton" style="margin-left: 20px;" value="Cerrar" />
+                    <h:commandButton class="boton" style="margin-left: 20px;" value="Guardar" action="#{estudianteController.guardarProyectoAula()}" />
+                    <h:commandButton class="boton" style="margin-left: 20px;" value="Publicar" />
+                 </div>
+                    
 
 
             </div>
         </section>
     </h:body>
 
-    <style>
-        .contaproy {  display: grid; 
-                      grid-auto-columns: 1fr; 
-                      grid-template-rows: auto auto auto; 
-                      gap: 0px 0px; 
-        }
-        .cinfo { grid-area: 1 / 1 / 2 / 2; }
-        .ctitulo { grid-area: 2 / 1 / 3 / 2; }
-        .cdescr { grid-area: 3 / 1 / 4 / 2; }
-    </style>
+    
 
 </html>
 

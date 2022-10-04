@@ -33,19 +33,16 @@
                         
                     </div>
                     <div class="foto-perfil">
+                        <h:commandButton action="#{estudianteController.miperfil()}" class="mi-perfil" value="Perfil" />
                         <div class="imagen-perfil">
                             
                             <h:graphicImage class="logo-unico" value="/Imagenes/Perfiles/#{estudianteController.estudiante.imagenPerfil()}"/>
-                            <div class="conectado"></div> 
+                            
+                            
                         </div>
                          <h:commandButton action="#{usuarioController.salir()}" class="log-out" value="Log out" />
 
                     </div>
-                   
-                    
-                    <div class="botones-perfil">
-                        <h:commandButton action="#{estudianteController.miperfil()}" class="mi-perfil" value="Perfil" />
-                        </div>
                 </div>
         </div>
 
