@@ -82,12 +82,14 @@
                 <div class="cop">
                     <div class="linea"></div>
                     <div class="op-v"><h:graphicImage value="/resources/img/libro.png"/><h:commandButton value="Gestor de Grupos " class="botones-v" action="#{profesorController.ggrupos()}"></h:commandButton></div>
-                </div>               
+                </div>
+                </h:panelGroup>            
+                <h:panelGroup layout="block" rendered="#{not empty programaController.programa.coordinadorPA}">
                 <div class="cop">
                     <div class="linea"></div>
                     <div class="op-v"><h:graphicImage value="/resources/img/libro.png"/><h:commandButton  value="Gestor de Prof Lider " class="botones-v" action="#{profesorController.gproflider()}"></h:commandButton></div>
                 </div>
-                    </h:panelGroup>            
+                    </h:panelGroup>   
                 
                 
                 
