@@ -9,7 +9,9 @@ import com.entity.LiderPA;
 import com.entity.Periodo;
 import com.entity.Profesor;
 import com.entity.ProgramaAcademico;
+import com.entity.Semestre;
 import com.services.LiderPAServices;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -22,16 +24,17 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class LiderPAController {
+public class LiderPAController implements Serializable {
 
     private LiderPA liderPA = new LiderPA();
-    private Periodo periodo=new Periodo();//para almacenar el el periodo actual
+    private Periodo periodo = new Periodo();//para almacenar el el periodo actual
+//    private Semestre semestre=new Semestre();
 
     LiderPAServices lidser = new LiderPAServices();
 
     private List<LiderPA> lideresPA = new LinkedList();
     private List<Profesor> profesores = new LinkedList();
-    
+
     //controladores
     @ManagedProperty("#{periodoController}")
     private PeriodoController percont = new PeriodoController();
@@ -39,27 +42,35 @@ public class LiderPAController {
     private ProgramaController progcont = new ProgramaController();
     @ManagedProperty("#{profesorController}")
     private ProfesorController profcont = new ProfesorController();
-    
-    
-    public void agregarProfesor (Profesor p) {
+
+    public void agregarProfesor(Profesor p) {
         getLiderPA().setProfesor(p);
     }
-    
+
     public void agregarPrograma(ProgramaAcademico pa) {
         getLiderPA().setPrograma(pa);
     }
-    
+
     public void agregarPeriodo(Periodo p) {
         getLiderPA().setPeriodo(p);
     }
-    
+
+    public void seleccionarSemestre(Semestre s) {
+        liderPA.setSemestre(s);
+    }
+
     public void registrarLiderPA() {
-        if (liderPA.validarliderPA()) {
-            lidser.crear(liderPA);
-            liderPA = new LiderPA();
+//        liderPA.setSemestre(getSemestre());
+        try {
+            if (liderPA.validarliderPA()) {
+                lidser.crear(liderPA);
+                liderPA = new LiderPA();
+            }
+        }catch(java.lang.NullPointerException npe){
+            
         }
     }
-    
+
     public LiderPAController() {
     }
 
@@ -118,5 +129,20 @@ public class LiderPAController {
     public void setProfcont(ProfesorController profcont) {
         this.profcont = profcont;
     }
-    
+
+//    /**
+//     * @return the semestre
+//     */
+//    public Semestre getSemestre() {
+//        return semestre;
+//    }
+//
+//    /**
+//     * @param semestre the semestre to set
+//     */
+//    public void setSemestre(Semestre semestre) {
+//        this.semestre = semestre;
+//    }
+//
+//    
 }

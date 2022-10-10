@@ -85,10 +85,13 @@
                         <h:outputText value="#{matriculaController.matricula.estudiante.toString()}" />
                         <h:outputText value="#{matriculaController.matricula.programa.nombreCompleto}" />
                         <h:outputText value="#{matriculaController.matricula.periodo.anio}-#{matriculaController.matricula.periodo.numero}" />
-                        <p:panelGrid columns="2">
-                            <h:outputText value="Semestre" />
-                            <p:spinner min="1" max="10" value="#{matriculaController.matricula.semestre}" />
-                        </p:panelGrid> 
+                        
+                          <p:dataGrid columns="4" var="sem"  value="#{semestreController.semestres}">
+                            <p:panel>
+                                <h:commandButton value="#{sem.denominacion}" action="#{matriculaController.seleccionarSemestre(sem)}" />
+                            </p:panel>                        
+                        </p:dataGrid>                        
+                        
                         <h:commandButton value="Matricular" action="#{matriculaController.matricular()}" />
                     </p:panelGrid>
                 </p:tab>

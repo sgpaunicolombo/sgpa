@@ -6,13 +6,16 @@
 package com.controller;
 
 import com.entity.Estudiante;
+import com.entity.Item_Proyecto;
 import com.entity.Matricula;
 import com.entity.Periodo;
 import com.entity.Proyecto_Aula;
+import com.entity.Tipo_Item;
 import com.services.EstudianteServices;
 import com.utilidades.ImageUtils;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,23 +33,23 @@ import org.primefaces.model.file.UploadedFile;
  */
 @ManagedBean
 @SessionScoped
-public class EstudianteController implements Serializable{
+public class EstudianteController implements Serializable {
 
-    
     //objetos de negocio
     private Estudiante estudiante = new Estudiante();
-    private Periodo periodo=new Periodo();//para almacenar el el periodo actual
-    
-    
+    private Periodo periodo = new Periodo();//para almacenar el el periodo actual
+
     //controlladores
     @ManagedProperty("#{matriculaController}")
-    private MatriculaController matcont=new MatriculaController();
+    private MatriculaController matcont = new MatriculaController();
     @ManagedProperty("#{proyectoAulaController}")
-    private ProyectoAulaController proacon=new ProyectoAulaController();
-    
+    private ProyectoAulaController proacon = new ProyectoAulaController();
+    @ManagedProperty("#{tipo_itemController}")
+    private Tipo_itemController tipicon = new Tipo_itemController();
+
     //Servicios
     EstudianteServices estser = new EstudianteServices();
-    
+
     //colecciones    
     private List<Estudiante> estudiantes = new LinkedList();
 
@@ -54,14 +57,51 @@ public class EstudianteController implements Serializable{
     private boolean mpanelInscripcion = true;
     private String paginaActualE = "";
     private UploadedFile iestudiante;
+    private boolean mpanelAItems = false;
+    private boolean mpanelItem = false;
 
-    
-    public void consultarMatriculaEstudiante(){
+    public void consultarMatriculaEstudiante() {
         matcont.consultarMatriculaXEstudianteEnPeriodo(estudiante, periodo);
     }
-    
-    public void consultarProyectoXMatricula(){
+
+    public void consultarProyectoXMatricula() {
         proacon.obtenerProyectoAulaXMatricula(matcont.getMatricula());
+    }
+
+    public void agregarItem() {
+        mpanelAItems = true;
+    }
+
+    public void volverItems() {
+        mpanelAItems = false;
+    }
+
+    public void seleccionarTItem(Tipo_Item ip) {
+        //tipicon.setTipo_item(ip);
+        proacon.getItem().setTipo(ip);
+        mpanelItem = true;
+        mpanelAItems = false;
+    }
+
+    public void registrarItem() {
+        proacon.guardarItem(matcont.getMatricula());
+        volverAItenes();
+    }
+
+    public void volverAItenes() {
+        mpanelItem = false;
+    }
+
+    public void seleccionarItem(Item_Proyecto ite) {
+        ite.setFechamodificacion(new Date());
+        proacon.setItem(ite);
+        mpanelItem = true;
+        mpanelAItems = false;
+    }
+
+    public void eliminarItem(Item_Proyecto ite){
+        proacon.itemser.eliminar(ite);
+        proacon.getProyecto().getItenes_Proyecto().remove(ite);
     }
     
     /**
@@ -69,12 +109,12 @@ public class EstudianteController implements Serializable{
      */
     public EstudianteController() {
     }
-       
-    public void limpiarDatos(){       
+
+    public void limpiarDatos() {
         matcont.setMatricula(new Matricula());
         proacon.setProyecto(new Proyecto_Aula());
     }
-    
+
     public void inscribirEstudiante() {
         estudiante.setTipo("Estudiante");
         estudiante.setEstado("Pre-Matricula");
@@ -84,43 +124,45 @@ public class EstudianteController implements Serializable{
             mpanelInscripcion = false;
         }
     }
-    
-    public void guardarProyectoAula(){             
+
+    public void guardarProyectoAula() {
         proacon.guardarPA();
     }
-    
-     public void subirImagenProfesor() {
-        try {  
-//               File destFile= new File(event.getFile().getFileName());           
-               System.out.println(""+iestudiante.getFileName());
-               ServletContext servletContext = (ServletContext) 
-               FacesContext.getCurrentInstance().getExternalContext().getContext();
-               String path=servletContext.getRealPath("/imagenInicial.jpg").replace("imagenInicial.jpg", "Imagenes\\Perfiles\\");
-               ImageUtils.copyFile(estudiante.getId()+".jpg", iestudiante.getInputStream(),path);
-               System.out.println(""+path);
-                //getEstudiante().getEstudiante().setImagenC(path+event.getFile().getFileName()+".jpg");               
-        } catch (IOException ex) {
-            Logger.getLogger(EstudianteController.class.getName()).log(Level.SEVERE, null, ex);
-        }	
+
+    public void publicarProyectoAula(){
+        proacon.publicarPA();
     }
     
+    public void subirImagenProfesor() {
+        try {
+//               File destFile= new File(event.getFile().getFileName());           
+            System.out.println("" + iestudiante.getFileName());
+            ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+            String path = servletContext.getRealPath("/imagenInicial.jpg").replace("imagenInicial.jpg", "Imagenes\\Perfiles\\");
+            ImageUtils.copyFile(estudiante.getId() + ".jpg", iestudiante.getInputStream(), path);
+            System.out.println("" + path);
+            //getEstudiante().getEstudiante().setImagenC(path+event.getFile().getFileName()+".jpg");               
+        } catch (IOException ex) {
+            Logger.getLogger(EstudianteController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public void miperfil() {
         paginaActualE = "/Estudiante/PerfilEstudiante.xhtml";
     }
-    
-    public void g_propuesta(){
-        paginaActualE= "/Estudiante/Gestor_Propuestas.xhtml";
-    }
-    
-    
-    public void obtenerEstudiantes(){
-        estudiantes=estser.consultarTodo(Estudiante.class);
+
+    public void g_propuesta() {
+        paginaActualE = "/Estudiante/Gestor_Propuestas.xhtml";
     }
 
-    public void obtenerEstudiante(Long id){
-        estudiante=estser.consultar(Estudiante.class, id);
+    public void obtenerEstudiantes() {
+        estudiantes = estser.consultarTodo(Estudiante.class);
     }
-    
+
+    public void obtenerEstudiante(Long id) {
+        estudiante = estser.consultar(Estudiante.class, id);
+    }
+
     /**
      * @return the estudiante
      */
@@ -231,6 +273,48 @@ public class EstudianteController implements Serializable{
      */
     public void setProacon(ProyectoAulaController proacon) {
         this.proacon = proacon;
+    }
+
+    /**
+     * @return the mpanelAItems
+     */
+    public boolean isMpanelAItems() {
+        return mpanelAItems;
+    }
+
+    /**
+     * @param mpanelAItems the mpanelAItems to set
+     */
+    public void setMpanelAItems(boolean mpanelAItems) {
+        this.mpanelAItems = mpanelAItems;
+    }
+
+    /**
+     * @return the mpanelItem
+     */
+    public boolean isMpanelItem() {
+        return mpanelItem;
+    }
+
+    /**
+     * @param mpanelItem the mpanelItem to set
+     */
+    public void setMpanelItem(boolean mpanelItem) {
+        this.mpanelItem = mpanelItem;
+    }
+
+    /**
+     * @return the tipicon
+     */
+    public Tipo_itemController getTipicon() {
+        return tipicon;
+    }
+
+    /**
+     * @param tipicon the tipicon to set
+     */
+    public void setTipicon(Tipo_itemController tipicon) {
+        this.tipicon = tipicon;
     }
 
 }

@@ -53,6 +53,9 @@ public class UsuarioController implements Serializable {
     private EstudianteController estcon=new EstudianteController();
     @ManagedProperty("#{profesorController}")
     private ProfesorController profcon=new ProfesorController();
+     @ManagedProperty("#{semestreController}")
+    private SemestreController semcon=new SemestreController();
+    
     
     /**
      * Creates a new instance of UsuarioController
@@ -64,6 +67,7 @@ public class UsuarioController implements Serializable {
         setUsuario(ususer.ingresar(getUsuario().getLogin(), getUsuario().getPassword()));
         if (!getUsuario().getIdentificacion().equals("")) {
             percon.establecerPeriodoActual();
+            estcon.getTipicon().consultarTipos_Items();
             if (getUsuario().getTipo().equals("Coordinador")) {
                 coorcon.obtenerCoordinador(getUsuario().getId());
                 profcon.obtenerProfesores();
@@ -276,5 +280,20 @@ public class UsuarioController implements Serializable {
     public void setProfcon(ProfesorController profcon) {
         this.profcon = profcon;
     }
+
+    /**
+     * @return the semcon
+     */
+    public SemestreController getSemcon() {
+        return semcon;
+    }
+
+    /**
+     * @param semcon the semcon to set
+     */
+    public void setSemcon(SemestreController semcon) {
+        this.semcon = semcon;
+    }
+
 
 }

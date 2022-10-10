@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,14 +47,15 @@ public class Proyecto_Aula implements Serializable {
     private String titulo;
     private String problematica;
     private String codigo;
-    private String semestre;
+    @ManyToOne
+    private Semestre semestre;
     @ManyToOne
     private ProgramaAcademico programa;
     @ManyToOne
     private Periodo periodo;
-    @OneToMany(mappedBy = "proyecto")
-    private List<Item_Proyecto> item_Proyectos;
-    @OneToMany(mappedBy = "proyecto")
+    @OneToMany(mappedBy = "proyecto",fetch = FetchType.LAZY)
+    private List<Item_Proyecto> itenes_Proyecto;
+    @OneToMany(mappedBy = "proyecto",fetch = FetchType.LAZY )
     private List<Integrante> integrantes;
     @OneToMany(mappedBy = "proyecto")
     private List<Avance> avances;
@@ -65,7 +67,7 @@ public class Proyecto_Aula implements Serializable {
     public Proyecto_Aula() {
     }
 
-    public Proyecto_Aula(Long id, String estado, Date fecha_inicio, Date fecha_ingreso, Date fecha_aprobacion, Profesor coordinadorPA, Date fecha_finalizacion, LiderPA profesorLider, String titulo, String problematica, String codigo, String semestre, ProgramaAcademico programa, Periodo periodo, List<Item_Proyecto> item_Proyectos, List<Integrante> integrantes, List<Avance> avances, List<Tutor> tutors, List<Tutoria> tutorias) {
+    public Proyecto_Aula(Long id, String estado, Date fecha_inicio, Date fecha_ingreso, Date fecha_aprobacion, Profesor coordinadorPA, Date fecha_finalizacion, LiderPA profesorLider, String titulo, String problematica, String codigo, Semestre semestre, ProgramaAcademico programa, Periodo periodo, List<Item_Proyecto> itenes_Proyecto, List<Integrante> integrantes, List<Avance> avances, List<Tutor> tutors, List<Tutoria> tutorias) {
         this.id = id;
         this.estado = estado;
         this.fecha_inicio = fecha_inicio;
@@ -80,47 +82,81 @@ public class Proyecto_Aula implements Serializable {
         this.semestre = semestre;
         this.programa = programa;
         this.periodo = periodo;
-        this.item_Proyectos = item_Proyectos;
+        this.itenes_Proyecto = itenes_Proyecto;
         this.integrantes = integrantes;
         this.avances = avances;
         this.tutors = tutors;
         this.tutorias = tutorias;
     }
 
-    
-    
-    public boolean esvalido(){
-        boolean valido=true;
-        try{
-        if(this.periodo.getId()<=0){
-            valido=false;
-            FacesUtil.addErrorMessage("No se le ha asignado el periodo al grupo");
-        } 
-        if(this.programa.getId()<=0){
-            valido=false;
-            FacesUtil.addErrorMessage("No se le ha asignado el Programa academico al grupo");
-        } if(this.semestre.equals("")){
-            valido=false;
-            FacesUtil.addErrorMessage("No se le ha asignado el Semestre al grupo");
-        } 
-        if( this.getProfesorLider().getId()<=0){
-            valido=false;
-            FacesUtil.addErrorMessage("El proyecto no posee Profesor Lider ");
-        } if(this.estado.equals("")){
-            valido=false;
-            FacesUtil.addErrorMessage("El estado del proyecto no puede ser Null");
-        }   
-        }catch(java.lang.NullPointerException npe){
-            
+   
+
+    public String infoProyectoAula() {
+        String contenido="";
+        
+        contenido=this.titulo+"\n\n"+this.problematica+"\n\n";
+        for(Integrante i:this.getIntegrantes()){
+            contenido=contenido+i.getMatricula().getEstudiante().toString()+"\n";
+        }
+        contenido=contenido+"\n";
+        for(Item_Proyecto ip:this.getItenes_Proyecto()){
+            contenido=contenido+ip.getTipo().getNombre()+": \n"+ip.getContenido()+"\n\n";
+        }
+        contenido=contenido+"\n";        
+        
+        return contenido;
+        
+    }
+
+    public boolean esvalido() {
+        boolean valido = true;
+        try {
+            if (this.periodo.getId() <= 0) {
+                valido = false;
+                FacesUtil.addErrorMessage("No se le ha asignado el periodo al grupo");
+            }
+            if (this.programa.getId() <= 0) {
+                valido = false;
+                FacesUtil.addErrorMessage("No se le ha asignado el Programa academico al grupo");
+            }
+            if (this.getSemestre().equals("")) {
+                valido = false;
+                FacesUtil.addErrorMessage("No se le ha asignado el Semestre al grupo");
+            }
+            if (this.getProfesorLider().getId() <= 0) {
+                valido = false;
+                FacesUtil.addErrorMessage("El proyecto no posee Profesor Lider ");
+            }
+            if (this.estado.equals("")) {
+                valido = false;
+                FacesUtil.addErrorMessage("El estado del proyecto no puede ser Null");
+            }
+        } catch (java.lang.NullPointerException npe) {
+
+        }
+        return valido;
+    }
+
+    public boolean validarInfo() {
+        boolean valido = true;
+        try {
+            if (this.titulo.trim().equals("")) {
+                valido = false;
+                FacesUtil.addErrorMessage("El proyecto no tiene titulo");
+            }
+            if (this.problematica.equals("")) {
+                valido = false;
+                FacesUtil.addErrorMessage("El proyeto no tiene problema ");
+            }
+        } catch (java.lang.NullPointerException npe) {
+
         }
         return valido;
     }
     
-  
-
-     public void generarCodigo() {
-        Random aleatorio=new Random();
-        this.codigo = this.getPrograma().getCodigo() + this.semestre + this.getPeriodo().getAnio()+aleatorio.nextInt(1000);
+    public void generarCodigo() {
+        Random aleatorio = new Random();
+        this.codigo = this.getPrograma().getCodigo() + this.getSemestre() + this.getPeriodo().getAnio() + aleatorio.nextInt(1000);
     }
 
     public Long getId() {
@@ -296,23 +332,7 @@ public class Proyecto_Aula implements Serializable {
         this.codigo = codigo;
     }
 
-    /**
-     * @return the semestre
-     */
-    public String getSemestre() {
-        return semestre;
-    }
-
-    /**
-     * @param semestre the semestre to set
-     */
-    public void setSemestre(String semestre) {
-        this.semestre = semestre;
-    }
-
-  
-
-    /**
+   /**
      * @return the programa
      */
     public ProgramaAcademico getPrograma() {
@@ -366,6 +386,34 @@ public class Proyecto_Aula implements Serializable {
      */
     public void setIntegrantes(List<Integrante> integrantes) {
         this.integrantes = integrantes;
+    }
+
+    /**
+     * @return the itenes_Proyecto
+     */
+    public List<Item_Proyecto> getItenes_Proyecto() {
+        return itenes_Proyecto;
+    }
+
+    /**
+     * @param itenes_Proyecto the itenes_Proyecto to set
+     */
+    public void setItenes_Proyecto(List<Item_Proyecto> itenes_Proyecto) {
+        this.itenes_Proyecto = itenes_Proyecto;
+    }
+
+    /**
+     * @return the semestre
+     */
+    public Semestre getSemestre() {
+        return semestre;
+    }
+
+    /**
+     * @param semestre the semestre to set
+     */
+    public void setSemestre(Semestre semestre) {
+        this.semestre = semestre;
     }
 
 }

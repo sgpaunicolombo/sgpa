@@ -27,7 +27,7 @@ public class Tipo_itemController implements Serializable{
 
     private Tipo_ItemServices tipiser = new Tipo_ItemServices();
 
-    private List<Tipo_Item> tipo_Item = new LinkedList();
+    private List<Tipo_Item> tipos_Items = new LinkedList();
 
     /**
      * Creates a new instance of PeriodoController
@@ -40,18 +40,18 @@ public class Tipo_itemController implements Serializable{
         if(getTipo_item().validar()){
             setTipo_item(getTipiser().modificar(getTipo_item()));
             setTipo_item(new Tipo_Item());
-            consultarTipo_Item();
+            consultarTipos_Items();
     
         }
     }
     public void eliminartipo_Item(Tipo_itemController te){
         getTipiser().eliminar(te);
-          consultarTipo_Item();   
+          consultarTipos_Items();   
         
     }
         
-       public void consultarTipo_Item(){
-           setTipo_Item(getTipiser().consultarTodo(Tipo_Item.class));
+       public void consultarTipos_Items(){
+           setTipos_Items(getTipiser().consultarTodo(Tipo_Item.class));
     }
 
     /**
@@ -80,26 +80,21 @@ public class Tipo_itemController implements Serializable{
      */
     public void setTipiser(Tipo_ItemServices tipiser) {
         this.tipiser = tipiser;
+    }     
+
+    /**
+     * @return the tipos_Items
+     */
+    public List<Tipo_Item> getTipos_Items() {
+        return tipos_Items;
     }
 
     /**
-     * @return the tipo_Item
+     * @param tipos_Items the tipos_Items to set
      */
-    public List<Tipo_Item> getTipo_Item() {
-        return tipo_Item;
+    public void setTipos_Items(List<Tipo_Item> tipos_Items) {
+        this.tipos_Items = tipos_Items;
     }
-
-    /**
-     * @param tipo_Item the tipo_Item to set
-     */
-    public void setTipo_Item(List<Tipo_Item> tipo_Item) {
-        this.tipo_Item = tipo_Item;
-    }
-       
-      
-        
-        
-           
 
   
  
