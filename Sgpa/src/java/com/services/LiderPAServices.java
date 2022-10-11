@@ -12,6 +12,8 @@ import com.entity.Profesor;
 import com.implDao.IAsignatura;
 import com.implDao.ILiderPA;
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 /**
@@ -19,17 +21,17 @@ import javax.persistence.Query;
  * @author Jcmm
  */
 public class LiderPAServices extends ImplDao<LiderPA, Long> implements ILiderPA,Serializable{
-    public LiderPA obtenerLiderPAXProfesor(Profesor p,Periodo pe){
+    public List<LiderPA> obtenersemestresLiderPAXProfesor(Profesor p,Periodo pe){
         EntityManager em =ImplDao.getEntityManagger();
-        LiderPA lid=new LiderPA();
+        List<LiderPA> lid=new LinkedList();
         em.getTransaction().begin();        
-        try{
+        try{//tengo que colocar el semestre para que me de un unico resultado
         String q="select lp from LiderPA lp where lp.periodo.id = ?1 and lp.profesor.id= ?2";        
 //        System.out.println(" Consulta: "+q);
         Query qu=em.createQuery(q)
                 .setParameter(1, pe.getId())
                 .setParameter(2, p.getId());
-        lid=(LiderPA)qu.getSingleResult();
+        lid=qu.getResultList();
 //        System.out.println(" Usuario: "+usu.getTipo());
         }catch(javax.persistence.NoResultException ner){
             

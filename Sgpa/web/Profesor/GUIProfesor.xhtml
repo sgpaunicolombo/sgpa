@@ -52,7 +52,7 @@
             <nav>
                 <div class="op"><h:graphicImage  value="/resources/img/bombillo.png"/><a href="">Tutorias</a></div>
                 <div class="op"><h:graphicImage  value="/resources/img/motar.png"/><a href="">Estudiantes</a></div>
-                <div class="op"><h:graphicImage  value="/resources/img/monitor.png"/><a href="">Proyecto Aula</a></div>
+                <div class="op"><h:graphicImage  value="/resources/img/monitor.png"/><h:commandLink action="#{profesorController.gproyectosaula()}" value="Proyecto Aula"  /></div>
                 <div class="op"><h:graphicImage  value="/resources/img/tabla.png"/><a href="">Asignaturas</a></div>
                 <div class="op"><h:graphicImage  value="/resources/img/profesor.png"/><a href="">Profesores</a></div>
                 <div class="op"><h:graphicImage  value="/resources/img/notas.png"/><a href="">Notas</a></div>     
@@ -78,10 +78,14 @@
                     <div class="linea"></div>
                     <div class="op-v"><h:graphicImage  value="/resources/img/libro.png"/><h:commandButton value="Tipos de Item " class="botones-v" action="#{profesorController.gtipo_Item()}"></h:commandButton></div>
                 </div>
-                <h:panelGroup layout="block" rendered="#{not empty profesorController.liderPa.profesor}">
+                <h:panelGroup layout="block" rendered="#{profesorController.habilitarLider()}">
                 <div class="cop">
                     <div class="linea"></div>
-                    <div class="op-v"><h:graphicImage value="/resources/img/libro.png"/><h:commandButton value="Gestor de Grupos " class="botones-v" action="#{profesorController.ggrupos()}"></h:commandButton></div>
+                    <div class="op-v"><h:graphicImage value="/resources/img/libro.png"/><h:commandButton value="Gestor de Grupos" class="botones-v" action="#{profesorController.ggrupos()}"></h:commandButton></div>
+                </div>
+                    <div class="cop">
+                    <div class="linea"></div>
+                    <div class="op-v"><h:graphicImage value="/resources/img/libro.png"/><h:commandButton value="Ver Proyectos" class="botones-v" action="#{profesorController.gproyectosaula()}"></h:commandButton></div>
                 </div>
                 </h:panelGroup>            
                 <h:panelGroup layout="block" rendered="#{not empty programaController.programa.coordinadorPA}">

@@ -108,6 +108,17 @@ public class Proyecto_Aula implements Serializable {
         
     }
 
+    public boolean estadoProyecto(){
+        boolean estado=false;
+        if(this.estado.equals("Guardado")||this.estado.equals("Propuesta")||this.estado.equals("Aplazado")){
+            estado=false;
+        }
+        if(this.estado.equals("Produccion")||this.estado.equals("ParaSustentar")||this.estado.equals("Finalizado")){
+             estado=true;
+        }
+        return estado;
+    }
+    
     public boolean esvalido() {
         boolean valido = true;
         try {
@@ -156,7 +167,7 @@ public class Proyecto_Aula implements Serializable {
     
     public void generarCodigo() {
         Random aleatorio = new Random();
-        this.codigo = this.getPrograma().getCodigo() + this.getSemestre() + this.getPeriodo().getAnio() + aleatorio.nextInt(1000);
+        this.codigo = this.getPrograma().getCodigo() + this.getSemestre().getDenominacion() + this.getPeriodo().getAnio() + aleatorio.nextInt(1000);
     }
 
     public Long getId() {

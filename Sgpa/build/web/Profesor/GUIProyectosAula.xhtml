@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <section class="contenido-contenedor">
+
+
+            <p:panel rendered="#{profesorController.mostPanelSemestres}">
+                <p:dataGrid paginator="true" var="sem" value="#{profesorController.semestresLider}">
+                    <p:panel>
+                        <div class="contsemli">
+                            <div class="csem">
+                                <h:outputText  value=""/><BR/>
+                                <h:commandButton style="font-size: 24pt" value="#{sem.semestre.denominacion}" action="#{profesorController.seleccionarLider(sem)}" />
+                            </div>
+                            <div class="cpro"><h:outputText value="#{sem.programa.nombre}"/>
+
+                            </div>
+                            <div class="cper">
+                                <h:outputText value="#{sem.periodo.anio} - #{sem.periodo.numero}"/>
+                            </div>
+                        </div>
+                    </p:panel>
+                </p:dataGrid>
+            </p:panel>
+            <p:panel rendered="#{!profesorController.mostPanelSemestres}">
+                <p:panel rendered="#{profesorController.mostPanelProyectoAula}">
+                    <h:commandButton value="volver" action="#{profesorController.volverSemestres()}"/>
+                    <p:dataTable var="proa" value="#{profesorController.proyectosSemestre}">
+                        <p:column headerText="Codigo">
+                            #{proa.codigo}
+                        </p:column>
+                        <p:column headerText="Fecha Ingreso">
+                            #{proa.fecha_ingreso}
+                        </p:column>                             
+                        <p:column width="500" headerText="Integrantes">
+                            <p:dataTable style="font-size: 10pt" var="integ" value="#{proa.integrantes}">
+                                <p:column headerText="">
+                                    <p:graphicImage value="/Imagenes/Perfiles/#{integ.matricula.estudiante.imagenPerfil()}" style="width: 40px;height: 40px "  />
+                                </p:column>
+                                <p:column width="300" headerText="">
+                                    <h:outputText  value="#{integ.matricula.estudiante.toString()}" /> 
+                                </p:column>                           
+                            </p:dataTable>                                 
+                        </p:column>
+                        <p:column headerText="Opciones">
+                            <h:commandButton  value="consultar" action="#{profesorController.consultarProyecto(proa)}" />   
+                        </p:column>  
+                    </p:dataTable> 
+                </p:panel>
+                <p:panel rendered="#{!profesorController.mostPanelProyectoAula}">
+                    <p:tabView>
+                        <p:tab title="Informacion Basica del Proyecto">
+                            <div class="contpro">
+                                <div class="codse">
+                                    <i class="fa fa-solid fa-thumbtack ic"></i>
+                                    <div class="codseitem">
+                                        <h:outputText value="Codigo Proyecto" /><br></br>
+                                        <span>#{proyectoAulaController.proyecto.codigo}</span>
+                                    </div>
+                                    <div class="codseitem">
+                                        <h:outputText value="Semestre" /><br></br>
+                                        <span>#{proyectoAulaController.proyecto.semestre.denominacion}</span>
+                                    </div>
+                                </div>
+                                <span class="aviso">Establezca la fecha del proyecto</span>
+                                <div class="fechas codse" style="gap:20px;">
+                                    <div class="input-form-200">
+                                        Fecha Inicial
+                                        <p:calendar   value="#{proyectoAulaController.proyecto.fecha_inicio}" />
+                                    </div>
+
+                                    <div class="input-form-200">
+                                        Fecha Finalizacion
+                                        <p:calendar   value="#{proyectoAulaController.proyecto.fecha_finalizacion}" />
+                                    </div>        
+                                </div>
+                                <span class="aviso ">Titulo Del proyecto</span>
+                                <div class="fechas codse" style="gap:20px;">
+                                    <p:inputText placeholder="Titulo" size="100" value="#{proyectoAulaController.proyecto.titulo}"/>
+                                </div>
+                                <span class="aviso">Problematica Del proyecto</span>
+                                <div class="fechas codse" style="gap:20px;">
+                                    <p:inputTextarea placeholder="Problematica" cols="100" value="#{proyectoAulaController.proyecto.problematica}" />
+                                </div>
+                            </div>
+                        </p:tab>
+                        <p:tab title="Items del Proyecto">
+                            <p:dataTable class="tabla-reporte" var="items" value="#{proyectoAulaController.proyecto.itenes_Proyecto}">
+                                <p:column headerText="Tipo"> 
+                                    #{items.tipo.nombre}
+                                </p:column>
+                                <p:column headerText="Contenido"> 
+                                    #{items.contenido}
+                                </p:column>
+                                <p:column headerText="Fecha Creacion"> 
+                                    #{items.fecharegistro}
+                                </p:column>
+                                <p:column headerText="Ultima Modificacion"> 
+                                    #{items.fechamodificacion}
+                                </p:column>
+                                <p:column headerText="Autor/Editor"> 
+                                    #{items.editor.estudiante.toString()}
+                                </p:column>                                
+                            </p:dataTable>
+                            <h:commandButton class="boton" style="margin-left: 20px;" value="Aprobar" action="#{profesorController.aprobarProyectoAula()}" />
+                            <h:commandButton class="boton" style="margin-left: 20px;" value="Aplazar" action="#{profesorController.aplazarProyectoAula()}" />
+                        </p:tab>
+                    </p:tabView> 
+                </p:panel>
+            </p:panel>
+
+        </section>
+    </h:body>
+</html>
+
