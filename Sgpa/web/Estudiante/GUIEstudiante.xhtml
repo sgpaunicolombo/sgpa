@@ -73,14 +73,13 @@
                     <div class="cop ">
                         <div class="linea"></div>
                         <div class="op-v"><h:graphicImage rendered="#{matriculaController.matricula.habilitarProyecto()}" value="/resources/img/motar.png"/><h:commandButton rendered="#{matriculaController.matricula.habilitarProyecto()}" value="Gestionar propuesta" class="botones-v" action="#{estudianteController.g_propuesta()}"></h:commandButton></div>
-
                     </div>
                     </h:panelGroup>
                     
                     <h:panelGroup layout="block" rendered="#{proyectoAulaController.proyecto.estadoProyecto()}">
                         <div class="cop">
                             <div class="linea"></div>
-                            <div class="op-v"><h:graphicImage  value="/resources/img/libro.png"/><h:commandButton value="Gestionar Proyecto" class="botones-v" action="#{usuarioController.gprogramas()}"></h:commandButton></div>
+                            <div class="op-v"><h:graphicImage  value="/resources/img/libro.png"/><h:commandButton value="Gestionar Proyecto" class="botones-v" action="#{estudianteController.g_proyecto()}"></h:commandButton></div>
                         </div>
                     </h:panelGroup>
                     <!--

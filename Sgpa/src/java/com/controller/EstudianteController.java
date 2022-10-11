@@ -154,6 +154,9 @@ public class EstudianteController implements Serializable {
     public void g_propuesta() {
         paginaActualE = "/Estudiante/Gestor_Propuestas.xhtml";
     }
+    public void g_proyecto() {
+        paginaActualE = "/Estudiante/Gestor_Proyecto_Aula.xhtml";
+    }
 
     public void obtenerEstudiantes() {
         estudiantes = estser.consultarTodo(Estudiante.class);
