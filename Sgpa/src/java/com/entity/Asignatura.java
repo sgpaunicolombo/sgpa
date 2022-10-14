@@ -34,6 +34,8 @@ public class Asignatura implements Serializable {
     private Area area;
     @ManyToOne
     private ProgramaAcademico programa;
+    @ManyToOne
+    private Semestre semestre;
     
     public boolean validarAsignatura() {
         boolean valido = true;
@@ -192,6 +194,20 @@ public class Asignatura implements Serializable {
      */
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    /**
+     * @return the semestre
+     */
+    public Semestre getSemestre() {
+        return semestre;
+    }
+
+    /**
+     * @param semestre the semestre to set
+     */
+    public void setSemestre(Semestre semestre) {
+        this.semestre = semestre;
     }
     
 }

@@ -55,10 +55,10 @@ public class Item_Proyecto implements Serializable {
 
     public boolean validarItemProyecto() {
         boolean valido = true;
-        if (this.tipo.toString().equals("") || this.contenido.toString().equals("") || this.fecharegistro.toString().equals("")) {
+        if (this.tipo.getId().equals(0) || this.contenido.toString().equals("") || this.fecharegistro.toString().equals("")) {
             valido = false;
         }
-        if (this.fechamodificacion.equals("") || this.editor.equals("") || this.proyecto.equals("")) {
+        if (this.editor.getId().equals(0) || this.proyecto.getId().equals(0)) {
             valido = false;
         }
         return valido;

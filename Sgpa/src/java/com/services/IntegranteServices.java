@@ -70,7 +70,10 @@ public class IntegranteServices extends ImplDao<Integrante, Long> implements IIn
         Query qu=em.createQuery(q)
                 .setParameter(1, m.getId());
         inte=(Integrante)qu.getSingleResult();
-        }catch(Exception ex){
+        }catch(javax.persistence.NoResultException nre){
+            
+        }
+        catch(Exception ex){
             ex.printStackTrace();
         }finally{
             em.close();        

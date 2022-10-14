@@ -98,7 +98,6 @@ public class ImplDao<T, ID> implements IDao<T, ID> {
         EntityTransaction et = em.getTransaction();
         try {
             et.begin();
-
             ent = em.merge(entity);
             et.commit();
 

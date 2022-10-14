@@ -19,7 +19,7 @@
         <h:commandButton value="agregar" action="#{tipo_itemController.registrarTipo_Item()}" />
                 <br/><br/>
                 
-                <p:dataTable var="per" value="#{tipo_itemController.tipo_Item}" >
+                <p:dataTable var="per" value="#{tipo_itemController.tipos_Items}" >
                     <p:column headerText="Nombre">
                         #{per.nombre}
                       </p:column>

@@ -9,6 +9,7 @@ import com.entity.Estudiante;
 import com.entity.Matricula;
 import com.entity.Periodo;
 import com.entity.ProgramaAcademico;
+import com.entity.Semestre;
 import com.services.EstudianteServices;
 import com.services.MatriculaServices;
 import java.io.Serializable;
@@ -32,8 +33,8 @@ public class MatriculaController implements Serializable {
     MatriculaServices matser = new MatriculaServices();
     EstudianteServices estser = new EstudianteServices();
 
-    private List<Matricula> matriculas=new LinkedList();
-    
+    private List<Matricula> matriculas = new LinkedList();
+
     /**
      * Creates a new instance of MatriculaController
      */
@@ -41,14 +42,14 @@ public class MatriculaController implements Serializable {
 
     }
 
-    public void consultarEstudiantesMatriculadosXPeriodo(Periodo p){
-        matriculas=matser.obtenerMatriculasXperiodo(p);
+    public void consultarEstudiantesMatriculadosXPeriodo(Periodo p) {
+        matriculas = matser.obtenerMatriculasXperiodo(p);
     }
-    
-    public void consultarMatriculaXEstudianteEnPeriodo(Estudiante e, Periodo p){
-        matricula=matser.obtenerMatriculaXPeriodo(p, e);
+
+    public void consultarMatriculaXEstudianteEnPeriodo(Estudiante e, Periodo p) {
+        matricula = matser.obtenerMatriculaXPeriodo(p, e);
     }
-    
+
     public void agregarEstudiante(Estudiante e) {
         getMatricula().setEstudiante(e);
     }
@@ -71,6 +72,10 @@ public class MatriculaController implements Serializable {
             matricula.setEstudiante(estser.modificar(matricula.getEstudiante()));
             matricula = new Matricula();
         }
+    }
+
+    public void seleccionarSemestre(Semestre s) {
+        matricula.setSemestre(s);
     }
 
     /**

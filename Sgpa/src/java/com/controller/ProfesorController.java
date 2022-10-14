@@ -11,12 +11,14 @@ import com.entity.Periodo;
 import com.entity.Profesor;
 import com.entity.ProgramaAcademico;
 import com.entity.Proyecto_Aula;
+import com.entity.Semestre;
 import com.services.LiderPAServices;
 import com.services.ProfesorServices;
 import com.utilidades.GestorImagenes;
 import com.utilidades.ImageUtils;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -35,37 +37,41 @@ import org.primefaces.model.file.UploadedFile;
 @ManagedBean
 @SessionScoped
 public class ProfesorController implements Serializable {
+
     //objetos de negocio
     private Profesor profesor = new Profesor();
-    private Periodo periodo=new Periodo();//para almacenar el el periodo actual
+    private Periodo periodo = new Periodo();//para almacenar el el periodo actual
     private LiderPA liderPa;// para conocer si el profesor es lider
     private ProgramaAcademico coordinadorPa;// para conocer si el profesor es coordinador
     ProfesorServices profser = new ProfesorServices();
 
-    
     //Colecciones
     private List<Profesor> profesores = new LinkedList();
+    private List<LiderPA> semestresLider = new LinkedList();//semestres en la cual un profesor es lider
+    private List<Proyecto_Aula> proyectosSemestre = new LinkedList();
 
-    //Servicios
-    LiderPAServices lidpaser=new LiderPAServices();
-    
+//Servicios
+    LiderPAServices lidpaser = new LiderPAServices();
+
     //controladores
     @ManagedProperty("#{proyectoAulaController}")
     private ProyectoAulaController proacon = new ProyectoAulaController();
     @ManagedProperty("#{matriculaController}")
     private MatriculaController matcont = new MatriculaController();
-    
+
     //variables de control
     private String paginaActualP = "";
     private UploadedFile iprofesor;
+    private boolean mostPanelSemestres;//mostrar los semestres en la cual un profesor es lider
+    private boolean mostPanelProyectoAula;//para mostrar la informacion del proyecto seleccionado
 
     /**
      * Creates a new instance of ProfesorController
      */
     public ProfesorController() {
     }
-    
-    public void consultarProfesores(){
+
+    public void consultarProfesores() {
         setProfesores(profser.consultarTodo(Profesor.class));
     }
 
@@ -74,17 +80,57 @@ public class ProfesorController implements Serializable {
         profesor = new Profesor();
     }
 
-    public void esLiderPA(){
-        liderPa=lidpaser.obtenerLiderPAXProfesor(profesor, periodo);
-        proacon.setLider(liderPa);
-        proacon.consultarProyectosXPrograma_Periodo();
-        proacon.obtenerIntegrantesXProyectos();
+    public void seleccionarLider(LiderPA lider) {
+        liderPa = lider;
+        proacon.setLider(lider);
+        proyectosXSemestre(lider.getSemestre());
+        mostPanelSemestres = false;
+        
     }
-    
-    public void consultarMatriculasXPeriodo(){
+
+    public void volverSemestres() {
+        mostPanelSemestres = true;
+    }
+
+    public void proyectosXSemestre(Semestre s) {
+        proyectosSemestre = new LinkedList();
+        for (Proyecto_Aula p : proacon.getProyectos()) {
+            if (p.getSemestre().getId().equals(s.getId())) {
+                proyectosSemestre.add(p);
+            }
+        }
+    }
+
+    public void consultarProyecto(Proyecto_Aula pa) {
+        proacon.setProyecto(pa);
+        mostPanelProyectoAula = false;
+    }
+
+    public void esLiderPA() {
+        semestresLider = null;
+        semestresLider = lidpaser.obtenersemestresLiderPAXProfesor(profesor, periodo);
+        //System.out.println(""+semestresLider.size());
+        if (semestresLider.size() > 0) {
+            mostPanelSemestres = true;
+            liderPa = semestresLider.get(0);
+            proacon.setLider(liderPa);
+            proacon.consultarProyectosXPrograma_Periodo();
+            proacon.obtenerIntegrantesXProyectos();
+        }
+    }
+
+    public boolean habilitarLider() {
+        if (semestresLider.size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void consultarMatriculasXPeriodo() {
         matcont.consultarEstudiantesMatriculadosXPeriodo(periodo);
     }
-    
+
     public void registrarprofesor() {
         profesor.setTipo("Profesor");
         profesor.setEstado("Activo");
@@ -102,21 +148,30 @@ public class ProfesorController implements Serializable {
         }
     }
 
-    public void guardarProyectoAula(){
-        proacon.getProyecto().setPeriodo(periodo);       
+    public void guardarProyectoAula() {
+        proacon.getProyecto().setPeriodo(periodo);
         proacon.crearPA();
     }
     
-    public void desvincularIntegrante(Integrante inte,Proyecto_Aula pa){
+    public void aprobarProyectoAula(){
+        proacon.getProyecto().setFecha_aprobacion(new Date());        
+        proacon.aprobarPA();
+    }
+     public void aplazarProyectoAula(){
+        proacon.getProyecto().setFecha_aprobacion(new Date());        
+        proacon.aplazarPA();
+    }
+
+    public void desvincularIntegrante(Integrante inte, Proyecto_Aula pa) {
         proacon.eliminarIntegrante(inte, pa);
         matcont.consultarEstudiantesMatriculadosXPeriodo(periodo);
     }
-    
-    public void eliminarProyectoAula(Proyecto_Aula pa){
-       proacon.eliminarProyecto(pa);       
-       matcont.consultarEstudiantesMatriculadosXPeriodo(periodo);
+
+    public void eliminarProyectoAula(Proyecto_Aula pa) {
+        proacon.eliminarProyecto(pa);
+        matcont.consultarEstudiantesMatriculadosXPeriodo(periodo);
     }
-    
+
     public void subirImagenProfesor() {
         try {
 //               File destFile= new File(event.getFile().getFileName());           
@@ -142,10 +197,16 @@ public class ProfesorController implements Serializable {
     public void ggrupos() {
         paginaActualP = "/Profesor/GestorGrupos.xhtml";
     }
+
+    public void gproyectosaula() {
+        mostPanelSemestres=true;
+        mostPanelProyectoAula = true;
+        paginaActualP = "/Profesor/GUIProyectosAula.xhtml";
+    }
+
     public void gproflider() {
         paginaActualP = "/Profesor/GestorProfesorLider.xhtml";
     }
-    
 
     public void miperfil() {
         paginaActualP = "/Profesor/PerfilProfesor.xhtml";
@@ -259,7 +320,6 @@ public class ProfesorController implements Serializable {
     public void setPeriodo(Periodo periodo) {
         this.periodo = periodo;
     }
-    
 
     /**
      * @return the liderPa
@@ -267,11 +327,11 @@ public class ProfesorController implements Serializable {
     public LiderPA getLiderPa() {
         return liderPa;
     }
-    
+
     /**
      * @return the coordinadorPa
      */
-     public ProgramaAcademico getcoordinadorPa() {
+    public ProgramaAcademico getcoordinadorPa() {
         return coordinadorPa;
     }
 
@@ -288,6 +348,62 @@ public class ProfesorController implements Serializable {
 
     public void setCoordinadorPa(ProgramaAcademico coordinadorPa) {
         this.coordinadorPa = coordinadorPa;
+    }
+
+    /**
+     * @return the semestresLider
+     */
+    public List<LiderPA> getSemestresLider() {
+        return semestresLider;
+    }
+
+    /**
+     * @param semestresLider the semestresLider to set
+     */
+    public void setSemestresLider(List<LiderPA> semestresLider) {
+        this.semestresLider = semestresLider;
+    }
+
+    /**
+     * @return the mostPanelSemestres
+     */
+    public boolean isMostPanelSemestres() {
+        return mostPanelSemestres;
+    }
+
+    /**
+     * @param mostPanelSemestres the mostPanelSemestres to set
+     */
+    public void setMostPanelSemestres(boolean mostPanelSemestres) {
+        this.mostPanelSemestres = mostPanelSemestres;
+    }
+
+    /**
+     * @return the proyectosSemestre
+     */
+    public List<Proyecto_Aula> getProyectosSemestre() {
+        return proyectosSemestre;
+    }
+
+    /**
+     * @param proyectosSemestre the proyectosSemestre to set
+     */
+    public void setProyectosSemestre(List<Proyecto_Aula> proyectosSemestre) {
+        this.proyectosSemestre = proyectosSemestre;
+    }
+
+    /**
+     * @return the mostPanelProyectoAula
+     */
+    public boolean isMostPanelProyectoAula() {
+        return mostPanelProyectoAula;
+    }
+
+    /**
+     * @param mostPanelProyectoAula the mostPanelProyectoAula to set
+     */
+    public void setMostPanelProyectoAula(boolean mostPanelProyectoAula) {
+        this.mostPanelProyectoAula = mostPanelProyectoAula;
     }
 
 }

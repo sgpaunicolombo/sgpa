@@ -72,11 +72,12 @@
                         <h:outputText value="#{liderPAController.liderPA.profesor.toString()}" />
                         <h:outputText value="#{liderPAController.liderPA.programa.nombreCompleto}" />
                         <h:outputText value="#{liderPAController.liderPA.periodo.anio}-#{liderPAController.liderPA.periodo.numero}" />
-                        <p:panelGrid columns="2">
-                            <h:outputText value="Semestre" />
-                            <p:spinner min="1" max="10" value="#{liderPAController.liderPA.semestre}" />
-                        </p:panelGrid> 
-                        <h:commandButton value="Registrar" action="#{liderPAController.registrarLiderPA()}" />
+                        <p:dataGrid columns="4" var="sem"  value="#{semestreController.semestres}">
+                            <p:panel>
+                                <h:commandButton value="#{sem.denominacion}" action="#{liderPAController.seleccionarSemestre(sem)}" />
+                            </p:panel>                        
+                        </p:dataGrid>
+                        <h:commandButton id="salsem" value="Registrar" action="#{liderPAController.registrarLiderPA()}" />
                     </p:panelGrid>
                 </p:tab>
             </p:wizard>

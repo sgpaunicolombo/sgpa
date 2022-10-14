@@ -35,6 +35,7 @@ public class ProyectoAulaController implements Serializable {
     //Objetos de negocio
     private Proyecto_Aula proyecto = new Proyecto_Aula();
     private LiderPA lider = new LiderPA();
+    private Item_Proyecto item = new Item_Proyecto();
 
     //colecciones
     private List<Item_Proyecto> itenes = new LinkedList();
@@ -56,14 +57,54 @@ public class ProyectoAulaController implements Serializable {
         proyectos = proaser.obtenerProyectosXPeriodo_Programa(lider.getPeriodo(), lider.getPrograma());
     }
 
+    
+    
     public void obtenerProyectoAulaXMatricula(Matricula m) {
         proyecto = proaser.consultar(Proyecto_Aula.class, inteser.obtenerIntegranteXMatricula(m).getProyecto().getId());
         proyecto.setIntegrantes(inteser.obtenerIntegrantesProyecto(proyecto));
+        proyecto.setItenes_Proyecto(itemser.obtenerProyectosXPeriodo_Programa(proyecto));
+    }
+
+    public void guardarItem(Matricula edit) {
+        item.setFecharegistro(new Date());
+        item.setEditor(edit);
+        item.setProyecto(proyecto);
+        if (item.validarItemProyecto()) {
+            item = itemser.modificar(item);
+            item = new Item_Proyecto();
+            obtenerItenesProyectoAula();
+        }
+    }
+
+    public void obtenerItenesProyectoAula() {
+        proyecto.setItenes_Proyecto(itemser.obtenerProyectosXPeriodo_Programa(proyecto));
     }
 
     public void guardarPA() {
-        proyecto.setEstado("Guardado");        
+        proyecto.setEstado("Guardado");
         proyecto = proaser.modificar(proyecto);
+    }
+    public void aprobarPA() {
+        proyecto.setEstado("Produccion");
+        proyecto = proaser.modificar(proyecto);
+    }
+    public void aplazarPA() {
+        proyecto.setEstado("Aplazado");
+        proyecto = proaser.modificar(proyecto);
+    }
+
+
+    public void publicarPA() {
+        proyecto.setEstado("Propuesta");
+        if (proyecto.getItenes_Proyecto().size() > 0) {
+            if (proyecto.esvalido()) {
+                if (proyecto.validarInfo()) {
+                    proyecto = proaser.modificar(proyecto);
+                }
+            }
+        } else {
+            FacesUtil.addErrorMessage("No se puede publicar proyecto si no posee Items");
+        }
     }
 
     public void crearPA() {
@@ -271,6 +312,20 @@ public class ProyectoAulaController implements Serializable {
      */
     public void setProyectos(List<Proyecto_Aula> proyectos) {
         this.proyectos = proyectos;
+    }
+
+    /**
+     * @return the item
+     */
+    public Item_Proyecto getItem() {
+        return item;
+    }
+
+    /**
+     * @param item the item to set
+     */
+    public void setItem(Item_Proyecto item) {
+        this.item = item;
     }
 
 }

@@ -36,7 +36,8 @@ public class Matricula implements Serializable {
     private Periodo periodo;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;  
-    private String semestre;
+    @ManyToOne
+    private Semestre semestre;
     private String estado;//Pre-Matricula -  Matricula  
     private String estadoPA;//Asignado - Libre
     @OneToMany(mappedBy = "editor")
@@ -47,7 +48,7 @@ public class Matricula implements Serializable {
     public Matricula() {
     }
 
-    public Matricula(Long id, Estudiante estudiante, ProgramaAcademico programa, Periodo periodo, Date fecha, String semestre, String estado, List<Item_Proyecto> item_Proyectos, List<Integrante> integrantes) {
+    public Matricula(Long id, Estudiante estudiante, ProgramaAcademico programa, Periodo periodo, Date fecha, Semestre semestre, String estado, String estadoPA, List<Item_Proyecto> item_Proyectos, List<Integrante> integrantes) {
         this.id = id;
         this.estudiante = estudiante;
         this.programa = programa;
@@ -55,9 +56,12 @@ public class Matricula implements Serializable {
         this.fecha = fecha;
         this.semestre = semestre;
         this.estado = estado;
+        this.estadoPA = estadoPA;
         this.item_Proyectos = item_Proyectos;
         this.integrantes = integrantes;
     }
+
+  
 
     
     public boolean validarMatricula() {
@@ -71,10 +75,10 @@ public class Matricula implements Serializable {
             valido = false;
         }
         
-        if(Integer.parseInt(this.semestre)<1 || Integer.parseInt(this.semestre)>10){
-            FacesUtil.addErrorMessage("el valor del semestre esta fuera de rango");
-            valido = false;
-        }
+//        if(Integer.parseInt(this.semestre)<1 || Integer.parseInt(this.semestre)>10){
+//            FacesUtil.addErrorMessage("el valor del semestre esta fuera de rango");
+//            valido = false;
+//        }
         return valido;
     }
 
@@ -216,19 +220,6 @@ public class Matricula implements Serializable {
         this.periodo = periodo;
     }
 
-    /**
-     * @return the semestre
-     */
-    public String getSemestre() {
-        return semestre;
-    }
-
-    /**
-     * @param semestre the semestre to set
-     */
-    public void setSemestre(String semestre) {
-        this.semestre = semestre;
-    }
 
     /**
      * @return the estadoPA
@@ -242,6 +233,20 @@ public class Matricula implements Serializable {
      */
     public void setEstadoPA(String estadoPA) {
         this.estadoPA = estadoPA;
+    }
+
+    /**
+     * @return the semestre
+     */
+    public Semestre getSemestre() {
+        return semestre;
+    }
+
+    /**
+     * @param semestre the semestre to set
+     */
+    public void setSemestre(Semestre semestre) {
+        this.semestre = semestre;
     }
     
 }

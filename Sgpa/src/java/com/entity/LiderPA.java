@@ -30,12 +30,13 @@ public class LiderPA implements Serializable {
     private ProgramaAcademico programa;
     @ManyToOne
     private Periodo periodo;
-    private String semestre;
+    @ManyToOne
+    private Semestre semestre;
     
     
     public boolean validarliderPA() {
         boolean valido = true;
-        if (this.profesor.equals("") || this.programa.equals("") || this.periodo.equals("") || this.semestre.equals("")) {
+        if (this.profesor.equals("") || this.programa.equals("") || this.periodo.equals("") || this.getSemestre().getDenominacion().equals("")) {
             FacesUtil.addErrorMessage("Estos campos son requeridos");
             valido = false;
         }
@@ -135,15 +136,16 @@ public class LiderPA implements Serializable {
     /**
      * @return the semestre
      */
-    public String getSemestre() {
+    public Semestre getSemestre() {
         return semestre;
     }
 
     /**
      * @param semestre the semestre to set
      */
-    public void setSemestre(String semestre) {
+    public void setSemestre(Semestre semestre) {
         this.semestre = semestre;
     }
+
     
 }
