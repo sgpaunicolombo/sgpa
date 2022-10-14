@@ -65,6 +65,7 @@ public class LiderPAController implements Serializable {
             if (liderPA.validarliderPA()) {
                 lidser.crear(liderPA);
                 liderPA = new LiderPA();
+                
             }
         }catch(java.lang.NullPointerException npe){
             

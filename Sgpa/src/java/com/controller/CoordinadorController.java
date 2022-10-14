@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 /**
@@ -32,6 +33,10 @@ public class CoordinadorController implements Serializable{
    //servicios
     CoordinadorServices coordser=new CoordinadorServices();
     AreaServices areaser = new AreaServices();
+    
+    //Controllers
+    @ManagedProperty("#{asignaturaController}")
+    private AsignaturaController asigcon =new AsignaturaController();
     
    //variables de control
     private String paginaActualC = "";
@@ -53,6 +58,9 @@ public class CoordinadorController implements Serializable{
     }
     public void gcoordinadorPA(){
         paginaActualC="/Coordinador/AsignarCoordinacionPA.xhtml";
+    }
+    public void gasignaturas(){
+        paginaActualC="/Coordinador/GestorAsignatura.xhtml";
     }
     
     public void consultarCoordinadores(){
@@ -146,6 +154,14 @@ public class CoordinadorController implements Serializable{
      */
     public void setPaginaActualC(String paginaActualC) {
         this.paginaActualC = paginaActualC;
+    }
+
+    public AsignaturaController getAsigcon() {
+        return asigcon;
+    }
+
+    public void setAsigcon(AsignaturaController asigcon) {
+        this.asigcon = asigcon;
     }
     
 }

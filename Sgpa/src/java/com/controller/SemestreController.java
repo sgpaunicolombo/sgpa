@@ -21,9 +21,9 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class SemestreController implements Serializable{
 
+    private Semestre semestre = new Semestre();
     private List<Semestre> semestres=new LinkedList();    
     SemestreServices semser=new SemestreServices();
-    
     /**
      * Creates a new instance of SemestreController
      */
@@ -46,5 +46,13 @@ public class SemestreController implements Serializable{
      */
     public void setSemestres(List<Semestre> semestres) {
         this.semestres = semestres;
+    }
+
+    public Semestre getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(Semestre semestre) {
+        this.semestre = semestre;
     }
 }
