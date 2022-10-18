@@ -29,15 +29,11 @@ public class Matricula implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne
-    private Estudiante estudiante;
-    @ManyToOne
-    private ProgramaAcademico programa;
-    @ManyToOne
-    private Periodo periodo;
+    private Estudiante estudiante; 
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;  
     @ManyToOne
-    private Semestre semestre;
+    private Seccion seccion;
     private String estado;//Pre-Matricula -  Matricula  
     private String estadoPA;//Asignado - Libre
     @OneToMany(mappedBy = "editor")
@@ -48,25 +44,25 @@ public class Matricula implements Serializable {
     public Matricula() {
     }
 
-    public Matricula(Long id, Estudiante estudiante, ProgramaAcademico programa, Periodo periodo, Date fecha, Semestre semestre, String estado, String estadoPA, List<Item_Proyecto> item_Proyectos, List<Integrante> integrantes) {
+    public Matricula(Long id, Estudiante estudiante, Date fecha, Seccion seccion, String estado, String estadoPA, List<Item_Proyecto> item_Proyectos, List<Integrante> integrantes) {
         this.id = id;
         this.estudiante = estudiante;
-        this.programa = programa;
-        this.periodo = periodo;
         this.fecha = fecha;
-        this.semestre = semestre;
+        this.seccion = seccion;
         this.estado = estado;
         this.estadoPA = estadoPA;
         this.item_Proyectos = item_Proyectos;
         this.integrantes = integrantes;
     }
 
-  
+   
+
+   
 
     
     public boolean validarMatricula() {
         boolean valido = true;
-        if (this.estudiante.toString().equals("") || this.programa.getNombreCompleto().equals("")) {
+        if (this.estudiante.toString().equals("") || this.seccion.getPrograma().getNombreCompleto().equals("")) {
             FacesUtil.addErrorMessage("No hay informacion de los siguientes entes:(estudiante o programa)");
             valido = false;
         }
@@ -163,19 +159,7 @@ public class Matricula implements Serializable {
         this.estudiante = estudiante;
     }
 
-    /**
-     * @return the programa
-     */
-    public ProgramaAcademico getPrograma() {
-        return programa;
-    }
-
-    /**
-     * @param programa the programa to set
-     */
-    public void setPrograma(ProgramaAcademico programa) {
-        this.programa = programa;
-    }
+   
 
     /**
      * @return the fecha
@@ -207,21 +191,6 @@ public class Matricula implements Serializable {
     }
 
     /**
-     * @return the periodo
-     */
-    public Periodo getPeriodo() {
-        return periodo;
-    }
-
-    /**
-     * @param periodo the periodo to set
-     */
-    public void setPeriodo(Periodo periodo) {
-        this.periodo = periodo;
-    }
-
-
-    /**
      * @return the estadoPA
      */
     public String getEstadoPA() {
@@ -236,17 +205,19 @@ public class Matricula implements Serializable {
     }
 
     /**
-     * @return the semestre
+     * @return the seccion
      */
-    public Semestre getSemestre() {
-        return semestre;
+    public Seccion getSeccion() {
+        return seccion;
     }
 
     /**
-     * @param semestre the semestre to set
+     * @param seccion the seccion to set
      */
-    public void setSemestre(Semestre semestre) {
-        this.semestre = semestre;
+    public void setSeccion(Seccion seccion) {
+        this.seccion = seccion;
     }
+
+   
     
 }

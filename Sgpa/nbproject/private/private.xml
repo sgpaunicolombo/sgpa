@@ -6,14 +6,17 @@
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/entity/Matricula.java</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/entity/ProgramaAcademico.java</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/EstudianteController.java</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Estudiante/GUIEstudiante.xhtml</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/web/META-INF/context.xml</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/UsuarioController.java</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/dao/ImplDao.java</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/services/ProgramaAcademicoServices.java</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/services/SemestreServices.java</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/entity/LiderPA.java</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/web/Profesor/GUIProfesor.xhtml</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/web/Profesor/GestorGrupos.xhtml</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/implDao/ISemestre.java</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Coordinador/GUIMallaCurricular.xhtml</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/Tipo_itemController.java</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/SemestreController.java</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/MatriculaController.java</file>
@@ -23,7 +26,9 @@
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/entity/Asignatura.java</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/web/Profesor/GestorProfesorLider.xhtml</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/web/Estudiante/Gestor_Propuestas.xhtml</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/services/Proyecto_AulaServices.java</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/entity/Tipo_Item.java</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Profesor/Gestor%20de%20Tutor.xhtml</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/LiderPAController.java</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/ProgramaController.java</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/entity/Proyecto_Aula.java</file>
@@ -31,6 +36,7 @@
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/entity/Profesor.java</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/services/MatriculaServices.java</file>
             <file>file:/C:/Proyectos/SGPA/Sgpa/web/Coordinador/GestorMatricula.xhtml</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Coordinador/GUICoordinador.xhtml</file>
         </group>
     </open-files>
 </project-private>

@@ -41,6 +41,7 @@ public class ProyectoAulaController implements Serializable {
     private List<Item_Proyecto> itenes = new LinkedList();
     private List<Integrante> integrantes = new LinkedList();
     private List<Proyecto_Aula> proyectos = new LinkedList();
+    private List<Proyecto_Aula> proyectosNoGuardados = new LinkedList();
 
     Proyecto_AulaServices proaser = new Proyecto_AulaServices();
     Item_ProyectoServices itemser = new Item_ProyectoServices();
@@ -54,10 +55,16 @@ public class ProyectoAulaController implements Serializable {
     }
 
     public void consultarProyectosXPrograma_Periodo() {
-        proyectos = proaser.obtenerProyectosXPeriodo_Programa(lider.getPeriodo(), lider.getPrograma());
+        proyectos = proaser.obtenerProyectosXPeriodo_Programa(lider.getSeccion());
     }
 
-    
+    public void obtenerProyectosNoGuardados(){
+        for(Proyecto_Aula p:proyectos){
+            if(!p.getEstado().equals("Guardado")){
+                proyectosNoGuardados.add(p);
+            }
+        }
+    }
     
     public void obtenerProyectoAulaXMatricula(Matricula m) {
         proyecto = proaser.consultar(Proyecto_Aula.class, inteser.obtenerIntegranteXMatricula(m).getProyecto().getId());
@@ -119,7 +126,7 @@ public class ProyectoAulaController implements Serializable {
                 FacesUtil.addInfoMessage("Se ha creado un grupo de proyecto de aula");
                 consultarProyectosXPrograma_Periodo();
                 obtenerIntegrantesXProyectos();
-                matser.obtenerMatriculasXperiodo(proyecto.getPeriodo());
+                matser.obtenerMatriculasXperiodo(proyecto.getSeccion().getPeriodo());
                 proyecto = new Proyecto_Aula();
                 integrantes = new LinkedList();
             }
@@ -153,7 +160,7 @@ public class ProyectoAulaController implements Serializable {
 
     public void obtenerIntegrantesXProyectos() {
         try {
-            integrantes = inteser.obtenerIntegrantesProyectosXPeriodo_Programa(lider.getPeriodo(), lider.getPrograma());
+            integrantes = inteser.obtenerIntegrantesProyectosXPeriodo_Programa(lider.getSeccion());
             for (int i = 0; i < proyectos.size(); i++) {
                 ListIterator it = integrantes.listIterator();
                 proyectos.get(i).setIntegrantes(new LinkedList());
@@ -171,10 +178,8 @@ public class ProyectoAulaController implements Serializable {
     }
 
     public void datosPeriodoPrograma() {
-        proyecto.setPrograma(lider.getPrograma());
-        proyecto.setPeriodo(lider.getPeriodo());
+        proyecto.setSeccion(lider.getSeccion());
         proyecto.setProfesorLider(lider);
-        proyecto.setSemestre(lider.getSemestre());
         // System.out.println(proyecto.getPeriodo().getAnio()+" "+proyecto.getProfesorLider().getProfesor().getPrimerNombre());
     }
 
@@ -326,6 +331,20 @@ public class ProyectoAulaController implements Serializable {
      */
     public void setItem(Item_Proyecto item) {
         this.item = item;
+    }
+
+    /**
+     * @return the proyectosNoGuardados
+     */
+    public List<Proyecto_Aula> getProyectosNoGuardados() {
+        return proyectosNoGuardados;
+    }
+
+    /**
+     * @param proyectosNoGuardados the proyectosNoGuardados to set
+     */
+    public void setProyectosNoGuardados(List<Proyecto_Aula> proyectosNoGuardados) {
+        this.proyectosNoGuardados = proyectosNoGuardados;
     }
 
 }

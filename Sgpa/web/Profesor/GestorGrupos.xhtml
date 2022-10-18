@@ -15,13 +15,13 @@
                         <div class="contsemli">
                             <div class="csem">
                                 <h:outputText  value=""/><BR/>
-                                <h:commandButton style="font-size: 24pt" value="#{sem.semestre.denominacion}" action="#{profesorController.seleccionarLider(sem)}" />
+                                <h:commandButton style="font-size: 24pt" value="#{sem.seccion.semestre.denominacion}" action="#{profesorController.seleccionarLider(sem)}" />
                             </div>
-                            <div class="cpro"><h:outputText value="#{sem.programa.nombre}"/>
+                            <div class="cpro"><h:outputText value="#{sem.seccion.programa.nombre}"/>
 
                             </div>
                             <div class="cper">
-                                <h:outputText value="#{sem.periodo.anio} - #{sem.periodo.numero}"/>
+                                <h:outputText value="#{sem.seccion.periodo.anio} - #{sem.seccion.periodo.numero}"/>
                             </div>
                         </div>
                     </p:panel>

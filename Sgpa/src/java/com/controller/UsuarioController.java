@@ -53,9 +53,10 @@ public class UsuarioController implements Serializable {
     private EstudianteController estcon=new EstudianteController();
     @ManagedProperty("#{profesorController}")
     private ProfesorController profcon=new ProfesorController();
-     @ManagedProperty("#{semestreController}")
+    @ManagedProperty("#{semestreController}")
     private SemestreController semcon=new SemestreController();
-    
+    @ManagedProperty("#{seccionController}")
+    private SeccionController seccon=new SeccionController();
     
     /**
      * Creates a new instance of UsuarioController
@@ -75,6 +76,7 @@ public class UsuarioController implements Serializable {
                 percon.obtenerPeriodos();
                 procon.consultarProgramasXCoordinador(coorcon.getCoordinador());
                 coorcon.consultarAreas();
+                seccon.setPeriodo(percon.getPeriodoActual());                
                 paginaActual = "/Coordinador/GUICoordinador.xhtml";
 
             }
@@ -293,6 +295,20 @@ public class UsuarioController implements Serializable {
      */
     public void setSemcon(SemestreController semcon) {
         this.semcon = semcon;
+    }
+
+    /**
+     * @return the seccon
+     */
+    public SeccionController getSeccon() {
+        return seccon;
+    }
+
+    /**
+     * @param seccon the seccon to set
+     */
+    public void setSeccon(SeccionController seccon) {
+        this.seccon = seccon;
     }
 
 

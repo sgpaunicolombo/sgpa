@@ -63,7 +63,7 @@
                 <p:tab id="tper" title="Periodo">
                     <p:panelGrid columns="2">
                         <h:outputText value="#{matriculaController.matricula.estudiante.toString()}" />
-                        <h:outputText value="#{matriculaController.matricula.programa.nombreCompleto}" />
+                        <h:outputText value="#{matriculaController.programa.nombreCompleto}" />
                     </p:panelGrid>
                     <p:dataTable var="per" value="#{periodoController.periodos}" >
                         <p:column headerText="Fecha Inicio">
@@ -83,21 +83,26 @@
                 <p:tab id="tmat" title="Matricular">
                     <p:panelGrid columns="3">
                         <h:outputText value="#{matriculaController.matricula.estudiante.toString()}" />
-                        <h:outputText value="#{matriculaController.matricula.programa.nombreCompleto}" />
-                        <h:outputText value="#{matriculaController.matricula.periodo.anio}-#{matriculaController.matricula.periodo.numero}" />
-                        
-                          <p:dataGrid columns="4" var="sem"  value="#{semestreController.semestres}">
+                        <h:outputText value="#{matriculaController.programa.nombreCompleto}" />
+                        <h:outputText value="#{matriculaController.periodo.anio}-#{matriculaController.periodo.numero}" />
+
+                        <p:dataGrid columns="4" var="sem"  value="#{semestreController.semestres}">
                             <p:panel>
                                 <h:commandButton value="#{sem.denominacion}" action="#{matriculaController.seleccionarSemestre(sem)}" />
                             </p:panel>                        
-                        </p:dataGrid>                        
-                        
+                        </p:dataGrid>  
+                        <p:dataGrid var="sec" value="#{matriculaController.secciones}">
+                            <p:panel>
+                                <h:commandButton value="#{sec.denominacion}" action="#{matriculaController.seleccionarSeccion(sec)}" />
+                            </p:panel>
+                        </p:dataGrid>
+
                         <h:commandButton value="Matricular" action="#{matriculaController.matricular()}" />
                     </p:panelGrid>
                 </p:tab>
             </p:wizard>
         </div>
-        </section>
-      
+    </section>
+
 </html>
 

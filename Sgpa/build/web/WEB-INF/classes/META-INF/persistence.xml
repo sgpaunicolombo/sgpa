@@ -24,6 +24,7 @@
     <class>com.entity.Usuario</class>
     <class>com.entity.LiderPA</class>
     <class>com.entity.Semestre</class>
+    <class>com.entity.Seccion</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sgpa?zeroDateTimeBehavior=convertToNull"/>

@@ -9,9 +9,11 @@ import com.entity.Estudiante;
 import com.entity.Matricula;
 import com.entity.Periodo;
 import com.entity.ProgramaAcademico;
+import com.entity.Seccion;
 import com.entity.Semestre;
 import com.services.EstudianteServices;
 import com.services.MatriculaServices;
+import com.services.SeccionServices;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
@@ -29,11 +31,17 @@ public class MatriculaController implements Serializable {
 
     //objetos de negocio
     private Matricula matricula = new Matricula();
+    private Semestre semestre = new Semestre();
+    private Periodo periodo = new Periodo();
+    private ProgramaAcademico programa=new ProgramaAcademico();
+
     //servicios
     MatriculaServices matser = new MatriculaServices();
     EstudianteServices estser = new EstudianteServices();
+    SeccionServices secser = new SeccionServices();
 
     private List<Matricula> matriculas = new LinkedList();
+    private List<Seccion> secciones = new LinkedList();
 
     /**
      * Creates a new instance of MatriculaController
@@ -55,15 +63,23 @@ public class MatriculaController implements Serializable {
     }
 
     public void agregarPrograma(ProgramaAcademico pa) {
-        getMatricula().setPrograma(pa);
+        setPrograma(pa);
     }
 
     public void agregarPeriodo(Periodo p) {
-        getMatricula().setPeriodo(p);
+        setPeriodo(p);        
+    }
+    public void seleccionarSemestre(Semestre s) {
+        setSemestre(s);
+        secciones=secser.obtenerSeccionesXSemestre_Periodo_Programa(getSemestre(), getPrograma(), getPeriodo());
     }
 
+    public void seleccionarSeccion(Seccion s){
+        matricula.setSeccion(s);
+    }
+    
     public void matricular() {
-        matricula.setEstado("Activa");
+        matricula.setEstado("Academica");
         matricula.setEstadoPA("Libre");
         matricula.setFecha(new Date());
         if (matricula.validarMatricula()) {
@@ -74,10 +90,7 @@ public class MatriculaController implements Serializable {
         }
     }
 
-    public void seleccionarSemestre(Semestre s) {
-        matricula.setSemestre(s);
-    }
-
+    
     /**
      * @return the matricula
      */
@@ -104,6 +117,62 @@ public class MatriculaController implements Serializable {
      */
     public void setMatriculas(List<Matricula> matriculas) {
         this.matriculas = matriculas;
+    }
+
+    /**
+     * @return the secciones
+     */
+    public List<Seccion> getSecciones() {
+        return secciones;
+    }
+
+    /**
+     * @param secciones the secciones to set
+     */
+    public void setSecciones(List<Seccion> secciones) {
+        this.secciones = secciones;
+    }
+
+    /**
+     * @return the semestre
+     */
+    public Semestre getSemestre() {
+        return semestre;
+    }
+
+    /**
+     * @param semestre the semestre to set
+     */
+    public void setSemestre(Semestre semestre) {
+        this.semestre = semestre;
+    }
+
+    /**
+     * @return the periodo
+     */
+    public Periodo getPeriodo() {
+        return periodo;
+    }
+
+    /**
+     * @param periodo the periodo to set
+     */
+    public void setPeriodo(Periodo periodo) {
+        this.periodo = periodo;
+    }
+
+    /**
+     * @return the programa
+     */
+    public ProgramaAcademico getPrograma() {
+        return programa;
+    }
+
+    /**
+     * @param programa the programa to set
+     */
+    public void setPrograma(ProgramaAcademico programa) {
+        this.programa = programa;
     }
 
 }
