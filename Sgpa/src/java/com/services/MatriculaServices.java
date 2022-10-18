@@ -51,7 +51,7 @@ public class MatriculaServices extends ImplDao<Matricula, Long> implements IMatr
          try {             
              EntityManager em =getEntityManagger();
              em.getTransaction().begin();               
-             String q="select m from Matricula m where m.periodo.id = ?1 and m.estado not in('Financiera')";        
+             String q="select m from Matricula m where m.seccion.periodo.id = ?1 and m.estado not in('Financiera')";        
 //             System.out.println(" Consulta: "+q);
              Query qu=em.createQuery(q)
                      .setParameter(1, p.getId());

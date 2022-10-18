@@ -5,6 +5,7 @@
 package com.services;
 
 import com.dao.ImplDao;
+import static com.dao.ImplDao.getEntityManagger;
 import com.entity.Matricula;
 import com.entity.Periodo;
 import com.entity.ProgramaAcademico;
@@ -39,3 +40,8 @@ public class Proyecto_AulaServices extends ImplDao<Proyecto_Aula, Long> implemen
          return proyectos;
     }
 }
+      
+
+
+
+
