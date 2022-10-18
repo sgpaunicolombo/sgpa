@@ -48,7 +48,7 @@
                         </div>
                     </p:tab>
                     <p:tab title="Itenes del Proyecto">
-                        <h:commandButton rendered="#{!estudianteController.mpanelAItems}"  value="+" action="#{estudianteController.agregarItem()}" />
+                        <h:commandButton  rendered="#{!estudianteController.mpanelAItems}"  value="+" action="#{estudianteController.agregarItem()}" />
                         <p:panel rendered="#{estudianteController.mpanelAItems}" >                            
                             <p:dataTable class="tabla-reporte" style="overflow-y: scroll;height: 350px"  var="ite" value="#{tipo_itemController.tipos_Items}" >
                                 <p:column headerText="Nombre">
@@ -59,7 +59,9 @@
                                 </p:column>
                             </p:dataTable>
                             <h:commandButton value="volver" action="#{estudianteController.volverItems()}" />
+                            
                         </p:panel>
+                        
                         <p:panel rendered="#{estudianteController.mpanelItem}">
                             <p:panelGrid columns="1">
                                 <h:outputText value="#{proyectoAulaController.item.tipo.nombre}" />
@@ -68,6 +70,7 @@
                              <h:commandButton value="volver" action="#{estudianteController.volverAItenes()}" />
                              <h:commandButton value="agregar" action="#{estudianteController.registrarItem()}" />
                         </p:panel>
+                        
                         <p:panel rendered="#{!estudianteController.mpanelAItems}">
                             <p:dataTable class="tabla-reporte" var="items" value="#{proyectoAulaController.proyecto.itenes_Proyecto}">
                                 <p:column headerText="Tipo"> 
@@ -117,7 +120,22 @@
         </section>
     </h:body>
 
-
+    <style>
+        .agg{
+            background-color: #a39e9e;
+            border: none;
+            color: white;
+            top: 23.8rem;
+            right: 9rem;
+            cursor: pointer;
+            padding: 5px 10px;
+            font-weight: 600;
+            position: absolute;
+        }
+        .agg:hover{
+            background-color: #14FF00
+        }
+    </style>
 
 </html>
 

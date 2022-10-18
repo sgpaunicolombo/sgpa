@@ -11,24 +11,45 @@
        <section class="contenido-contenedor">
         <div class="border contenedor top">
              <h1 class="tittle">Gestor Tipo de Entregable</h1>
-              <div>Nombre</div>
-        <div><p:inputText value="#{tipo_EntregableController.tipo_entregable.nombre}" /></div><br/>
-        <div>Descripcion</div>
-
-        <div><p:inputTextarea rows="6" cols="33" value="#{tipo_EntregableController.tipo_entregable.descripcion}"/></div>
-
-                <h:commandButton value="agregar" action="#{tipo_EntregableController.registrarTipo_Entregable()}" />
-                <br/><br/>
+             <span class="aviso">Crear Tipo De Entregable</span>
+             <div class="contenedor-form periodos" style="align-items: center">
+                 <div class="form-izq">
+                     <div class="input-form-310">
+                         Nombre
+                         <p:inputText class="iform" value="#{tipo_EntregableController.tipo_entregable.nombre}" />
+                     </div>
+                     
+                 </div>
+                 <div class="form-dere">
+                     <div class="input-form-410">
+                         Descripcion
+                         <p:inputTextarea  class="iform" value="#{tipo_EntregableController.tipo_entregable.descripcion}"/>
+                     </div>
+                 </div>
+             </div>
+             <div class="tanone">
+                 <h:commandButton class="boton " value="agregar" action="#{tipo_EntregableController.registrarTipo_Entregable()}" />
                 
-                <p:dataTable var="per" value="#{tipo_EntregableController.tipo_Entregables}" >
+             </div>
+       
+
+                
+                
+             <p:dataTable class="tabla-reporte" var="per" value="#{tipo_EntregableController.tipo_Entregables}" >
                     <p:column headerText="Nombre">
                         #{per.nombre}
                       </p:column>
                     <p:column headerText="Descripcion">
                         #{per.descripcion}
                      </p:column>
-                    <p:column >
-                        <h:commandButton value="Eliminar" action="#{tipo_EntregableController.eliminartipo_Entregable(per)}" /><br/>
+                    <p:column headerText="Eliminar">
+                        <div class="Acciones">
+                            <div class="accion">
+                            <i class="uil uil-trash-alt" style="color: red; font-size: 25px"></i>
+                            <h:commandButton class="icono" value="Eliminar" action="#{tipo_EntregableController.eliminartipo_Entregable(per)}" />
+                        </div>
+                        </div>
+                        
                     </p:column>
                 </p:dataTable>
     

@@ -44,7 +44,8 @@ public class Tipo_itemController implements Serializable{
     
         }
     }
-    public void eliminartipo_Item(Tipo_itemController te){
+    public void eliminartipo_Item(Tipo_Item te){
+        
         getTipiser().eliminar(te);
           consultarTipos_Items();   
         

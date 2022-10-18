@@ -84,11 +84,12 @@ public class CoordinadorController implements Serializable{
         }
     }
     public void registrarArea() {
-        if (coordinador.validarUsuario()) {
+        if (area.validarArea()) {
             area.setEstado("Activo");
             areaser.crear(area);
             area = new Area();
             consultarAreas();
+            
             
         }
     }

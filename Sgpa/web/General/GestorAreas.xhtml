@@ -13,17 +13,35 @@
        <section class="contenido-contenedor">
         <div class="border contenedor top">
              <h1 class="tittle">Gestor de Areas</h1>
-             <div class="cgusuarios">
-            <div class="l1">Nombre: </div>
-            <div class="c1"><p:inputText value="#{coordinadorController.area.nombre}" /></div>
-            <div class="l2">Nombre Corto: </div>
-            <div class="c2"><p:inputText value="#{coordinadorController.area.nombreCorto}" /></div>
-            <div class="l3">Descripcion: </div>
-            <div class="c3"><p:inputText value="#{coordinadorController.area.descripcion}" /></div>
+             <span class="aviso">Crea Nueva Area</span>
+             <div class="contenedor-form periodos" >
+                 <div class="form-izq">
+                     <div class="input-form-310">
+                         Nombre
+                         <p:inputText class="iform" value="#{coordinadorController.area.nombre}" />
+                     </div>
+                     <div class="input-form-310">
+                         Nombre Corto
+                         <p:inputText class="iform" value="#{coordinadorController.area.nombreCorto}" />
+                     </div>
+                     
+                 </div>
+                 <div class="form-dere">
+                     <div class="input-form-410">
+                         Descripcion
+                         <p:inputTextarea class="iform" value="#{coordinadorController.area.descripcion}" />
+                     </div>
+                     
+                 </div>
+                 
+             </div>
+              
+             <div class="tanone">
+                 <h:commandButton value="Crear" class="boton" action="#{coordinadorController.registrarArea()}" />
+             </div>
+        
+             
             
-     
-            <div class="cop"><h:commandButton action="#{coordinadorController.registrarArea()}" value="Registrar" />   </div>
-        </div>
         <p:dataTable var="ara" class="tabla-reporte" value="#{coordinadorController.areas}">
             <p:column headerText="Nombre">
                 #{ara.nombre}
@@ -31,15 +49,19 @@
             <p:column headerText="Nombre Corto">
                 #{ara.nombreCorto}
             </p:column>
-            <p:column headerText="Primer Nombre">
+            <p:column headerText="Descripcion">
                 #{ara.descripcion}
             </p:column>
-            <p:column headerText="Segundo Nombre">
+            <p:column headerText="Estado">
                 #{ara.estado}
             </p:column>
-            <p:column>
-                <h:commandButton action="#{coordinadorController.EliminarArea(ara)}" value="Eliminar"  />
-                    
+            <p:column headerText="Eliminar">
+                <div class="Acciones">
+                            <div class="accion">
+                            <i class="uil uil-trash-alt" style="color: red; font-size: 25px"></i>
+                            <h:commandButton class="icono" value="Eliminar" action="#{coordinadorController.EliminarArea(ara)}" />
+                        </div>
+                        </div>
                 
             </p:column>
            

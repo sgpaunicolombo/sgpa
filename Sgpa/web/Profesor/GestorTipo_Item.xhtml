@@ -11,23 +11,47 @@
         <section class="contenido-contenedor">
         <div class="border contenedor top">
              <h1 class="tittle">Tipo de item</h1>
-              <div>Nombre</div>
-        <div><p:inputText value="#{tipo_itemController.tipo_item.nombre}" /></div><br/>
-        <div>Descripcion</div>
-        <div><p:inputText value="#{tipo_itemController.tipo_item.descripcion}" /></div>
-
-        <h:commandButton value="agregar" action="#{tipo_itemController.registrarTipo_Item()}" />
-                <br/><br/>
+             <span class="aviso">Crea Tipo De Item</span>
+             <div class="contenedor-form periodos" style="align-items:center">
+                 <div class="form-izq">
+                     <div class="input-form-310">
+                         Nombre
+                         <p:inputText class="iform" value="#{tipo_itemController.tipo_item.nombre}" />
+                     </div>
+                     
+                 </div>
+                 <div class="form-dere">
+                     <div class="input-form-410">
+                         Descripcion
+                         <p:inputTextarea class="iform" value="#{tipo_itemController.tipo_item.descripcion}" />
+                     </div>
+                     
+                 </div>
+                 
+             </div>
+              
+             <div class="tanone">
+                 <h:commandButton value="agregar" class="boton" action="#{tipo_itemController.registrarTipo_Item()}" />
+             </div>
+        
                 
-                <p:dataTable var="per" value="#{tipo_itemController.tipos_Items}" >
+                
+                <p:dataTable class="tabla-reporte" var="per" value="#{tipo_itemController.tipos_Items}" >
                     <p:column headerText="Nombre">
                         #{per.nombre}
                       </p:column>
                     <p:column headerText="Descripcion">
                         #{per.descripcion}
                      </p:column>
-                    <p:column >
-                        <h:commandButton value="Eliminar" action="#{tipo_itemController.eliminartipo_Item(te)}" /><br/>
+                    <p:column headerText="Eliminar">
+                        <div class="Acciones">
+                            <div class="accion">
+                            <i class="uil uil-trash-alt" style="color: red; font-size: 25px"></i>
+                            <h:commandButton class="icono" value="Eliminar" action="#{tipo_itemController.eliminartipo_Item(per)}" />
+                        </div>
+                        </div>
+                        
+                        
                     </p:column>
                 </p:dataTable>
     

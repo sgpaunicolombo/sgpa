@@ -9,32 +9,45 @@
 
     <section class="contenido-contenedor">
         <div class="border contenedor top">
-            <h1 class="tittle">Gestor MATRICULAS</h1>
-            <p:wizard>
+            <h1 class="tittle">Gestor Asignaturas</h1>
+            <span class="aviso">Crear Asignatura</span>
+            <p:tabView>
                 <p:tab id="test" title="Semestres">
-                    <p:dataTable style="font-size: 10pt" var="coor" value="#{coordinadorController.asigcon.semcon.semestres}">
+                    <p:dataTable class="tabla-reporte" var="coor" value="#{coordinadorController.asigcon.semcon.semestres}">
                         <p:column headerText="Semestres">
                             #{coor.denominacion}
                         </p:column>
-                        <p:column headerText="">
-                            <h:commandButton value="+" action="#{asignaturaController.agregarSemestre(coor)}"/>
+                        <p:column headerText="Seleccionar">
+                            <div class="Acciones">
+                                <div class="accion">
+                                    <i class="fa fa-hand-pointer" style="color: #005CB9"></i>
+                                    <h:commandButton class="icono" value="+" action="#{asignaturaController.agregarSemestre(coor)}" />
+                                </div>
+                            </div>
+                            
                         </p:column>
                     </p:dataTable> 
                 </p:tab>
                 <p:tab id="tmat" title="Areas">
-                    <p:dataTable style="font-size: 10pt" var="coor" value="#{coordinadorController.areas}">
+                    <p:dataTable class="tabla-reporte" style="font-size: 10pt" var="coor" value="#{coordinadorController.areas}">
                         <p:column headerText="Nombre">
                             #{coor.nombre}
                         </p:column>
                         <p:column headerText="Nombre Corto">
                             #{coor.nombreCorto}
                         </p:column>
-                        <p:column headerText="">
-                            <h:commandButton value="+" action="#{asignaturaController.agregarArea(coor)}"/>
+                        <p:column headerText="Seleccionar">
+                            <div class="Acciones">
+                                <div class="accion">
+                                    <i class="fa fa-hand-pointer" style="color: #005CB9"></i>
+                                    <h:commandButton class="icono" value="+" action="#{asignaturaController.agregarArea(coor)}" />
+                                </div>
+                            </div>
+                            
                         </p:column>
                     </p:dataTable>
                 </p:tab>
-            </p:wizard>
+            </p:tabView>
         </div>
         </section>
       

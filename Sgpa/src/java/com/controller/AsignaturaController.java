@@ -39,6 +39,7 @@ public class AsignaturaController {
     public void agregarArea(Area a) {
         getAsignatura().setArea(a);
     }
+    
 
     public List<Asignatura> getAsignaturas() {
         return asignaturas;

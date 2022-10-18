@@ -747,6 +747,17 @@ box-shadow: 0px 0px 7px 1px rgba(0,0,0,0.75);
             font-size: 13px;
             
         }
+        .plider-seleccionado{
+            display: flex;
+            background-color: #D9D9D9;
+            font-size: 1rem;
+            text-transform: uppercase;
+            color: #005CB9;
+            font-weight: 600;
+            padding: .5rem .5rem 1rem;
+            column-gap: 1rem;
+            margin-bottom: .5rem;
+        }
         .input-form-410 {
             max-width:410px;
             margin-bottom: 15px;
