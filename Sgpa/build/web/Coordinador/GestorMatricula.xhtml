@@ -78,13 +78,15 @@
 
                 </p:tab>
                 <p:tab id="tper" title="Periodo">
-                    <div class="plider-seleccionado">
+
+                   <div class="plider-seleccionado">
                         <span>Seleccionado:</span>
                         <span>#{matriculaController.matricula.estudiante.toString()}</span>
                         <span>#{matriculaController.matricula.programa.nombreCompleto}</span>
                     </div>
                     
                     <p:dataTable class="tabla-reporte" var="per" value="#{periodoController.periodos}" >
+
                         <p:column headerText="Fecha Inicio">
                             #{per.fechaInicial}
                         </p:column>
@@ -106,29 +108,39 @@
                     </p:dataTable> 
                 </p:tab>
                 <p:tab id="tmat" title="Matricular">
-                    <div class="plider-seleccionado">
+
+                    <p:panelGrid columns="3">
+                        <div class="plider-seleccionado">
                         <span>Seleccionado:</span>
                         <span>#{matriculaController.matricula.estudiante.toString()}</span>
                         <span>#{matriculaController.matricula.programa.nombreCompleto}</span>
                         <span>#{matriculaController.matricula.periodo.anio}-#{matriculaController.matricula.periodo.numero}</span>
                     </div>
-                    <p:dataView   layout="grid" var="sem"  value="#{semestreController.semestres}">
                         <p:dataViewGridItem >
                             <div class="tanone" style="justify-content:center !important">
-                                <h:commandButton class="boton" value="#{sem.denominacion}" action="#{liderPAController.seleccionarSemestre(sem)}" /> 
-                            </div>
+                              <h:commandButton class="boton" value="#{sem.denominacion}" action="#{liderPAController.seleccionarSemestre(sem)}" /> 
+                         </div>
                             
-                              
-                        </p:dataViewGridItem>                      
-                    </p:dataView>
-                        
-                        <div class="tanone">
+                        <p:dataGrid columns="4" var="sem"  value="#{semestreController.semestres}">
+                            <p:panel>
+                                <h:commandButton value="#{sem.denominacion}" action="#{matriculaController.seleccionarSemestre(sem)}" />
+                            </p:panel>                        
+                        </p:dataGrid>  
+                        <p:dataGrid var="sec" value="#{matriculaController.secciones}">
+                            <p:panel>
+                                <h:commandButton value="#{sec.denominacion}" action="#{matriculaController.seleccionarSeccion(sec)}" />
+                            </p:panel>
+                        </p:dataGrid>
+                       </p:dataViewGridItem>
+                         <div class="tanone">
                             <h:commandButton id="salsem" class="boton" value="Matricular" action="#{matriculaController.matricular()}" />
                         </div>
+                    </p:panelGrid>
+
                 </p:tab>
             </p:tabView>
         </div>
-        </section>
-      
+    </section>
+
 </html>
 

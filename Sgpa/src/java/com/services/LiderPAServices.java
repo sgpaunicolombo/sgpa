@@ -5,11 +5,9 @@
 package com.services;
 
 import com.dao.ImplDao;
-import com.entity.Asignatura;
 import com.entity.LiderPA;
 import com.entity.Periodo;
 import com.entity.Profesor;
-import com.implDao.IAsignatura;
 import com.implDao.ILiderPA;
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -26,7 +24,7 @@ public class LiderPAServices extends ImplDao<LiderPA, Long> implements ILiderPA,
         List<LiderPA> lid=new LinkedList();
         em.getTransaction().begin();        
         try{//tengo que colocar el semestre para que me de un unico resultado
-        String q="select lp from LiderPA lp where lp.periodo.id = ?1 and lp.profesor.id= ?2";        
+        String q="select lp from LiderPA lp where lp.seccion.periodo.id = ?1 and lp.profesor.id= ?2";        
 //        System.out.println(" Consulta: "+q);
         Query qu=em.createQuery(q)
                 .setParameter(1, pe.getId())

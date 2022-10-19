@@ -39,7 +39,7 @@ public class Estudiante extends Usuario implements Serializable {
     }
 
     public void generarCodigo(Matricula m) {
-        this.codigo = m.getPrograma().getCodigo() + this.getIdentificacion().substring(0, 5) + this.getId();
+        this.codigo = m.getSeccion().getPrograma().getCodigo() + this.getIdentificacion().substring(0, 5) + this.getId();
     }
     
     

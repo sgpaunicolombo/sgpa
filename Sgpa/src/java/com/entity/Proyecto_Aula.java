@@ -48,14 +48,12 @@ public class Proyecto_Aula implements Serializable {
     private String problematica;
     private String codigo;
     @ManyToOne
-    private Semestre semestre;
-    @ManyToOne
-    private ProgramaAcademico programa;
-    @ManyToOne
-    private Periodo periodo;
-    @OneToMany(mappedBy = "proyecto",fetch = FetchType.LAZY)
+    private Seccion seccion;
+   
+    
+    @OneToMany(mappedBy = "proyecto", fetch = FetchType.LAZY)
     private List<Item_Proyecto> itenes_Proyecto;
-    @OneToMany(mappedBy = "proyecto",fetch = FetchType.LAZY )
+    @OneToMany(mappedBy = "proyecto", fetch = FetchType.LAZY)
     private List<Integrante> integrantes;
     @OneToMany(mappedBy = "proyecto")
     private List<Avance> avances;
@@ -67,7 +65,7 @@ public class Proyecto_Aula implements Serializable {
     public Proyecto_Aula() {
     }
 
-    public Proyecto_Aula(Long id, String estado, Date fecha_inicio, Date fecha_ingreso, Date fecha_aprobacion, Profesor coordinadorPA, Date fecha_finalizacion, LiderPA profesorLider, String titulo, String problematica, String codigo, Semestre semestre, ProgramaAcademico programa, Periodo periodo, List<Item_Proyecto> itenes_Proyecto, List<Integrante> integrantes, List<Avance> avances, List<Tutor> tutors, List<Tutoria> tutorias) {
+    public Proyecto_Aula(Long id, String estado, Date fecha_inicio, Date fecha_ingreso, Date fecha_aprobacion, Profesor coordinadorPA, Date fecha_finalizacion, LiderPA profesorLider, String titulo, String problematica, String codigo, Seccion seccion, List<Item_Proyecto> itenes_Proyecto, List<Integrante> integrantes, List<Avance> avances, List<Tutor> tutors, List<Tutoria> tutorias) {
         this.id = id;
         this.estado = estado;
         this.fecha_inicio = fecha_inicio;
@@ -79,9 +77,7 @@ public class Proyecto_Aula implements Serializable {
         this.titulo = titulo;
         this.problematica = problematica;
         this.codigo = codigo;
-        this.semestre = semestre;
-        this.programa = programa;
-        this.periodo = periodo;
+        this.seccion = seccion;
         this.itenes_Proyecto = itenes_Proyecto;
         this.integrantes = integrantes;
         this.avances = avances;
@@ -89,48 +85,48 @@ public class Proyecto_Aula implements Serializable {
         this.tutorias = tutorias;
     }
 
-   
+    
 
     public String infoProyectoAula() {
-        String contenido="";
-        
-        contenido=this.titulo+"\n\n"+this.problematica+"\n\n";
-        for(Integrante i:this.getIntegrantes()){
-            contenido=contenido+i.getMatricula().getEstudiante().toString()+"\n";
+        String contenido = "";
+
+        contenido = this.titulo + "\n\n" + this.problematica + "\n\n";
+        for (Integrante i : this.getIntegrantes()) {
+            contenido = contenido + i.getMatricula().getEstudiante().toString() + "\n";
         }
-        contenido=contenido+"\n";
-        for(Item_Proyecto ip:this.getItenes_Proyecto()){
-            contenido=contenido+ip.getTipo().getNombre()+": \n"+ip.getContenido()+"\n\n";
+        contenido = contenido + "\n";
+        for (Item_Proyecto ip : this.getItenes_Proyecto()) {
+            contenido = contenido + ip.getTipo().getNombre() + ": \n" + ip.getContenido() + "\n\n";
         }
-        contenido=contenido+"\n";        
-        
+        contenido = contenido + "\n";
+
         return contenido;
-        
+
     }
 
-    public boolean estadoProyecto(){
-        boolean estado=false;
-        if(this.estado.equals("Guardado")||this.estado.equals("Propuesta")||this.estado.equals("Aplazado")){
-            estado=false;
+    public boolean estadoProyecto() {
+        boolean estado = false;
+        if (this.estado.equals("Guardado") || this.estado.equals("Propuesta") || this.estado.equals("Aplazado")) {
+            estado = false;
         }
-        if(this.estado.equals("Produccion")||this.estado.equals("ParaSustentar")||this.estado.equals("Finalizado")){
-             estado=true;
+        if (this.estado.equals("Produccion") || this.estado.equals("ParaSustentar") || this.estado.equals("Finalizado")) {
+            estado = true;
         }
         return estado;
     }
-    
+
     public boolean esvalido() {
         boolean valido = true;
         try {
-            if (this.periodo.getId() <= 0) {
+            if (this.seccion.getPeriodo().getId() <= 0) {
                 valido = false;
                 FacesUtil.addErrorMessage("No se le ha asignado el periodo al grupo");
             }
-            if (this.programa.getId() <= 0) {
+            if (this.seccion.getPrograma().getId() <= 0) {
                 valido = false;
                 FacesUtil.addErrorMessage("No se le ha asignado el Programa academico al grupo");
             }
-            if (this.getSemestre().equals("")) {
+            if (this.seccion.getSemestre().getId() <=0 ) {
                 valido = false;
                 FacesUtil.addErrorMessage("No se le ha asignado el Semestre al grupo");
             }
@@ -148,6 +144,21 @@ public class Proyecto_Aula implements Serializable {
         return valido;
     }
 
+    public boolean validarProyectoParaAprobar() {
+        boolean valido = true;
+        try {
+            if (!validarInfo()) {
+                valido = false;
+            }if(this.getItenes_Proyecto().size()==0){
+                 valido = false;
+                 FacesUtil.addErrorMessage("El proyeto no tiene Items ");
+            }
+        } catch (java.lang.NullPointerException npe) {
+
+        }
+        return valido;
+    }
+
     public boolean validarInfo() {
         boolean valido = true;
         try {
@@ -157,6 +168,7 @@ public class Proyecto_Aula implements Serializable {
             }
             if (this.problematica.equals("")) {
                 valido = false;
+                
                 FacesUtil.addErrorMessage("El proyeto no tiene problema ");
             }
         } catch (java.lang.NullPointerException npe) {
@@ -164,10 +176,10 @@ public class Proyecto_Aula implements Serializable {
         }
         return valido;
     }
-    
+
     public void generarCodigo() {
         Random aleatorio = new Random();
-        this.codigo = this.getPrograma().getCodigo() + this.getSemestre().getDenominacion() + this.getPeriodo().getAnio() + aleatorio.nextInt(1000);
+        this.codigo = this.getSeccion().getPrograma().getCodigo() + this.getSeccion().getSemestre().getDenominacion() + this.getSeccion().getPeriodo().getAnio() + aleatorio.nextInt(1000);
     }
 
     public Long getId() {
@@ -343,33 +355,7 @@ public class Proyecto_Aula implements Serializable {
         this.codigo = codigo;
     }
 
-   /**
-     * @return the programa
-     */
-    public ProgramaAcademico getPrograma() {
-        return programa;
-    }
-
-    /**
-     * @param programa the programa to set
-     */
-    public void setPrograma(ProgramaAcademico programa) {
-        this.programa = programa;
-    }
-
-    /**
-     * @return the periodo
-     */
-    public Periodo getPeriodo() {
-        return periodo;
-    }
-
-    /**
-     * @param periodo the periodo to set
-     */
-    public void setPeriodo(Periodo periodo) {
-        this.periodo = periodo;
-    }
+ 
 
     /**
      * @return the profesorLider
@@ -414,17 +400,19 @@ public class Proyecto_Aula implements Serializable {
     }
 
     /**
-     * @return the semestre
+     * @return the seccion
      */
-    public Semestre getSemestre() {
-        return semestre;
+    public Seccion getSeccion() {
+        return seccion;
     }
 
     /**
-     * @param semestre the semestre to set
+     * @param seccion the seccion to set
      */
-    public void setSemestre(Semestre semestre) {
-        this.semestre = semestre;
+    public void setSeccion(Seccion seccion) {
+        this.seccion = seccion;
     }
+
+    
 
 }

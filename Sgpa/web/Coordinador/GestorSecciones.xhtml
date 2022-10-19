@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <section class="contenido-contenedor">
+            <div class="border contenedor top">
+                <h1 class="tittle">Gestor Secciones</h1>
+                <p:panel rendered="#{!seccionController.mostPCsecc}">
+                    <p:dataTable var="prog" value="#{programaController.programas}">
+                        <p:column headerText="Codigo">
+                            #{prog.codigo}
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            #{prog.nombreCompleto}
+                        </p:column>
+                        <p:column headerText="">
+                            <h:commandButton value="+" action="#{seccionController.obtenerseccionesPeriodo(prog)}" />
+                        </p:column>
+                    </p:dataTable>                     
+
+                </p:panel>
+                <p:panel rendered="#{seccionController.mostPCsecc}">
+                    <div class="contsecc">
+                        <div class="csem">
+                            <p:dataGrid class="contseme" var="sem" columns="6" value="#{semestreController.semestres}">
+                                <p:panel>
+                                    <div class="contseme">
+                                        <div class="csem">
+                                            <h:commandButton style="font-size: 30pt" value="#{sem.denominacion}" action="#{seccionController.seleccionarSemestre(sem)}" />
+                                        </div>
+                                    </div>                                
+                                </p:panel>
+                            </p:dataGrid>
+                        </div>
+                        <div class="csec">
+                            <p:panelGrid columns="3">
+                                <h:outputText value="Seccion" />
+                                <p:spinner min="1" max="10" value="#{seccionController.seccion.denominacion}" />
+                                <h:commandButton value="agregar" action="#{seccionController.registrar()}" />
+                            </p:panelGrid>               
+
+                        </div>
+                        <div class="csecciones">
+                            <p:dataTable var="sec" value="#{seccionController.secciones}">
+                                <p:column headerText="">
+                                    #{sec.semestre.denominacion}
+                                </p:column>
+                                <p:column headerText="">
+                                    #{sec.denominacion}
+                                </p:column>
+                            </p:dataTable>                           
+                        </div>
+                    </div>
+                    <h:commandButton value="volver" action="#{seccionController.volverprogramas()}" />
+                </p:panel>    
+            </div>
+        </section>
+    </h:body>
+    <style>
+        .contsecc {  display: grid;
+                     grid-template-columns: 1fr;
+                     grid-template-rows: 180px 200px 300px;
+                     grid-auto-columns: 1fr;
+                     gap: 0px 0px;
+                     grid-auto-flow: row;
+                     justify-items: center;
+                     align-items: center;
+                     grid-template-areas:
+                         "csem"
+                         "csec"
+                         "csecciones";
+        }
+
+        .csem { grid-area: csem; }
+
+        .csec { grid-area: csec; }
+
+        .csecciones { grid-area: csecciones; }
+
+        .contseme {  display: grid;
+                     grid-template-columns: 80px;
+                     grid-template-rows: 70px;
+                     grid-auto-columns: 1fr;
+                     gap: 0px 0px;
+                     grid-auto-flow: row;
+                     justify-items: center;
+                     align-items: center;
+                     grid-template-areas:
+                         "csem";
+        }
+
+        .csem { grid-area: csem; }
+
+    </style>
+</html>
+

@@ -35,10 +35,11 @@ public class AsignaturaController {
     
     public AsignaturaController() {
     }
-    
+    /*
     public void agregarSemestre(Semestre s) {
         getAsignatura().setSemestre(s);
     }
+**/
     public void agregarArea(Area a) {
         getAsignatura().setArea(a);
     }
