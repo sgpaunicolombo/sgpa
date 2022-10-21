@@ -9,8 +9,10 @@ import com.entity.LiderPA;
 import com.entity.Periodo;
 import com.entity.Profesor;
 import com.entity.ProgramaAcademico;
+import com.entity.Seccion;
 import com.entity.Semestre;
 import com.services.LiderPAServices;
+import com.services.SeccionServices;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,12 +30,15 @@ public class LiderPAController implements Serializable {
 
     private LiderPA liderPA = new LiderPA();
     private Periodo periodo = new Periodo();//para almacenar el el periodo actual
+    private ProgramaAcademico programa=new ProgramaAcademico();
 //    private Semestre semestre=new Semestre();
 
     LiderPAServices lidser = new LiderPAServices();
+    SeccionServices secser=new SeccionServices();
 
     private List<LiderPA> lideresPA = new LinkedList();
     private List<Profesor> profesores = new LinkedList();
+    private List<Seccion> secciones=new LinkedList();
 
     //controladores
     @ManagedProperty("#{periodoController}")
@@ -48,17 +53,22 @@ public class LiderPAController implements Serializable {
     }
 
     public void agregarPrograma(ProgramaAcademico pa) {
-        getLiderPA().setPrograma(pa);
+        setPrograma(pa);
     }
 
     public void agregarPeriodo(Periodo p) {
-        getLiderPA().setPeriodo(p);
+        setPeriodo(p);
+        obtenerseccionesPeriodo();
     }
 
-    public void seleccionarSemestre(Semestre s) {
-        liderPA.setSemestre(s);
+     public void obtenerseccionesPeriodo(){       
+        secciones=secser.obtenerSeccionesXPeriodo_Programa(programa, periodo);        
     }
-
+    
+     public void agregarSeccion(Seccion sec){
+         liderPA.setSeccion(sec);
+     }
+    
     public void registrarLiderPA() {
 //        liderPA.setSemestre(getSemestre());
         try {
@@ -131,19 +141,31 @@ public class LiderPAController implements Serializable {
         this.profcont = profcont;
     }
 
-//    /**
-//     * @return the semestre
-//     */
-//    public Semestre getSemestre() {
-//        return semestre;
-//    }
-//
-//    /**
-//     * @param semestre the semestre to set
-//     */
-//    public void setSemestre(Semestre semestre) {
-//        this.semestre = semestre;
-//    }
-//
-//    
+    /**
+     * @return the programa
+     */
+    public ProgramaAcademico getPrograma() {
+        return programa;
+    }
+
+    /**
+     * @param programa the programa to set
+     */
+    public void setPrograma(ProgramaAcademico programa) {
+        this.programa = programa;
+    }
+
+    /**
+     * @return the secciones
+     */
+    public List<Seccion> getSecciones() {
+        return secciones;
+    }
+
+    /**
+     * @param secciones the secciones to set
+     */
+    public void setSecciones(List<Seccion> secciones) {
+        this.secciones = secciones;
+    }
 }

@@ -37,8 +37,6 @@ public class Periodo implements Serializable {
     private int anio;
     private boolean actual;
     @OneToMany(mappedBy = "periodo")
-    private List<Matricula> matriculas;
-    @OneToMany(mappedBy = "periodo")
     private List<Fase> fases;
 
     public Periodo() {

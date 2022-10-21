@@ -34,11 +34,7 @@ public class ProgramaAcademico implements Serializable {
     @ManyToOne
     private Coordinador coordinador;
     @OneToOne
-    private Profesor coordinadorPA;
-    @OneToMany(mappedBy = "programa")
-    private List<Matricula> matriculas;
-    @OneToMany(mappedBy = "programa")
-    private List<Asignatura> asignaturas;
+    private Profesor coordinadorPA;    
     @OneToMany(mappedBy = "programa")
     private List<Fase> fases;
 

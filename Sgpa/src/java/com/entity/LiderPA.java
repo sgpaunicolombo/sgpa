@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -20,23 +21,30 @@ import javax.persistence.ManyToOne;
 @Entity
 public class LiderPA implements Serializable {
 
+
     private static long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne
-    private Profesor profesor;
-    @ManyToOne
-    private ProgramaAcademico programa;
-    @ManyToOne
-    private Periodo periodo;
-    @ManyToOne
-    private Semestre semestre;
+    private Profesor profesor;  
+    @OneToOne
+    private Seccion seccion;
+
+    public LiderPA() {
+    }
+
+    public LiderPA(Long id, Profesor profesor, Seccion seccion) {
+        this.id = id;
+        this.profesor = profesor;
+        this.seccion = seccion;
+    }
+    
     
     
     public boolean validarliderPA() {
         boolean valido = true;
-        if (this.profesor.equals("") || this.programa.equals("") || this.periodo.equals("") || this.getSemestre().getDenominacion().equals("")) {
+        if (this.profesor.getId().equals(0) || this.getSeccion().getPrograma().getId().equals(0) || this.getSeccion().getPeriodo().getId().equals(0) || this.getSeccion().getSemestre().getId().equals(0)) {
             FacesUtil.addErrorMessage("Estos campos son requeridos");
             valido = false;
         }
@@ -106,46 +114,19 @@ public class LiderPA implements Serializable {
     }
 
     /**
-     * @return the programa
+     * @return the seccion
      */
-    public ProgramaAcademico getPrograma() {
-        return programa;
+    public Seccion getSeccion() {
+        return seccion;
     }
 
     /**
-     * @param programa the programa to set
+     * @param seccion the seccion to set
      */
-    public void setPrograma(ProgramaAcademico programa) {
-        this.programa = programa;
+    public void setSeccion(Seccion seccion) {
+        this.seccion = seccion;
     }
 
-    /**
-     * @return the periodo
-     */
-    public Periodo getPeriodo() {
-        return periodo;
-    }
-
-    /**
-     * @param periodo the periodo to set
-     */
-    public void setPeriodo(Periodo periodo) {
-        this.periodo = periodo;
-    }
-
-    /**
-     * @return the semestre
-     */
-    public Semestre getSemestre() {
-        return semestre;
-    }
-
-    /**
-     * @param semestre the semestre to set
-     */
-    public void setSemestre(Semestre semestre) {
-        this.semestre = semestre;
-    }
-
+   
     
 }

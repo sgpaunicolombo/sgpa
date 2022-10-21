@@ -23,24 +23,39 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class AsignaturaController {
     
+    private List<Semestre> semestres = new LinkedList();
     private List<Asignatura> asignaturas=new LinkedList();
+    private List<Area> areas = new LinkedList();
     private Asignatura asignatura=new Asignatura();
     AsignaturaServices asigser=new AsignaturaServices();
+    
     
     @ManagedProperty("#{semestreController}")
     private SemestreController semcon=new SemestreController();
     
     public AsignaturaController() {
     }
-    
+    /*
     public void agregarSemestre(Semestre s) {
         getAsignatura().setSemestre(s);
     }
+**/
     public void agregarArea(Area a) {
         getAsignatura().setArea(a);
     }
+    public void agregarAsignatura(Asignatura a){
+        asigser.crear(a);
+    
+    }
     
 
+    public List<Semestre> getSemestres(){
+        return semestres;
+    }
+            
+    public List<Area> getAreas(){
+        return areas;
+    }
     public List<Asignatura> getAsignaturas() {
         return asignaturas;
     }
