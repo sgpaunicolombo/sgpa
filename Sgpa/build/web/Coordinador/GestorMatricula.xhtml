@@ -112,23 +112,27 @@
                         <span>#{matriculaController.matricula.programa.nombreCompleto}</span>
                         <span>#{matriculaController.matricula.periodo.anio}-#{matriculaController.matricula.periodo.numero}</span>
                     </div>
-                    <p:dataView   layout="grid" var="sem"  value="#{semestreController.semestres}">
+                    <p:dataView    var="sem"  value="#{semestreController.semestres}">
                         <p:dataViewGridItem >
-                            <div class="tanone" style="justify-content:center !important">
-                                <h:commandButton class="boton" value="#{sem.denominacion}" action="#{liderPAController.seleccionarSemestre(sem)}" /> 
+                            <div class="semestres" style="justify-content:center !important">
+                                <p>Semestre <br></br>#{sem.denominacion}</p>
+                                <h:graphicImage style="max-width: 100%; height: auto" value="/resources/img/imgsemestres.jpg"/>
+                                <h:commandButton class="semestre" value="#{sem.denominacion}" action="#{liderPAController.seleccionarSemestre(sem)}" /> 
                             </div>
+                            
                             
                               
                         </p:dataViewGridItem>                      
                     </p:dataView>
                         
                         <div class="tanone">
+                            
                             <h:commandButton id="salsem" class="boton" value="Matricular" action="#{matriculaController.matricular()}" />
                         </div>
                 </p:tab>
             </p:tabView>
         </div>
         </section>
-      
+  
 </html>
 
