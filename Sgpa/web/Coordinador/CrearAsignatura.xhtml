@@ -7,49 +7,60 @@
         <title>Facelet Title</title>
     </h:head>
 
-    <section class="contenido-contenedor">
-        <div class="border contenedor top">
-            <h1 class="tittle">Crear Asignatura</h1>
-            <span class="aviso"></span>
-            <p:tabView>
-                <p:tab id="test" title="Semestres">
-                    <p:dataTable class="tabla-reporte" var="coor" value="#{coordinadorController.asigcon.semcon.semestres}">
-                        <p:column headerText="Semestres">
-                            #{coor.denominacion}
+    <h:body>
+        <section class="contenido-contenedor">
+            <div class="border contenedor top">
+                <h1 class="tittle">Gestor Secciones</h1>
+                <p:panel rendered="#{!seccionController.mostPCsecc}">
+                    <p:dataTable var="prog" value="#{programaController.programas}">
+                        <p:column headerText="Codigo">
+                            #{prog.codigo}
                         </p:column>
-                        <p:column headerText="Seleccionar">
-                            <div class="Acciones">
-                                <div class="accion">
-                                    <i class="fa fa-hand-pointer" style="color: #005CB9"></i>
-                                    <h:commandButton class="icono" value="+" action="#{asignaturaController.agregarSemestre(coor)}" />
-                                </div>
-                            </div>
-                            
-                        </p:column>
-                    </p:dataTable> 
-                </p:tab>
-                <p:tab id="tmat" title="Areas">
-                    <p:dataTable class="tabla-reporte" style="font-size: 10pt" var="coor" value="#{coordinadorController.areas}">
                         <p:column headerText="Nombre">
-                            #{coor.nombre}
+                            #{prog.nombreCompleto}
                         </p:column>
-                        <p:column headerText="Nombre Corto">
-                            #{coor.nombreCorto}
+                        <p:column headerText="">
+                            <h:commandButton value="+" action="#{seccionController.obtenerseccionesPeriodo(prog)}" />
                         </p:column>
-                        <p:column headerText="Seleccionar">
-                            <div class="Acciones">
-                                <div class="accion">
-                                    <i class="fa fa-hand-pointer" style="color: #005CB9"></i>
-                                    <h:commandButton class="icono" value="+" action="#{asignaturaController.agregarArea(coor)}" />
-                                </div>
-                            </div>
-                            
-                        </p:column>
-                    </p:dataTable>
-                </p:tab>
-            </p:tabView>
-        </div>
+                    </p:dataTable>                     
+
+                </p:panel>
+                <p:panel rendered="#{seccionController.mostPCsecc}">
+                    <div class="contsecc">
+                        <div class="csem">
+                            <p:dataGrid class="contseme" var="sem" columns="6" value="#{semestreController.semestres}">
+                                <p:panel>
+                                    <div class="contseme">
+                                        <div class="csem">
+                                            <h:commandButton style="font-size: 30pt" value="#{sem.denominacion}" action="#{seccionController.seleccionarSemestre(sem)}" />
+                                        </div>
+                                    </div>                                
+                                </p:panel>
+                            </p:dataGrid>
+                        </div>
+                        <div class="csec">
+                            <p:panelGrid columns="3">
+                                <h:outputText value="Seccion" />
+                                <p:spinner min="1" max="10" value="#{seccionController.seccion.denominacion}" />
+                                <h:commandButton value="agregar" action="#{seccionController.registrar()}" />
+                            </p:panelGrid>               
+                        </div>
+                        <div class="csecciones">
+                            <p:dataTable var="sec" value="#{seccionController.secciones}">
+                                <p:column headerText="">
+                                    #{sec.semestre.denominacion}
+                                </p:column>
+                                <p:column headerText="">
+                                    #{sec.denominacion}
+                                </p:column>
+                            </p:dataTable>                           
+                        </div>
+                    </div>
+                    <h:commandButton value="volver" action="#{seccionController.volverprogramas()}" />
+                </p:panel>    
+            </div>
         </section>
+    </h:body>
       
 </html>
 

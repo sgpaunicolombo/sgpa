@@ -75,6 +75,7 @@ public class ProyectoAulaController implements Serializable {
     }
     
     public void obtenerProyectoAulaXMatricula(Matricula m) {
+        
         proyecto = proaser.consultar(Proyecto_Aula.class, inteser.obtenerIntegranteXMatricula(m).getProyecto().getId());
         proyecto.setIntegrantes(inteser.obtenerIntegrantesProyecto(proyecto));
         proyecto.setItenes_Proyecto(itemser.obtenerProyectosXPeriodo_Programa(proyecto));
