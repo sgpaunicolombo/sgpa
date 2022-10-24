@@ -10,6 +10,7 @@ import com.entity.Matricula;
 import com.entity.Periodo;
 import com.entity.ProgramaAcademico;
 import com.entity.Proyecto_Aula;
+import com.entity.Seccion;
 import com.implDao.IIntegrante;
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -21,16 +22,15 @@ import javax.persistence.Query;
  * @author Jcmm
  */
 public class IntegranteServices extends ImplDao<Integrante, Long> implements IIntegrante,Serializable{
-   public List<Integrante> obtenerIntegrantesProyectosXPeriodo_Programa(Periodo p,ProgramaAcademico pr){
+   public List<Integrante> obtenerIntegrantesProyectosXPeriodo_Programa(Seccion s){
          List<Integrante> integrantes=new LinkedList();
          try {             
              EntityManager em =getEntityManagger();
              em.getTransaction().begin();               
-             String q="select i from Integrante i where i.proyecto.periodo.id = ?1 and i.proyecto.programa.id = ?2";        
+             String q="select i from Integrante i where i.proyecto.seccion.id = ?1";        
              System.out.println(" Consulta: "+q);
              Query qu=em.createQuery(q)
-                     .setParameter(1, p.getId())
-                     .setParameter(2, pr.getId());
+                     .setParameter(1, s.getId());
              integrantes=qu.getResultList();            
              
              em.close();             

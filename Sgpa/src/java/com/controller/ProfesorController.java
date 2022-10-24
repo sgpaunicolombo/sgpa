@@ -11,6 +11,7 @@ import com.entity.Periodo;
 import com.entity.Profesor;
 import com.entity.ProgramaAcademico;
 import com.entity.Proyecto_Aula;
+import com.entity.Seccion;
 import com.entity.Semestre;
 import com.services.LiderPAServices;
 import com.services.ProfesorServices;
@@ -50,7 +51,7 @@ public class ProfesorController implements Serializable {
     private List<LiderPA> semestresLider = new LinkedList();//semestres en la cual un profesor es lider
     private List<Proyecto_Aula> proyectosSemestre = new LinkedList();
 
-//Servicios
+    //Servicios
     LiderPAServices lidpaser = new LiderPAServices();
 
     //controladores
@@ -83,19 +84,19 @@ public class ProfesorController implements Serializable {
     public void seleccionarLider(LiderPA lider) {
         liderPa = lider;
         proacon.setLider(lider);
-        proyectosXSemestre(lider.getSemestre());
+        proyectosXSeccion(lider.getSeccion());
         mostPanelSemestres = false;
-        
+
     }
 
     public void volverSemestres() {
         mostPanelSemestres = true;
     }
 
-    public void proyectosXSemestre(Semestre s) {
+    public void proyectosXSeccion(Seccion s) {
         proyectosSemestre = new LinkedList();
         for (Proyecto_Aula p : proacon.getProyectos()) {
-            if (p.getSemestre().getId().equals(s.getId())) {
+            if (p.getSeccion().getId().equals(s.getId())) {
                 proyectosSemestre.add(p);
             }
         }
@@ -103,6 +104,7 @@ public class ProfesorController implements Serializable {
 
     public void consultarProyecto(Proyecto_Aula pa) {
         proacon.setProyecto(pa);
+//        System.out.println("" + proacon.getProyecto().validarProyectoParaAprobar());
         mostPanelProyectoAula = false;
     }
 
@@ -149,16 +151,19 @@ public class ProfesorController implements Serializable {
     }
 
     public void guardarProyectoAula() {
-        proacon.getProyecto().setPeriodo(periodo);
+        proacon.getProyecto().setSeccion(liderPa.getSeccion());
         proacon.crearPA();
     }
-    
-    public void aprobarProyectoAula(){
-        proacon.getProyecto().setFecha_aprobacion(new Date());        
-        proacon.aprobarPA();
+
+    public void aprobarProyectoAula() {
+        if (proacon.getProyecto().validarProyectoParaAprobar()) {
+            proacon.getProyecto().setFecha_aprobacion(new Date());
+            proacon.aprobarPA();
+        }
     }
-     public void aplazarProyectoAula(){
-        proacon.getProyecto().setFecha_aprobacion(new Date());        
+
+    public void aplazarProyectoAula() {
+        proacon.getProyecto().setFecha_aprobacion(new Date());
         proacon.aplazarPA();
     }
 
@@ -199,7 +204,7 @@ public class ProfesorController implements Serializable {
     }
 
     public void gproyectosaula() {
-        mostPanelSemestres=true;
+        mostPanelSemestres = true;
         mostPanelProyectoAula = true;
         paginaActualP = "/Profesor/GUIProyectosAula.xhtml";
     }

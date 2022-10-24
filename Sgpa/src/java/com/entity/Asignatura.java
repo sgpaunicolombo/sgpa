@@ -29,13 +29,12 @@ public class Asignatura implements Serializable {
     private String nombreCorto;
     private String estado;
     private int creditos;
-    
     @ManyToOne
     private Area area;
     @ManyToOne
-    private ProgramaAcademico programa;
+    private Seccion seccion;
     @ManyToOne
-    private Semestre semestre;
+    private Profesor profesor;
     
     public boolean validarAsignatura() {
         boolean valido = true;
@@ -168,20 +167,7 @@ public class Asignatura implements Serializable {
         this.area = area;
     }
 
-    /**
-     * @return the programa
-     */
-    public ProgramaAcademico getPrograma() {
-        return programa;
-    }
-
-    /**
-     * @param programa the programa to set
-     */
-    public void setPrograma(ProgramaAcademico programa) {
-        this.programa = programa;
-    }
-
+   
     /**
      * @return the estado
      */
@@ -196,18 +182,42 @@ public class Asignatura implements Serializable {
         this.estado = estado;
     }
 
+   
+
     /**
-     * @return the semestre
+     * @return the profesor
      */
-    public Semestre getSemestre() {
-        return semestre;
+    public Profesor getProfesor() {
+        return profesor;
     }
 
     /**
-     * @param semestre the semestre to set
+     * @param profesor the profesor to set
      */
-    public void setSemestre(Semestre semestre) {
-        this.semestre = semestre;
+    public void setProfesor(Profesor profesor) {
+        this.profesor = profesor;
+    }
+
+
+    /**
+     * @param seccion the seccion to set
+     */
+    public void setSeccion(String seccion) {
+        this.setSeccion(seccion);
+    }
+
+    /**
+     * @param seccion the seccion to set
+     */
+    public void setSeccion(Seccion seccion) {
+        this.seccion = seccion;
+    }
+
+    /**
+     * @return the seccion
+     */
+    public Seccion getSeccion() {
+        return seccion;
     }
     
 }

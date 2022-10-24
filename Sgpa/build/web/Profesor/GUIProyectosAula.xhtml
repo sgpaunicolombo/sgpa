@@ -8,21 +8,19 @@
     </h:head>
     <h:body>
         <section class="contenido-contenedor">
-
-
             <p:panel rendered="#{profesorController.mostPanelSemestres}">
                 <p:dataGrid paginator="true" var="sem" value="#{profesorController.semestresLider}">
                     <p:panel>
                         <div class="contsemli">
                             <div class="csem">
                                 <h:outputText  value=""/><BR/>
-                                <h:commandButton style="font-size: 24pt" value="#{sem.semestre.denominacion}" action="#{profesorController.seleccionarLider(sem)}" />
+                                <h:commandButton style="font-size: 24pt" value="#{sem.seccion.semestre.denominacion} - #{sem.seccion.denominacion}" action="#{profesorController.seleccionarLider(sem)}" />
                             </div>
-                            <div class="cpro"><h:outputText value="#{sem.programa.nombre}"/>
+                            <div class="cpro"><h:outputText value="#{sem.seccion.programa.nombre}"/>
 
                             </div>
                             <div class="cper">
-                                <h:outputText value="#{sem.periodo.anio} - #{sem.periodo.numero}"/>
+                                <h:outputText value="#{sem.seccion.periodo.anio} - #{sem.seccion.periodo.numero}"/>
                             </div>
                         </div>
                     </p:panel>
@@ -64,8 +62,8 @@
                                         <span>#{proyectoAulaController.proyecto.codigo}</span>
                                     </div>
                                     <div class="codseitem">
-                                        <h:outputText value="Semestre" /><br></br>
-                                        <span>#{proyectoAulaController.proyecto.semestre.denominacion}</span>
+                                        <h:outputText value="Semestre - Seccion" /><br></br>
+                                        <span>#{proyectoAulaController.proyecto.seccion.semestre.denominacion} - #{proyectoAulaController.proyecto.seccion.denominacion}</span>
                                     </div>
                                 </div>
                                 <span class="aviso">Establezca la fecha del proyecto</span>

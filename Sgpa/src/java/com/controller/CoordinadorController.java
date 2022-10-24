@@ -59,10 +59,15 @@ public class CoordinadorController implements Serializable{
     public void gcoordinadorPA(){
         paginaActualC="/Coordinador/AsignarCoordinacionPA.xhtml";
     }
+
+     public void gsecciones(){
+        paginaActualC="/Coordinador/GestorSecciones.xhtml";
+    }
+
     public void gasignaturas(){
         paginaActualC="/Coordinador/GestorAsignatura.xhtml";
     }
-    
+
     public void consultarCoordinadores(){
         setCoordinadores(coordser.consultarTodo(Coordinador.class));
     }

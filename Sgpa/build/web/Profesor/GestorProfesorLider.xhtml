@@ -39,11 +39,13 @@
                     </p:dataTable>
                 </p:tab>
                 <p:tab id="tpro" title="Programa">
+
                     <div class="plider-seleccionado">
                         <span>Seleccionado:</span>
                         <span>#{liderPAController.liderPA.profesor.toString()}</span>
                     </div>
                     <p:dataTable var="prog" class="tabla-reporte" value="#{programaController.programas}">
+
                         <p:column headerText="Codigo">
                             #{prog.codigo}
                         </p:column>
@@ -62,14 +64,15 @@
 
                 </p:tab>
                 <p:tab id="tper" title="Periodo">
+
                     <div class="plider-seleccionado">
                         <span>Seleccionado:</span>
                         <span>#{liderPAController.liderPA.profesor.toString()}</span>
-                        <span>#{liderPAController.liderPA.programa.nombreCompleto}</span>
+                        <span>#{liderPAController.liderPA.seccion.programa.nombreCompleto}</span>
                     </div>
-                        
-                    
+         
                     <p:dataTable class="tabla-reporte" var="per" value="#{periodoController.periodos}" >
+
                         <p:column headerText="Fecha Inicio">
                             #{per.fechaInicial}
                         </p:column>
@@ -90,7 +93,8 @@
                         </p:column>
                     </p:dataTable> 
                 </p:tab>
-                <p:tab id="tmat" title="Asignar">
+
+                <p:tab id="tmat" title="Matricular">
                         <div class="plider-seleccionado">
                         <span>Seleccionado:</span>
                         <span>#{liderPAController.liderPA.profesor.toString()}</span>
@@ -115,12 +119,34 @@
                         <div class="tanone">
                             <h:commandButton id="salsem" class="boton" value="Registrar" action="#{liderPAController.registrarLiderPA()}" />
                         </div>
+
                 </p:tab>
             </p:tabView>
         </div>
-        </section>
+    </section>
     <style>
-        
+        .contsecc1 {  display: grid;
+                      grid-template-columns: 96px 80px;
+                      grid-template-rows: 50px 50px;
+                      grid-auto-columns: 1fr;
+                      gap: 0px 0px;
+                      grid-auto-flow: row;
+                      justify-items: center;
+                      align-items: center;
+                      grid-template-areas:
+                          "csem cop"
+                          "csec cop";
+        }
+
+        .csem { grid-area: csem; }
+
+        .csec { grid-area: csec; }
+
+        .cop { grid-area: cop; }
+
+
+       
+    
     </style>
 </html>
 

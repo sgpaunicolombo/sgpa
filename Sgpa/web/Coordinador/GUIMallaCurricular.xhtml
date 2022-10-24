@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <div class="contmalla">
+            <div class="copc"></div>
+            <div class="csem">
+                <p:repeat value="#{semestreController.semestres}" var="sem">
+                    <div class="contsem">
+                        <div class="cseme">
+                            <h:commandLink value="#{sem.denominacion}" />
+                        </div>
+                    </div>
+                </p:repeat>
+            </div>
+            <div class="cmalla">
+
+            </div>
+            <div class="casig"></div>
+            <div class="careas"></div>
+        </div>
+    </h:body>
+    <style>
+        .contmalla {  display: grid;
+                      grid-template-columns: 0.3fr 1.7fr;
+                      grid-template-rows: 0.3fr 0.4fr 2.3fr;
+                      grid-auto-columns: 1fr;                      
+                      gap: 0px 0px;
+                      grid-auto-flow: row;
+                      justify-items: stretch;
+                      align-items: stretch;
+                      grid-template-areas:
+                          "copc careas"
+                          "copc casig"
+                          "csem cmalla";
+        }
+
+        .copc { grid-area: copc; }
+
+        .csem { grid-area: csem; }
+
+        .cmalla { grid-area: cmalla; }
+
+        .casig { grid-area: casig; }
+
+        .careas { grid-area: careas; }
+
+        .contsem {  display: grid;
+                      grid-template-columns: 160px;
+                      grid-template-rows: 100px;
+                      grid-auto-columns: 1fr;
+                      border: #004F9E;                      
+                      gap: 0px 0px;
+                      grid-auto-flow: row;
+                      justify-items: center;
+                      align-items: center;
+                      grid-template-areas:
+                          "cseme";
+        }
+
+        .cseme { grid-area: cseme; }
+
+    </style>
+</html>
+
