@@ -15,7 +15,8 @@
                     <p:tab title="Informacion Basica del Proyecto">
                         <div class="contpro">
                             <div class="codse">
-                                <i class="fa fa-solid fa-thumbtack ic"></i>
+                                <i class="uil uil-notes ic"></i>
+                                
                                 <div class="codseitem">
                                     <h:outputText value="Codigo Proyecto" /><br></br>
                                     <span>#{proyectoAulaController.proyecto.codigo}</span>
@@ -48,30 +49,57 @@
                         </div>
                     </p:tab>
                     <p:tab title="Itenes del Proyecto">
-                        <h:commandButton  rendered="#{!estudianteController.mpanelAItems}"  value="+" action="#{estudianteController.agregarItem()}" />
-                        <p:panel rendered="#{estudianteController.mpanelAItems}" >                            
+                        <h:commandButton  class="agg" rendered="#{!estudianteController.mpanelAItems}"  value="+" action="#{estudianteController.agregarItem()}" />
+                        <p:card rendered="#{estudianteController.mpanelAItems}" >                            
                             <p:dataTable class="tabla-reporte" style="overflow-y: scroll;height: 350px"  var="ite" value="#{tipo_itemController.tipos_Items}" >
                                 <p:column headerText="Nombre">
                                     <h:outputText title="#{ite.descripcion}" value="#{ite.nombre}" />
                                 </p:column>                            
-                                <p:column  >
-                                    <h:commandButton value="+" action="#{estudianteController.seleccionarTItem(ite)}"  />
+                                <p:column headerText="Agregar" >
+                                    <div class="accion">
+                                        <i class="uil uil-plus" style="color: #004F9E; "></i>
+                                        <h:commandButton class="icono" value="+" action="#{estudianteController.seleccionarTItem(ite)}"  />
+                                    </div>
+                                    
                                 </p:column>
                             </p:dataTable>
-                            <h:commandButton value="volver" action="#{estudianteController.volverItems()}" />
+                            <div class="tanone" style="justify-content: flex-start; column-gap: 1rem" >
+                                <div class="btns" style="background-color: #005CB9">
+                                    <i class="uil uil-angle-left-b" ></i>
+                                    Volver
+                                    <h:commandButton class="btn" value="volver" action="#{estudianteController.volverItems()}" />
+                                </div>
+                                
+                            </div>
                             
-                        </p:panel>
+                            
+                        </p:card>
                         
-                        <p:panel rendered="#{estudianteController.mpanelItem}">
-                            <p:panelGrid columns="1">
-                                <h:outputText value="#{proyectoAulaController.item.tipo.nombre}" />
-                                <p:inputTextarea value="#{proyectoAulaController.item.contenido}" rows="4" cols="70" />
-                            </p:panelGrid>
-                             <h:commandButton value="volver" action="#{estudianteController.volverAItenes()}" />
-                             <h:commandButton value="agregar" action="#{estudianteController.registrarItem()}" />
-                        </p:panel>
+                        <p:card style="margin-bottom: 2rem" rendered="#{estudianteController.mpanelItem}">
+                            
+                             
+                            <f:facet name="title">
+                               #{proyectoAulaController.item.tipo.nombre}
+                            </f:facet>
+                                
+                            <p:inputTextarea placeholder="Escribe aquí..." class="iform" value="#{proyectoAulaController.item.contenido}" rows="4" cols="70" />
+                            <div class="tanone" style="justify-content: flex-start; column-gap: 1rem" >
+                                <div class="btns" style="background-color: #005CB9">
+                                    <i class="uil uil-angle-left-b" ></i>
+                                    Volver
+                                    <h:commandButton class="btn" value="." action="#{estudianteController.volverAItenes()}" />
+                                </div>
+                                <div class="btns" style="background-color: #1CE63F">
+                                    <i class="uil uil-check" ></i>
+                                Agregar
+                                <h:commandButton class="btn" value="." action="#{estudianteController.registrarItem()}" />
+                                </div>
+                                
+                            </div>
+                            
+                        </p:card>
                         
-                        <p:panel rendered="#{!estudianteController.mpanelAItems}">
+                        <p:card rendered="#{!estudianteController.mpanelAItems}">
                             <p:dataTable class="tabla-reporte" var="items" value="#{proyectoAulaController.proyecto.itenes_Proyecto}">
                                 <p:column headerText="Tipo"> 
                                     #{items.tipo.nombre}
@@ -89,11 +117,21 @@
                                     #{items.editor.estudiante.toString()}
                                 </p:column>
                                 <p:column headerText=""> 
-                                    <h:commandButton value="editar" action="#{estudianteController.seleccionarItem(items)}" />
-                                    <h:commandButton value="eliminar" action="#{estudianteController.eliminarItem(items)}" />
+                                    <div class="Acciones">
+                                        <div class="accion">
+                                            <i class="uil uil-pen" style="color: #004F9E; "></i>
+                                            <h:commandButton class="icono" value="." action="#{estudianteController.seleccionarItem(items)}" />
+                                        </div>
+                                        <div class="accion">
+                                            <i class="uil uil-trash-alt" style="color: red; "></i>
+                                            <h:commandButton class="icono" value="-" action="#{estudianteController.eliminarItem(items)}" />
+                                        </div>
+                                    </div>
+                                    
+                               
                                 </p:column>
                             </p:dataTable>
-                        </p:panel>
+                        </p:card>
                     </p:tab>
                     
                     <p:tab title="Integrantes">
@@ -134,6 +172,18 @@
         }
         .agg:hover{
             background-color: #14FF00
+        }
+        .btns{
+            font-family: sans-serif;
+            font-size: 16px;
+            position: relative;
+            display: flex;
+            align-content: center;
+            text-align: center;
+            column-gap: .2rem;
+            padding: 5px 8px;
+            color: white;
+            border-radius: 5px;
         }
     </style>
 
