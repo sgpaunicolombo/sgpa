@@ -9,8 +9,6 @@ import com.entity.Integrante;
 import com.entity.Item_Proyecto;
 import com.entity.LiderPA;
 import com.entity.Matricula;
-import com.entity.Periodo;
-import com.entity.ProgramaAcademico;
 import com.entity.Proyecto_Aula;
 import com.services.IntegranteServices;
 import com.services.Item_ProyectoServices;
