@@ -7,6 +7,7 @@ package com.controller;
 
 import com.entity.Area;
 import com.entity.Coordinador;
+import com.entity.Seccion;
 import com.services.AreaServices;
 import com.services.CoordinadorServices;
 import java.io.Serializable;
@@ -30,6 +31,10 @@ public class CoordinadorController implements Serializable{
     // Areas
     private List<Area> areas = new LinkedList();
     private Area area = new Area();
+    
+    //Seccion (para manejar el panel)
+    private Seccion seccion = new Seccion();
+    
    //servicios
     CoordinadorServices coordser=new CoordinadorServices();
     AreaServices areaser = new AreaServices();
@@ -168,6 +173,14 @@ public class CoordinadorController implements Serializable{
 
     public void setAsigcon(AsignaturaController asigcon) {
         this.asigcon = asigcon;
+    }
+
+    public Seccion getSeccion() {
+        return seccion;
+    }
+
+    public void setSeccion(Seccion seccion) {
+        this.seccion = seccion;
     }
     
 }

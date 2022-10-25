@@ -116,12 +116,18 @@
                         <span>#{matriculaController.matricula.seccion.programa.nombreCompleto}</span>
                         <span>#{matriculaController.matricula.seccion.periodo.anio}-#{matriculaController.matricula.seccion.periodo.numero}</span>
                     </div>
-                        <p:dataViewGridItem >                           
-                        <p:dataGrid columns="4" var="sem"  value="#{semestreController.semestres}">
-                            <p:panel>
-                                <h:commandButton value="#{sem.denominacion}" action="#{matriculaController.seleccionarSemestre(sem)}" />
-                            </p:panel>                        
-                        </p:dataGrid>  
+
+                    <p:dataView    var="sem"  value="#{semestreController.semestres}">
+                        <p:dataViewGridItem>
+                            <div class="semestres" style="justify-content:center !important">
+                                <p>Semestre <br></br>#{sem.denominacion}</p>
+                                <h:graphicImage style="max-width: 100%; height: auto" value="/resources/img/imgsemestres.jpg"/>
+                                <h:commandButton class="semestre" value="#{sem.denominacion}" action="#{matriculaController.seleccionarSemestre(sem)}" /> 
+                            </div>
+             
+                        </p:dataViewGridItem>                      
+                    </p:dataView>
+                      <p:dataViewGridItem>
                         <p:dataGrid var="sec" value="#{matriculaController.secciones}">
                             <p:panel>
                                 <h:commandButton value="#{sec.denominacion}" action="#{matriculaController.seleccionarSeccion(sec)}" />

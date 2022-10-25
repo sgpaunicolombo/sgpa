@@ -9,9 +9,7 @@ import com.entity.Integrante;
 import com.entity.Item_Proyecto;
 import com.entity.LiderPA;
 import com.entity.Matricula;
-import com.entity.Periodo;
 import com.entity.Profesor;
-import com.entity.ProgramaAcademico;
 import com.entity.Proyecto_Aula;
 import com.services.IntegranteServices;
 import com.services.Item_ProyectoServices;
@@ -71,6 +69,7 @@ public class ProyectoAulaController implements Serializable {
     }
     
     public void obtenerProyectoAulaXMatricula(Matricula m) {
+        
         proyecto = proaser.consultar(Proyecto_Aula.class, inteser.obtenerIntegranteXMatricula(m).getProyecto().getId());
         proyecto.setIntegrantes(inteser.obtenerIntegrantesProyecto(proyecto));
         proyecto.setItenes_Proyecto(itemser.obtenerProyectosXPeriodo_Programa(proyecto));

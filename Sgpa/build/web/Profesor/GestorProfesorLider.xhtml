@@ -93,12 +93,14 @@
                         </p:column>
                     </p:dataTable> 
                 </p:tab>
+
                 <p:tab id="tmat" title="Vincular">
                     <p:panelGrid columns="3">
                         <h:outputText value="#{liderPAController.liderPA.profesor.toString()}" />
                         <h:outputText value="#{liderPAController.programa.nombreCompleto}" />
                         <h:outputText value="#{liderPAController.periodo.anio}-#{liderPAController.periodo.numero}" />
                         <p:dataGrid columns="4" var="sec"  value="#{liderPAController.secciones}">
+                            
                             <p:panel>
                                 <div class="contsecc1">
                                     <div class="csem">#{sec.semestre.denominacion}</div>
