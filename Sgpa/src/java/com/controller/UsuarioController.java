@@ -12,12 +12,18 @@ import com.entity.Profesor;
 import com.entity.ProgramaAcademico;
 import com.entity.Usuario;
 import com.services.UsuarioServices;
+import com.utilidades.ImageUtils;
+import com.utilidades.MArchivos;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+import org.primefaces.model.file.UploadedFile;
 
 /**
  *
@@ -41,6 +47,9 @@ public class UsuarioController implements Serializable {
     private boolean mpanelLogin = true;
     private String paginaActual = "";
     private String paginaSU="";
+    private UploadedFile archivoDatos;
+    private MArchivos marchivos=new MArchivos(); 
+    
 
     //controladores asociados
     @ManagedProperty("#{coordinadorController}")
@@ -65,6 +74,7 @@ public class UsuarioController implements Serializable {
     }
     
     public void iniciar() {
+        try{
         setUsuario(ususer.ingresar(getUsuario().getLogin(), getUsuario().getPassword()));
         if (!getUsuario().getIdentificacion().equals("")) {
             percon.establecerPeriodoActual();
@@ -109,7 +119,9 @@ public class UsuarioController implements Serializable {
 
             }
             mpanelLogin = false;
-
+        }
+        }catch(java.lang.NullPointerException npe){
+            FacesUtil.addErrorMessage("Usuario, tipo de usuario o matricula inexistente");
         }
     }
 
@@ -131,6 +143,10 @@ public class UsuarioController implements Serializable {
        public void gperiodos(){
         paginaSU="/General/GestorPeriodos.xhtml";
     }
+          public void gcargamasiva(){
+        paginaSU="/General/CargaMasiva.xhtml";
+    }
+       
     public void salir() {
         paginaActual = "";
         mpanelLogin = true;
@@ -143,7 +159,26 @@ public class UsuarioController implements Serializable {
         percon.setPeriodo(new Periodo());
         usuario = new Usuario();
     }
-
+    
+     public void subirArchivoPlano() {
+        try {
+               System.out.println("  "+archivoDatos.getFileName());
+               ServletContext servletContext = (ServletContext) 
+               FacesContext.getCurrentInstance().getExternalContext().getContext();
+               String path = servletContext.getRealPath("/imagenInicial.jpg").replace("imagenInicial.jpg", "Imagenes\\Archivos\\");
+               System.out.println(path);
+               ImageUtils.copyFile("datos.txt", archivoDatos.getInputStream(),path);               
+               marchivos.cargarArhivoEstudiante(path+"datos.txt");
+        } catch (IOException ex) {
+           ex.printStackTrace();
+        }	
+    }
+    
+    public void almacenamientoMasivo(){
+        marchivos.almacenamiento();
+    }
+    
+    
     /**
      * @return the usuario
      */
@@ -310,6 +345,34 @@ public class UsuarioController implements Serializable {
      */
     public void setSeccon(SeccionController seccon) {
         this.seccon = seccon;
+    }
+
+    /**
+     * @return the archivoDatos
+     */
+    public UploadedFile getArchivoDatos() {
+        return archivoDatos;
+    }
+
+    /**
+     * @param archivoDatos the archivoDatos to set
+     */
+    public void setArchivoDatos(UploadedFile archivoDatos) {
+        this.archivoDatos = archivoDatos;
+    }
+
+    /**
+     * @return the marchivos
+     */
+    public MArchivos getMarchivos() {
+        return marchivos;
+    }
+
+    /**
+     * @param marchivos the marchivos to set
+     */
+    public void setMarchivos(MArchivos marchivos) {
+        this.marchivos = marchivos;
     }
 
 

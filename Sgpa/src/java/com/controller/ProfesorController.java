@@ -85,8 +85,8 @@ public class ProfesorController implements Serializable {
         liderPa = lider;
         proacon.setLider(lider);
         proyectosXSeccion(lider.getSeccion());
+        matcont.obtenerMatriculasXSeccion(lider.getSeccion());
         mostPanelSemestres = false;
-
     }
 
     public void volverSemestres() {
@@ -95,6 +95,7 @@ public class ProfesorController implements Serializable {
 
     public void proyectosXSeccion(Seccion s) {
         proyectosSemestre = new LinkedList();
+        System.out.println(""+proacon.getProyectos().size());
         for (Proyecto_Aula p : proacon.getProyectos()) {
             if (p.getSeccion().getId().equals(s.getId())) {
                 proyectosSemestre.add(p);
@@ -114,10 +115,10 @@ public class ProfesorController implements Serializable {
         //System.out.println(""+semestresLider.size());
         if (semestresLider.size() > 0) {
             mostPanelSemestres = true;
-            liderPa = semestresLider.get(0);
-            proacon.setLider(liderPa);
-            proacon.consultarProyectosXPrograma_Periodo();
-            proacon.obtenerIntegrantesXProyectos();
+//            liderPa = semestresLider.get(0);
+//            proacon.setLider(liderPa);
+            proacon.consultarProyectosXProfesorLider(profesor);
+            proacon.obtenerIntegrantesXProyectos(profesor);
         }
     }
 
@@ -153,6 +154,7 @@ public class ProfesorController implements Serializable {
     public void guardarProyectoAula() {
         proacon.getProyecto().setSeccion(liderPa.getSeccion());
         proacon.crearPA();
+        proyectosXSeccion(liderPa.getSeccion());
     }
 
     public void aprobarProyectoAula() {
@@ -176,6 +178,9 @@ public class ProfesorController implements Serializable {
         proacon.eliminarProyecto(pa);
         matcont.consultarEstudiantesMatriculadosXPeriodo(periodo);
     }
+    
+    
+    
 
     public void subirImagenProfesor() {
         try {

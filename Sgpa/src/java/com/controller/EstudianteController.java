@@ -65,6 +65,7 @@ public class EstudianteController implements Serializable {
     }
 
     public void consultarProyectoXMatricula() {
+        System.out.println(""+matcont.getMatricula());
         proacon.obtenerProyectoAulaXMatricula(matcont.getMatricula());
     }
 

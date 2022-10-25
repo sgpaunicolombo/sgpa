@@ -8,6 +8,7 @@ import com.dao.ImplDao;
 import static com.dao.ImplDao.getEntityManagger;
 import com.entity.Matricula;
 import com.entity.Periodo;
+import com.entity.Profesor;
 import com.entity.ProgramaAcademico;
 import com.entity.Proyecto_Aula;
 import com.entity.Seccion;
@@ -39,6 +40,25 @@ public class Proyecto_AulaServices extends ImplDao<Proyecto_Aula, Long> implemen
          } 
          return proyectos;
     }
+      
+       public List<Proyecto_Aula> obtenerProyectosXProfesorLider(Profesor s){
+         List<Proyecto_Aula> proyectos=new LinkedList();
+         try {             
+             EntityManager em =getEntityManagger();
+             em.getTransaction().begin();               
+             String q="select pa from Proyecto_Aula pa where pa.profesorLider.profesor.id = ?1";        
+             System.out.println(" Consulta: "+q);
+             Query qu=em.createQuery(q)
+                     .setParameter(1, s.getId());
+             proyectos=qu.getResultList();            
+             
+             em.close();             
+         }catch(Exception ex){
+             ex.printStackTrace();
+         } 
+         return proyectos;
+    }
+      
 }
       
 

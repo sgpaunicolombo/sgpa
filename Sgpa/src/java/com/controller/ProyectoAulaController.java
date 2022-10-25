@@ -10,6 +10,7 @@ import com.entity.Item_Proyecto;
 import com.entity.LiderPA;
 import com.entity.Matricula;
 import com.entity.Periodo;
+import com.entity.Profesor;
 import com.entity.ProgramaAcademico;
 import com.entity.Proyecto_Aula;
 import com.services.IntegranteServices;
@@ -53,21 +54,14 @@ public class ProyectoAulaController implements Serializable {
      */
     public ProyectoAulaController() {
     }
-/*
-    public void consultarProyectosXProgramaXPeriodo_Consultables(){
-    proyectos=proaser.obtenerProyectosXPeriodo_Programa(lider.getPeriodo(), lider.getPrograma());
-    for (Proyecto_Aula a : proyectos){
-        if(!proyecto.getEstado().equals("Guardado")){
-            proyectos=proyectos;
-        }
-    }
-    
-        }
-    */
-    public void consultarProyectosXPrograma_Periodo() {
-        proyectos = proaser.obtenerProyectosXPeriodo_Programa(lider.getSeccion());
+
+    public void consultarProyectosXProfesorLider(Profesor p) {
+        proyectos = proaser.obtenerProyectosXProfesorLider(p);
+        //System.out.println(""+proyectos.size());
     }
 
+    
+    
     public void obtenerProyectosNoGuardados(){
         for(Proyecto_Aula p:proyectos){
             if(!p.getEstado().equals("Guardado")){
@@ -134,8 +128,8 @@ public class ProyectoAulaController implements Serializable {
                 proyecto = proaser.modificar(proyecto);
                 guardarIntegrates(proyecto);
                 FacesUtil.addInfoMessage("Se ha creado un grupo de proyecto de aula");
-                consultarProyectosXPrograma_Periodo();
-                obtenerIntegrantesXProyectos();
+                consultarProyectosXProfesorLider(lider.getProfesor());
+                obtenerIntegrantesXProyectos(lider.getProfesor());
                 matser.obtenerMatriculasXperiodo(proyecto.getSeccion().getPeriodo());
                 proyecto = new Proyecto_Aula();
                 integrantes = new LinkedList();
@@ -168,9 +162,9 @@ public class ProyectoAulaController implements Serializable {
         pa.getIntegrantes().remove(inte);
     }
 
-    public void obtenerIntegrantesXProyectos() {
+    public void obtenerIntegrantesXProyectos(Profesor p) {
         try {
-            integrantes = inteser.obtenerIntegrantesProyectosXPeriodo_Programa(lider.getSeccion());
+            integrantes = inteser.obtenerIntegrantesProyectosXProfesorLider(p);
             for (int i = 0; i < proyectos.size(); i++) {
                 ListIterator it = integrantes.listIterator();
                 proyectos.get(i).setIntegrantes(new LinkedList());

@@ -33,7 +33,7 @@ public class MatriculaController implements Serializable {
     private Matricula matricula = new Matricula();
     private Semestre semestre = new Semestre();
     private Periodo periodo = new Periodo();
-    private ProgramaAcademico programa=new ProgramaAcademico();
+    private ProgramaAcademico programa = new ProgramaAcademico();
 
     //servicios
     MatriculaServices matser = new MatriculaServices();
@@ -42,6 +42,7 @@ public class MatriculaController implements Serializable {
 
     private List<Matricula> matriculas = new LinkedList();
     private List<Seccion> secciones = new LinkedList();
+    private List<Matricula> matriculasXSeccion = new LinkedList();
 
     /**
      * Creates a new instance of MatriculaController
@@ -50,6 +51,15 @@ public class MatriculaController implements Serializable {
 
     }
 
+    public void obtenerMatriculasXSeccion(Seccion s){
+        matriculasXSeccion = new LinkedList();
+        for(Matricula m:matriculas){
+            if(m.getSeccion().getId().equals(s.getId())){
+                matriculasXSeccion.add(m);
+            }
+        }
+    }
+    
     public void consultarEstudiantesMatriculadosXPeriodo(Periodo p) {
         matriculas = matser.obtenerMatriculasXperiodo(p);
     }
@@ -67,17 +77,18 @@ public class MatriculaController implements Serializable {
     }
 
     public void agregarPeriodo(Periodo p) {
-        setPeriodo(p);        
-    }
-    public void seleccionarSemestre(Semestre s) {
-        setSemestre(s);
-        secciones=secser.obtenerSeccionesXSemestre_Periodo_Programa(getSemestre(), getPrograma(), getPeriodo());
+        setPeriodo(p);
     }
 
-    public void seleccionarSeccion(Seccion s){
+    public void seleccionarSemestre(Semestre s) {
+        setSemestre(s);
+        secciones = secser.obtenerSeccionesXSemestre_Periodo_Programa(getSemestre(), getPrograma(), getPeriodo());
+    }
+
+    public void seleccionarSeccion(Seccion s) {
         matricula.setSeccion(s);
     }
-    
+
     public void matricular() {
         matricula.setEstado("Academica");
         matricula.setEstadoPA("Libre");
@@ -90,7 +101,6 @@ public class MatriculaController implements Serializable {
         }
     }
 
-    
     /**
      * @return the matricula
      */
@@ -173,6 +183,20 @@ public class MatriculaController implements Serializable {
      */
     public void setPrograma(ProgramaAcademico programa) {
         this.programa = programa;
+    }
+
+    /**
+     * @return the matriculasXSeccion
+     */
+    public List<Matricula> getMatriculasXSeccion() {
+        return matriculasXSeccion;
+    }
+
+    /**
+     * @param matriculasXSeccion the matriculasXSeccion to set
+     */
+    public void setMatriculasXSeccion(List<Matricula> matriculasXSeccion) {
+        this.matriculasXSeccion = matriculasXSeccion;
     }
 
 }

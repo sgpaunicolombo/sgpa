@@ -22,47 +22,61 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class SeccionController implements Serializable{
+public class SeccionController implements Serializable {
 
-    private Seccion seccion=new Seccion();
-    private Periodo periodo=new Periodo();
+    private Seccion seccion = new Seccion();
+    private Periodo periodo = new Periodo();
 //    ProgramaAcademico programa=new ProgramaAcademico();
-    
-    private List<Seccion> secciones=new LinkedList();
-    
-    SeccionServices secser=new SeccionServices();
-    
-    private boolean mostPCsecc=false;
-    
+
+    private List<Seccion> secciones = new LinkedList();
+
+    SeccionServices secser = new SeccionServices();
+
+    private boolean mostPCsecc = false;
+
     /**
      * Creates a new instance of SeccionController
      */
     public SeccionController() {
     }
 
-    public void obtenerseccionesPeriodo(ProgramaAcademico pa){
-        mostPCsecc=true;
-        secciones=secser.obtenerSeccionesXPeriodo_Programa(pa, periodo);
+    public void obtenerseccionesPeriodo(ProgramaAcademico pa) {
+        mostPCsecc = true;
+        secciones = secser.obtenerSeccionesXPeriodo_Programa(pa, periodo);
         seccion.setPrograma(pa);
     }
-    
-   
-    
-    public void volverprogramas(){
-        mostPCsecc=false;
+
+    public void volverprogramas() {
+        mostPCsecc = false;
     }
-    
-    public void seleccionarSemestre(Semestre sem){
+
+    public void seleccionarSemestre(Semestre sem) {
         seccion.setSemestre(sem);
     }
-    
-    public void registrar(){
+
+    public void registrar() {
         seccion.setPeriodo(periodo);
-        secser.modificar(seccion);
-        obtenerseccionesPeriodo(seccion.getPrograma());
-        seccion=new Seccion();
+        if(!existeSeccion(seccion)) {
+            secser.modificar(seccion);
+            obtenerseccionesPeriodo(seccion.getPrograma());
+            seccion = new Seccion();
+        }else{
+            FacesUtil.addErrorMessage("La seccion ya esta registrada");
+        }
     }
-    
+
+    public boolean existeSeccion(Seccion sec) {
+        boolean existe = false;
+        for (Seccion s : secciones) {
+            if (s.getPeriodo().getId().equals(sec.getPeriodo().getId()) && s.getPrograma().getId().equals(sec.getPrograma().getId()) && s.getSemestre().getId().equals(sec.getSemestre().getId())) {
+                if (s.getDenominacion().equals(sec.getDenominacion())) {
+                    existe = true;
+                }
+            }
+        }
+        return existe;
+    }
+
     /**
      * @return the seccion
      */
@@ -118,5 +132,5 @@ public class SeccionController implements Serializable{
     public void setMostPCsecc(boolean mostPCsecc) {
         this.mostPCsecc = mostPCsecc;
     }
-    
+
 }

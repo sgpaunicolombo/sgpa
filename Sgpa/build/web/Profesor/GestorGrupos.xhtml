@@ -33,7 +33,7 @@
                     <h1 class="tittle">Gestor Grupos</h1>
                     <div class="contproy">
                         <div class="cestudiantes">
-                            <p:dataTable rows="5" paginator="true" style="font-size: 10pt" var="est" value="#{matriculaController.matriculas}">
+                            <p:dataTable rows="5" paginator="true" style="font-size: 10pt" var="est" value="#{matriculaController.matriculasXSeccion}">
                                 <p:column filterBy="#{est.estudiante.identificacion}" headerText="Identificacion">
                                     #{est.estudiante.identificacion}
                                 </p:column>                        

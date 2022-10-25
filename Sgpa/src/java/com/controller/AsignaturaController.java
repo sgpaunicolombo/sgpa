@@ -9,6 +9,7 @@ import com.entity.Area;
 import com.entity.Asignatura;
 import com.entity.Semestre;
 import com.services.AsignaturaServices;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -21,7 +22,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class AsignaturaController {
+public class AsignaturaController implements Serializable{
     
     private List<Asignatura> asignaturas=new LinkedList();
     private Asignatura asignatura=new Asignatura();

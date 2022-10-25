@@ -11,7 +11,7 @@
             <div class="border contenedor top">
                 <h1 class="tittle">Gestor Secciones</h1>
                 <p:panel rendered="#{!seccionController.mostPCsecc}">
-                    <p:dataTable var="prog" value="#{programaController.programas}">
+                    <p:dataTable class="tabla-reporte" var="prog" value="#{programaController.programas}">
                         <p:column headerText="Codigo">
                             #{prog.codigo}
                         </p:column>
@@ -19,19 +19,23 @@
                             #{prog.nombreCompleto}
                         </p:column>
                         <p:column headerText="">
-                            <h:commandButton value="+" action="#{seccionController.obtenerseccionesPeriodo(prog)}" />
+                            <div class="accion">
+                                <i class="fa fa-hand-pointer" style="color: #005CB9"></i>
+                                <h:commandButton class="icono" value="+" action="#{seccionController.obtenerseccionesPeriodo(prog)}" />
+                            </div>                            
                         </p:column>
                     </p:dataTable>                     
 
                 </p:panel>
                 <p:panel rendered="#{seccionController.mostPCsecc}">
-                    <div class="contsecc">
+                    <h:commandButton value="volver" action="#{seccionController.volverprogramas()}" />
+                    <div class="contsecc">                        
                         <div class="csem">
                             <p:dataGrid class="contseme" var="sem" columns="6" value="#{semestreController.semestres}">
                                 <p:panel>
                                     <div class="contseme">
                                         <div class="csem">
-                                            <h:commandButton style="font-size: 30pt" value="#{sem.denominacion}" action="#{seccionController.seleccionarSemestre(sem)}" />
+                                            <h:commandButton style="font-size: 30pt;width: 70px" value="#{sem.denominacion}" action="#{seccionController.seleccionarSemestre(sem)}" />
                                         </div>
                                     </div>                                
                                 </p:panel>
@@ -46,17 +50,17 @@
 
                         </div>
                         <div class="csecciones">
-                            <p:dataTable var="sec" value="#{seccionController.secciones}">
-                                <p:column headerText="">
+                            <p:dataTable class="tabla-reporte" rows="5" paginator="true" var="sec" value="#{seccionController.secciones}">
+                                <p:column headerText="Semestre">
                                     #{sec.semestre.denominacion}
                                 </p:column>
-                                <p:column headerText="">
+                                <p:column headerText="Seccion">
                                     #{sec.denominacion}
                                 </p:column>
                             </p:dataTable>                           
                         </div>
                     </div>
-                    <h:commandButton value="volver" action="#{seccionController.volverprogramas()}" />
+
                 </p:panel>    
             </div>
         </section>
@@ -64,7 +68,7 @@
     <style>
         .contsecc {  display: grid;
                      grid-template-columns: 1fr;
-                     grid-template-rows: 180px 200px 300px;
+                     grid-template-rows: 180px 200px 500px;
                      grid-auto-columns: 1fr;
                      gap: 0px 0px;
                      grid-auto-flow: row;
