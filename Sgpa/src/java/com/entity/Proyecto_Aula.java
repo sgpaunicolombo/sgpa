@@ -49,8 +49,7 @@ public class Proyecto_Aula implements Serializable {
     private String codigo;
     @ManyToOne
     private Seccion seccion;
-   
-    
+
     @OneToMany(mappedBy = "proyecto", fetch = FetchType.LAZY)
     private List<Item_Proyecto> itenes_Proyecto;
     @OneToMany(mappedBy = "proyecto", fetch = FetchType.LAZY)
@@ -85,8 +84,6 @@ public class Proyecto_Aula implements Serializable {
         this.tutorias = tutorias;
     }
 
-    
-
     public String infoProyectoAula() {
         String contenido = "";
 
@@ -106,11 +103,17 @@ public class Proyecto_Aula implements Serializable {
 
     public boolean estadoProyecto() {
         boolean estado = false;
-        if (this.estado.equals("Guardado") || this.estado.equals("Propuesta") || this.estado.equals("Aplazado")) {
-            estado = false;
+        try{
+        if (this != null) {
+            if (this.estado.equals("Guardado") || this.estado.equals("Propuesta") || this.estado.equals("Aplazado")) {
+                estado = false;
+            }
+            if (this.estado.equals("Produccion") || this.estado.equals("ParaSustentar") || this.estado.equals("Finalizado")) {
+                estado = true;
+            }
         }
-        if (this.estado.equals("Produccion") || this.estado.equals("ParaSustentar") || this.estado.equals("Finalizado")) {
-            estado = true;
+        }catch(java.lang.NullPointerException npe){
+            
         }
         return estado;
     }
@@ -126,7 +129,7 @@ public class Proyecto_Aula implements Serializable {
                 valido = false;
                 FacesUtil.addErrorMessage("No se le ha asignado el Programa academico al grupo");
             }
-            if (this.seccion.getSemestre().getId() <=0 ) {
+            if (this.seccion.getSemestre().getId() <= 0) {
                 valido = false;
                 FacesUtil.addErrorMessage("No se le ha asignado el Semestre al grupo");
             }
@@ -149,9 +152,10 @@ public class Proyecto_Aula implements Serializable {
         try {
             if (!validarInfo()) {
                 valido = false;
-            }if(this.getItenes_Proyecto().size()==0){
-                 valido = false;
-                 FacesUtil.addErrorMessage("El proyeto no tiene Items ");
+            }
+            if (this.getItenes_Proyecto().size() == 0) {
+                valido = false;
+                FacesUtil.addErrorMessage("El proyeto no tiene Items ");
             }
         } catch (java.lang.NullPointerException npe) {
 
@@ -168,7 +172,7 @@ public class Proyecto_Aula implements Serializable {
             }
             if (this.problematica.equals("")) {
                 valido = false;
-                
+
                 FacesUtil.addErrorMessage("El proyeto no tiene problema ");
             }
         } catch (java.lang.NullPointerException npe) {
@@ -355,8 +359,6 @@ public class Proyecto_Aula implements Serializable {
         this.codigo = codigo;
     }
 
- 
-
     /**
      * @return the profesorLider
      */
@@ -412,7 +414,5 @@ public class Proyecto_Aula implements Serializable {
     public void setSeccion(Seccion seccion) {
         this.seccion = seccion;
     }
-
-    
 
 }

@@ -61,12 +61,22 @@ public class EstudianteController implements Serializable {
     private boolean mpanelItem = false;
 
     public void consultarMatriculaEstudiante() {
-        matcont.consultarMatriculaXEstudianteEnPeriodo(estudiante, periodo);
+        try {
+            matcont.consultarMatriculaXEstudianteEnPeriodo(estudiante, periodo);
+        } catch (java.lang.NullPointerException npe) {
+            FacesUtil.addWarnMessage("Usuario, tipo de usuario o matricula inexistente");
+        }
+
     }
 
     public void consultarProyectoXMatricula() {
-        System.out.println(""+matcont.getMatricula());
-        proacon.obtenerProyectoAulaXMatricula(matcont.getMatricula());
+        try {
+            proacon.obtenerProyectoAulaXMatricula(matcont.getMatricula());
+        } catch (java.lang.NullPointerException npe) {
+            paginaActualE = "";
+            FacesUtil.addWarnMessage("Usuario, no tiene proyecto de aula asignado en el periodo");
+        }
+
     }
 
     public void agregarItem() {
@@ -100,11 +110,11 @@ public class EstudianteController implements Serializable {
         mpanelAItems = false;
     }
 
-    public void eliminarItem(Item_Proyecto ite){
+    public void eliminarItem(Item_Proyecto ite) {
         proacon.itemser.eliminar(ite);
         proacon.getProyecto().getItenes_Proyecto().remove(ite);
     }
-    
+
     /**
      * Creates a new instance of EstudianteController
      */
@@ -130,10 +140,10 @@ public class EstudianteController implements Serializable {
         proacon.guardarPA();
     }
 
-    public void publicarProyectoAula(){
+    public void publicarProyectoAula() {
         proacon.publicarPA();
     }
-    
+
     public void subirImagenProfesor() {
         try {
 //               File destFile= new File(event.getFile().getFileName());           
@@ -153,10 +163,19 @@ public class EstudianteController implements Serializable {
     }
 
     public void g_propuesta() {
-        paginaActualE = "/Estudiante/Gestor_Propuestas.xhtml";
+        try{
+        if (!proacon.getProyecto().getCodigo().trim().equals("")) {
+            paginaActualE = "/Estudiante/Gestor_Propuestas.xhtml";
+        }
+        }catch(java.lang.NullPointerException npe){
+            
+        }
     }
+
     public void g_proyecto() {
-        paginaActualE = "/Estudiante/Gestor_Proyecto_Aula.xhtml";
+        if (!proacon.getProyecto().getCodigo().trim().equals("")) {
+            paginaActualE = "/Estudiante/Gestor_Proyecto_Aula.xhtml";
+        }
     }
 
     public void obtenerEstudiantes() {

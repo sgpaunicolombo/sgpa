@@ -6,28 +6,30 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         
+        <SCRIPT LANGUAGE="JavaScript">history.forward()</SCRIPT>
+        
         <script src="https://kit.fontawesome.com/6f2a08f515.js" crossorigin="anonymous"></script>
         <h:outputStylesheet library="css" name="style.css"/>
-        
+
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"></link>
-        
+
 
         <title>Facelet Title</title>
     </h:head>
     <h:body>
         <h:form  enctype="multipart/form-data">
             <p:panel rendered="#{usuarioController.mpanelLogin}">
-                 <ui:include src="PlantillaInicial.xhtml"  />
+                <ui:include src="PlantillaInicial.xhtml"  />
             </p:panel>
-           
+
             <p:panel  rendered="#{!usuarioController.mpanelLogin}">
                 <ui:include src="#{usuarioController.paginaActual}"  />
-                
+
             </p:panel>          
-            
+
             <p:growl/>
         </h:form>
-         
+
     </h:body>
     <style>
         body .ui-panel .ui-panel-content{

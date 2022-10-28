@@ -11,7 +11,7 @@
         <div class="border contenedor top">
             <h1 class="tittle">Gestor MATRICULAS</h1>
             <span class="aviso">Matricula Estudiante</span>
-            <p:tabView>
+            <p:tabView activeIndex="#{matriculaController.activeIndex}">
                 <p:tab id="test" title="Estudiante">
                     <p:dataTable paginator="true" rows="10" class="tabla-reporte" style="font-size: 10pt" var="est" value="#{estudianteController.estudiantes}">
                         <p:column headerText="Tipo de Identificacion">
@@ -47,8 +47,7 @@
                                     <i class="fa fa-hand-pointer" style="color: #005CB9"></i>
                                     <h:commandButton value="+" class="icono" action="#{matriculaController.agregarEstudiante(est)}" />
                                 </div>
-                            </div>
-                            
+                            </div>                            
                         </p:column>
                     </p:dataTable>
                 </p:tab>

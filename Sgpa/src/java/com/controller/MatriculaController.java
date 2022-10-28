@@ -40,10 +40,14 @@ public class MatriculaController implements Serializable {
     EstudianteServices estser = new EstudianteServices();
     SeccionServices secser = new SeccionServices();
 
+    //colecciones
     private List<Matricula> matriculas = new LinkedList();
     private List<Seccion> secciones = new LinkedList();
     private List<Matricula> matriculasXSeccion = new LinkedList();
 
+    //variables de control
+    private int activeIndex = 0;
+    
     /**
      * Creates a new instance of MatriculaController
      */
@@ -51,15 +55,15 @@ public class MatriculaController implements Serializable {
 
     }
 
-    public void obtenerMatriculasXSeccion(Seccion s){
+    public void obtenerMatriculasXSeccion(Seccion s) {
         matriculasXSeccion = new LinkedList();
-        for(Matricula m:matriculas){
-            if(m.getSeccion().getId().equals(s.getId())){
+        for (Matricula m : matriculas) {
+            if (m.getSeccion().getId().equals(s.getId())) {
                 matriculasXSeccion.add(m);
             }
         }
     }
-    
+
     public void consultarEstudiantesMatriculadosXPeriodo(Periodo p) {
         matriculas = matser.obtenerMatriculasXperiodo(p);
     }
@@ -70,14 +74,17 @@ public class MatriculaController implements Serializable {
 
     public void agregarEstudiante(Estudiante e) {
         getMatricula().setEstudiante(e);
+        activeIndex = 1;
     }
 
     public void agregarPrograma(ProgramaAcademico pa) {
         setPrograma(pa);
+        activeIndex = 2;
     }
 
     public void agregarPeriodo(Periodo p) {
         setPeriodo(p);
+        activeIndex = 3;
     }
 
     public void seleccionarSemestre(Semestre s) {
@@ -89,15 +96,29 @@ public class MatriculaController implements Serializable {
         matricula.setSeccion(s);
     }
 
-    public void matricular() {
+    public void matricular() {        
+        Matricula mat=matser.obtenerMatriculaXPeriodo(periodo, matricula.getEstudiante());
         matricula.setEstado("Academica");
         matricula.setEstadoPA("Libre");
         matricula.setFecha(new Date());
-        if (matricula.validarMatricula()) {
-            matser.crear(matricula);
-            matricula.getEstudiante().generarCodigo(matricula);
-            matricula.setEstudiante(estser.modificar(matricula.getEstudiante()));
-            matricula = new Matricula();
+//        System.out.println(""+matricula.getId()+" "+matricula.getEstado());
+        try {
+//            System.out.println(matricula.getSeccion().getPrograma().getNombre()+" "+matricula.getId()+" "+matricula.getEstado()+" "+matricula.getEstudiante().toString());
+            if (mat.getId() > 0) {
+                FacesUtil.addErrorMessage("El estudiante ya esta matriculado en la seccion: " + matricula.getSeccion().getDenominacion());
+            } else {
+//                System.out.println(""+matricula.getId()+" "+matricula.getEstado()+" "+matricula.getEstudiante().toString());
+                if (matricula.validarMatricula()) {                    
+//                    matricula.setId(null);
+                    matser.modificar(matricula);
+                    matricula.getEstudiante().generarCodigo(matricula);
+                    matricula.setEstudiante(estser.modificar(matricula.getEstudiante()));
+                    matricula = new Matricula();
+                }
+            }
+            activeIndex = 0;
+        } catch (java.lang.NullPointerException npe) {
+
         }
     }
 
@@ -197,6 +218,20 @@ public class MatriculaController implements Serializable {
      */
     public void setMatriculasXSeccion(List<Matricula> matriculasXSeccion) {
         this.matriculasXSeccion = matriculasXSeccion;
+    }
+
+    /**
+     * @return the activeIndex
+     */
+    public int getActiveIndex() {
+        return activeIndex;
+    }
+
+    /**
+     * @param activeIndex the activeIndex to set
+     */
+    public void setActiveIndex(int activeIndex) {
+        this.activeIndex = activeIndex;
     }
 
 }
