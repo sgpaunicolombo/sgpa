@@ -42,6 +42,7 @@ public class Matricula implements Serializable {
     private List<Integrante> integrantes;
 
     public Matricula() {
+        this.setId(Long.parseLong("0"));
     }
 
     public Matricula(Long id, Estudiante estudiante, Date fecha, Seccion seccion, String estado, String estadoPA, List<Item_Proyecto> item_Proyectos, List<Integrante> integrantes) {
@@ -69,12 +70,7 @@ public class Matricula implements Serializable {
         if (this.fecha.equals("") || this.estado.equals("")) {
             FacesUtil.addErrorMessage("no se han suministrado los siguientes datos(fecha o estado)");
             valido = false;
-        }
-        
-//        if(Integer.parseInt(this.semestre)<1 || Integer.parseInt(this.semestre)>10){
-//            FacesUtil.addErrorMessage("el valor del semestre esta fuera de rango");
-//            valido = false;
-//        }
+        }        
         return valido;
     }
 
@@ -92,9 +88,13 @@ public class Matricula implements Serializable {
     
     public boolean habilitarProyecto(){
         boolean habilitado=true;
+        try{
         if(this.estado.equals("Financiera")){
             habilitado=false;
-        }        
+        }    
+         }catch(java.lang.NullPointerException npe){
+            
+        }
         return habilitado;
     } 
 

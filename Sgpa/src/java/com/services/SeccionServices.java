@@ -5,6 +5,8 @@
 package com.services;
 
 import com.dao.ImplDao;
+import com.entity.Estudiante;
+import com.entity.Matricula;
 import com.entity.Periodo;
 import com.entity.Profesor;
 import com.entity.ProgramaAcademico;
@@ -58,6 +60,8 @@ public class SeccionServices extends ImplDao<Seccion, Long> implements ISeccion,
          } 
          return secciones;
     }
+     
+     
      public List<Seccion> obtenerSeccionesXProfesor(Profesor p){
          List<Seccion> secciones=new LinkedList();
          try {             
@@ -75,5 +79,5 @@ public class SeccionServices extends ImplDao<Seccion, Long> implements ISeccion,
          } 
          return secciones;
     }
-    
+     
 }

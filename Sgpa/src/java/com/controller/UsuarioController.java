@@ -74,7 +74,7 @@ public class UsuarioController implements Serializable {
     }
     
     public void iniciar() {
-        try{
+       try{
         setUsuario(ususer.ingresar(getUsuario().getLogin(), getUsuario().getPassword()));
         if (!getUsuario().getIdentificacion().equals("")) {
             percon.establecerPeriodoActual();
@@ -120,9 +120,10 @@ public class UsuarioController implements Serializable {
             }
             mpanelLogin = false;
         }
-        }catch(java.lang.NullPointerException npe){
-            FacesUtil.addErrorMessage("Usuario, tipo de usuario o matricula inexistente");
-        }
+       }catch(java.lang.NullPointerException npe){
+           
+       }
+        
     }
 
     public void gregistroEstudiantes(){

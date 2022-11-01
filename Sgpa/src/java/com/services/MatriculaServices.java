@@ -34,7 +34,7 @@ public class MatriculaServices extends ImplDao<Matricula, Long> implements IMatr
         mat=(Matricula)qu.getSingleResult();
 //        System.out.println(" Usuario: "+usu.getTipo());
         }catch(javax.persistence.NoResultException ner){
-            
+            mat=new Matricula();
         }
         catch(Exception ex){
             ex.printStackTrace();
