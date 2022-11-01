@@ -31,16 +31,8 @@
                         </p:column>
                         <p:column filterBy="#{est.segundoApellido}" headerText="Segundo Apellido">
                             #{est.segundoApellido}
-                        </p:column>
-                        <p:column headerText="Telefono">
-                            #{est.telefono}
-                        </p:column>
-                        <p:column headerText="Email">
-                            #{est.email}
-                        </p:column>                   
-                        <p:column headerText="Estado">
-                            #{est.estado}
-                        </p:column>
+                        </p:column>                  
+                        
                         <p:column headerText="Seleccionar">
                             <div class="Acciones">
                                 <div class="accion">
@@ -109,7 +101,7 @@
                 </p:tab>
                 <p:tab id="tmat" title="Matricular">
 
-                    <p:panelGrid columns="3">
+                    
                         <div class="plider-seleccionado">
                         <span>Seleccionado:</span>
                         <span>#{matriculaController.matricula.estudiante.toString()}</span>
@@ -119,7 +111,7 @@
 
                     <p:dataView    var="sem"  value="#{semestreController.semestres}">
                         <p:dataViewGridItem>
-                            <div class="semestres" style="justify-content:center !important">
+                            <div class="semestres" style="justify-content:center !important; ">
                                 <p>Semestre <br></br>#{sem.denominacion}</p>
                                 <h:graphicImage style="max-width: 100%; height: auto" value="/resources/img/imgsemestres.jpg"/>
                                 <h:commandButton class="semestre" value="#{sem.denominacion}" action="#{matriculaController.seleccionarSemestre(sem)}" /> 
@@ -137,7 +129,7 @@
                          <div class="tanone">
                             <h:commandButton id="salsem" class="boton" value="Matricular" action="#{matriculaController.matricular()}" />
                         </div>
-                    </p:panelGrid>
+
 
                 </p:tab>
             </p:tabView>

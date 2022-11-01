@@ -9,7 +9,7 @@
     <h:body>
         <section class="contenido-contenedor">
             <div class="border contenedor top">
-                <h1 class="tittle">Gestor Secciones</h1>
+                <h1 class="tittle">Crear seciones</h1>
                 <p:panel rendered="#{!seccionController.mostPCsecc}">
                     <p:dataTable class="tabla-reporte" var="prog" value="#{programaController.programas}">
                         <p:column headerText="Codigo">
@@ -28,26 +28,46 @@
 
                 </p:panel>
                 <p:panel rendered="#{seccionController.mostPCsecc}">
-                    <h:commandButton value="volver" action="#{seccionController.volverprogramas()}" />
-                    <div class="contsecc">                        
-                        <div class="csem">
-                            <p:dataGrid class="contseme" var="sem" columns="6" value="#{semestreController.semestres}">
-                                <p:panel>
-                                    <div class="contseme">
-                                        <div class="csem">
-                                            <h:commandButton style="font-size: 30pt;width: 70px" value="#{sem.denominacion}" action="#{seccionController.seleccionarSemestre(sem)}" />
-                                        </div>
-                                    </div>                                
-                                </p:panel>
-                            </p:dataGrid>
+                    <div class="tanone" style="justify-content: flex-start; column-gap: 1rem" >
+                                <div class="btns" style="background-color: #005CB9">
+                                    <i class="uil uil-angle-left-b" ></i>
+                                    Volver
+                                    <h:commandButton class="btn" value="volver" action="#{seccionController.volverprogramas()}" />
+                                </div>
+                                
+                    </div>
+                                            
+                    <span class="aviso">Selecciona un Semestre</span>    
+                    <p:dataGrid    columns="5" var="sem"  value="#{semestreController.semestres}">
+                                <div class="card img-negra" >
+                        <figure >
+                            <h:graphicImage style="max-width: 100%; height: auto;  " value="/resources/img/imgsemestres.jpg"/> 
+                        </figure>
+                        <div class="contenido">
+                            <p>Semestre <br></br>#{sem.denominacion}</p>
+                            
                         </div>
-                        <div class="csec">
-                            <p:panelGrid columns="3">
-                                <h:outputText value="Seccion" />
-                                <p:spinner min="1" max="10" value="#{seccionController.seccion.denominacion}" />
-                                <h:commandButton value="agregar" action="#{seccionController.registrar()}" />
-                            </p:panelGrid>               
-                        </div>
+                        <h:commandButton   class="btn" value="Abrir" action="#{seccionController.seleccionarSemestre(sem)}" />
+                    </div>
+                   
+                            </p:dataGrid>>
+                            
+                       
+                        
+                        
+                                <span class="aviso">Selecciona el numero de seccioens</span>
+                                
+                            
+                                
+                                
+                                <div class="tanone" style="justify-content: flex-start; column-gap: 1rem">
+                                    Seccion<br></br>
+                                    <p:spinner min="1" max="10" value="#{seccionController.seccion.denominacion}" />
+                                    <h:commandButton class="boton" value="agregar" action="#{seccionController.registrar()}" />
+                                </div>
+                                
+                                          
+                        
                         <div class="csecciones">
                             <p:dataTable class="tabla-reporte" rows="5" paginator="true" var="sec" value="#{seccionController.secciones}">
                                 <p:column headerText="Semestre">
@@ -58,47 +78,14 @@
                                 </p:column>
                             </p:dataTable>                           
                         </div>
-                    </div>
+                    
 
                 </p:panel>    
             </div>
         </section>
     </h:body>
     <style>
-        .contsecc {  display: grid;
-                     grid-template-columns: 1fr;
-                     grid-template-rows: 180px 200px 500px;
-                     grid-auto-columns: 1fr;
-                     gap: 0px 0px;
-                     grid-auto-flow: row;
-                     justify-items: center;
-                     align-items: center;
-                     grid-template-areas:
-                         "csem"
-                         "csec"
-                         "csecciones";
-        }
-
-        .csem { grid-area: csem; }
-
-        .csec { grid-area: csec; }
-
-        .csecciones { grid-area: csecciones; }
-
-        .contseme {  display: grid;
-                     grid-template-columns: 80px;
-                     grid-template-rows: 70px;
-                     grid-auto-columns: 1fr;
-                     gap: 0px 0px;
-                     grid-auto-flow: row;
-                     justify-items: center;
-                     align-items: center;
-                     grid-template-areas:
-                         "csem";
-        }
-
-        .csem { grid-area: csem; }
-
+        
     </style>
 </html>
 

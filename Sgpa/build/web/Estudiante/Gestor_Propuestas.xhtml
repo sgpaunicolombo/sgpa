@@ -84,11 +84,7 @@
                                 
                             <p:inputTextarea placeholder="Escribe aquí..." class="iform" value="#{proyectoAulaController.item.contenido}" rows="4" cols="70" />
                             <div class="tanone" style="justify-content: flex-start; column-gap: 1rem" >
-                                <div class="btns" style="background-color: #005CB9">
-                                    <i class="uil uil-angle-left-b" ></i>
-                                    Volver
-                                    <h:commandButton class="btn" value="." action="#{estudianteController.volverAItenes()}" />
-                                </div>
+                                
                                 <div class="btns" style="background-color: #1CE63F">
                                     <i class="uil uil-check" ></i>
                                 Agregar
@@ -103,9 +99,6 @@
                             <p:dataTable class="tabla-reporte" var="items" value="#{proyectoAulaController.proyecto.itenes_Proyecto}">
                                 <p:column headerText="Tipo"> 
                                     #{items.tipo.nombre}
-                                </p:column>
-                                <p:column headerText="Contenido"> 
-                                    #{items.contenido}
                                 </p:column>
                                 <p:column headerText="Fecha Creacion"> 
                                     #{items.fecharegistro}

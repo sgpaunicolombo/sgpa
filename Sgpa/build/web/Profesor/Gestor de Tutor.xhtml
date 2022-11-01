@@ -16,7 +16,7 @@
                 <h:commandButton value="agregar" action="#{tipo_EntregableController.registrarTipo_Entregable()}" />
                 <br/><br/>
                 
-                <p:dataTable var="per" value="#{tipo_itemController.tipo_Entregables}" >
+                <p:dataTable class="tabla-reporte" var="per" value="#{tipo_itemController.tipo_Entregables}" >
                     <p:column headerText="Nombre">
                         #{per.nombre}
                       </p:column>

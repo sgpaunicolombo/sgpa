@@ -3,29 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Proyectos/SGPA/Sgpa/web/General/GestorPeriodos.xhtml</file>
-            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/MatriculaController.java</file>
-            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/ProfesorController.java</file>
-            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/ProyectoAulaController.java</file>
-            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/UsuarioController.java</file>
-            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/utilidades/MArchivos.java</file>
-            <file>file:/C:/Proyectos/SGPA/Sgpa/web/General/CargaMasiva.xhtml</file>
-            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/services/Proyecto_AulaServices.java</file>
-            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/services/IntegranteServices.java</file>
-            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Profesor/GestorGrupos.xhtml</file>
-            <file>file:/C:/Proyectos/SGPA/Sgpa/web/GUISuperUsuario.xhtml</file>
-            <file>file:/C:/Proyectos/SGPA/Sgpa/web/General/GestorAreas.xhtml</file>
-            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Coordinador/GestorSecciones.xhtml</file>
-            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Coordinador/GestorMatricula.xhtml</file>
-=======
-            <file>file:/C:/Users/sgpaAdmin1/Desktop/SGPA/Sgpa/src/java/com/controller/SeccionController.java</file>
-            <file>file:/C:/Users/sgpaAdmin1/Desktop/SGPA/Sgpa/src/java/com/controller/AsignaturaController.java</file>
-            <file>file:/C:/Users/sgpaAdmin1/Desktop/SGPA/Sgpa/web/Coordinador/GestorSecciones.xhtml</file>
-            <file>file:/C:/Users/sgpaAdmin1/Desktop/SGPA/Sgpa/web/Coordinador/GestorAsignatura.xhtml</file>
-            <file>file:/C:/Users/sgpaAdmin1/Desktop/SGPA/Sgpa/src/java/com/controller/CoordinadorController.java</file>
-            <file>file:/C:/Users/sgpaAdmin1/Desktop/SGPA/Sgpa/web/Coordinador/CrearAsignatura.xhtml</file>
->>>>>>> 54055c2a41541b65e9cd203996d217df789bc431
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/resources/js/DFView.js</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/General/GestorCoordinadores.xhtml</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/Profesor/GUIProfesor.xhtml</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/GUISuperUsuario.xhtml</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/src/java/com/controller/ProyectoAulaController.java</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/Profesor/PerfilProfesor.xhtml</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/src/java/com/entity/Profesor.java</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/Estudiante/InscripcionEstudiante.xhtml</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/index.xhtml</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/Estudiante/PerfilEstudiante.xhtml</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/Estudiante/Gestor_Propuestas.xhtml</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/Estudiante/GUIEstudiante.xhtml</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/resources/js/menu-vertical.js</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/resources/css/style.css</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/PlantillaInicial.xhtml</file>
+            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/src/conf/persistence.xml</file>
         </group>
     </open-files>
 </project-private>
