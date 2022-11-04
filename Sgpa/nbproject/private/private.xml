@@ -3,18 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/General/GestorCoordinadores.xhtml</file>
-            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/Profesor/GestorTipo_Entregable.xhtml</file>
-            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/Estudiante/InscripcionEstudiante.xhtml</file>
-            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/Coordinador/AsignarCoordinacionPA.xhtml</file>
-            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/Profesor/GUIProfesor.xhtml</file>
-            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/Profesor/GestorProfesorLider.xhtml</file>
-            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/META-INF/context.xml</file>
-            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/Coordinador/GestorSecciones.xhtml</file>
-            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/resources/js/menu-vertical.js</file>
-            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/resources/css/style.css</file>
-            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/web/PlantillaInicial.xhtml</file>
-            <file>file:/C:/Users/Lenovo/Documents/NetBeansProjects/Nueva%20carpeta/Sgpa/src/conf/persistence.xml</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/CoordinadorController.java</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/MatriculaController.java</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/EstudianteController.java</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/ProfesorController.java</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/services/EstudianteServices.java</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/UsuarioController.java</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Coordinador/CrearAsignatura.xhtml</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Coordinador/GestorAsignatura.xhtml</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Profesor/GestorGrupos.xhtml</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/src/conf/persistence.xml</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Coordinador/GUIMallaCurricular.xhtml</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Coordinador/GestorMatricula.xhtml</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Coordinador/GUICoordinador.xhtml</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Coordinador/GestorSecciones.xhtml</file>
         </group>
     </open-files>
 </project-private>
