@@ -6,12 +6,14 @@
 package com.controller;
 
 import com.entity.Estudiante;
+import com.entity.Integrante;
 import com.entity.Matricula;
 import com.entity.Periodo;
 import com.entity.ProgramaAcademico;
 import com.entity.Seccion;
 import com.entity.Semestre;
 import com.services.EstudianteServices;
+import com.services.IntegranteServices;
 import com.services.MatriculaServices;
 import com.services.SeccionServices;
 import java.io.Serializable;
@@ -39,6 +41,7 @@ public class MatriculaController implements Serializable {
     MatriculaServices matser = new MatriculaServices();
     EstudianteServices estser = new EstudianteServices();
     SeccionServices secser = new SeccionServices();
+    IntegranteServices intser=new IntegranteServices();
 
     //colecciones
     private List<Matricula> matriculas = new LinkedList();
@@ -47,6 +50,8 @@ public class MatriculaController implements Serializable {
 
     //variables de control
     private int activeIndex = 0;
+    private boolean existematricula=false;
+    
     
     /**
      * Creates a new instance of MatriculaController
@@ -64,6 +69,16 @@ public class MatriculaController implements Serializable {
         }
     }
 
+    public Matricula obtenerMatriculaEstudiante(Estudiante e) {
+        Matricula mat = new Matricula();
+        for (Matricula m : matriculas) {
+            if (m.getEstudiante().getId().equals(e.getId())) {
+                mat = m;
+            }
+        }
+        return mat;
+    }
+
     public void consultarEstudiantesMatriculadosXPeriodo(Periodo p) {
         matriculas = matser.obtenerMatriculasXperiodo(p);
     }
@@ -72,9 +87,27 @@ public class MatriculaController implements Serializable {
         matricula = matser.obtenerMatriculaXPeriodo(p, e);
     }
 
+    public void consultarMatriculasXPeriodoYPrograma(ProgramaAcademico pa, Periodo p) {
+        matriculas = matser.obtenerMatriculasXperiodoYPrograma(p, pa);
+    }
+
+    public void volverEstudiantes(){
+        existematricula=false;
+        activeIndex = 0;
+        matricula = new Matricula();
+    }
+    
     public void agregarEstudiante(Estudiante e) {
-        getMatricula().setEstudiante(e);
-        activeIndex = 1;
+        Matricula mat = obtenerMatriculaEstudiante(e);
+        if (mat.getId() > 0) {
+            existematricula=true;
+            matricula=mat;
+            activeIndex = 0;
+        } else {
+            existematricula=false;
+            getMatricula().setEstudiante(e);
+            activeIndex = 1;
+        }
     }
  
     public void agregarPrograma(ProgramaAcademico pa) {
@@ -95,30 +128,45 @@ public class MatriculaController implements Serializable {
     public void seleccionarSeccion(Seccion s) {
         matricula.setSeccion(s);
     }
+    
+    
+    public void eliminarMatricula(){
+        System.out.println(""+matricula.getId());
+        Integrante integrante=intser.obtenerIntegranteXMatricula(matricula);
+        System.out.println(""+integrante.getId());
+        if(integrante!=null){
+            intser.eliminar(integrante);
+        }
+        matser.eliminar(matricula);  
+        consultarEstudiantesMatriculadosXPeriodo(periodo);
+    }
 
-    public void matricular() {        
-        Matricula mat=matser.obtenerMatriculaXPeriodo(periodo, matricula.getEstudiante());
+    public void matricular() {
+       // Matricula mat = matser.obtenerMatriculaXPeriodo(periodo, matricula.getEstudiante());
         matricula.setEstado("Academica");
         matricula.setEstadoPA("Libre");
         matricula.setFecha(new Date());
 //        System.out.println(""+matricula.getId()+" "+matricula.getEstado());
         try {
 //            System.out.println(matricula.getSeccion().getPrograma().getNombre()+" "+matricula.getId()+" "+matricula.getEstado()+" "+matricula.getEstudiante().toString());
-            if (mat.getId() > 0) {
-                FacesUtil.addErrorMessage("El estudiante ya esta matriculado en la seccion: " + matricula.getSeccion().getDenominacion());
-            } else {
+//            if (mat.getId() > 0) {
+//                FacesUtil.addErrorMessage("El estudiante ya esta matriculado en la seccion: " + matricula.getSeccion().getDenominacion());
+//            } else {
 //                System.out.println(""+matricula.getId()+" "+matricula.getEstado()+" "+matricula.getEstudiante().toString());
-                if (matricula.validarMatricula()) {                    
+                if (matricula.validarMatricula()) {
 //                    matricula.setId(null);
                     matser.modificar(matricula);
+                    consultarEstudiantesMatriculadosXPeriodo(periodo);
                     matricula.getEstudiante().generarCodigo(matricula);
                     matricula.setEstudiante(estser.modificar(matricula.getEstudiante()));
                     matricula = new Matricula();
+                    activeIndex = 0;
+                    FacesUtil.addErrorMessage("Se creo una matricula para la seccion: " + matricula.getSeccion().getDenominacion());
                 }
-            }
-            activeIndex = 0;
-        } catch (java.lang.NullPointerException npe) {
+//            }
 
+        } catch (java.lang.NullPointerException npe) {
+//            FacesUtil.addErrorMessage("Falta informacion para registro de matricula");
         }
     }
 
@@ -232,6 +280,20 @@ public class MatriculaController implements Serializable {
      */
     public void setActiveIndex(int activeIndex) {
         this.activeIndex = activeIndex;
+    }
+
+    /**
+     * @return the existematricula
+     */
+    public boolean isExistematricula() {
+        return existematricula;
+    }
+
+    /**
+     * @param existematricula the existematricula to set
+     */
+    public void setExistematricula(boolean existematricula) {
+        this.existematricula = existematricula;
     }
 
 }

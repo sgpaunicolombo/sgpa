@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Dimas/Desktop/SGPA/Sgpa/src/java/com/controller/EstudianteController.java</file>
             <file>file:/C:/Users/Dimas/Desktop/SGPA/Sgpa/src/java/com/controller/CoordinadorController.java</file>
             <file>file:/C:/Users/Dimas/Desktop/SGPA/Sgpa/src/java/com/services/FaseServices.java</file>
@@ -17,6 +18,22 @@
             <file>file:/C:/Users/Dimas/Desktop/SGPA/Sgpa/web/Estudiante/Gestor_Proyecto_Aula.xhtml</file>
             <file>file:/C:/Users/Dimas/Desktop/SGPA/Sgpa/src/java/com/controller/Tipo_EntregableController.java</file>
             <file>file:/C:/Users/Dimas/Desktop/SGPA/Sgpa/web/Coordinador/GestorMatricula.xhtml</file>
+=======
+            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/CoordinadorController.java</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/MatriculaController.java</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/EstudianteController.java</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/ProfesorController.java</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/services/EstudianteServices.java</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/src/java/com/controller/UsuarioController.java</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Coordinador/CrearAsignatura.xhtml</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Coordinador/GestorAsignatura.xhtml</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Profesor/GestorGrupos.xhtml</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/src/conf/persistence.xml</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Coordinador/GUIMallaCurricular.xhtml</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Coordinador/GestorMatricula.xhtml</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Coordinador/GUICoordinador.xhtml</file>
+            <file>file:/C:/Proyectos/SGPA/Sgpa/web/Coordinador/GestorSecciones.xhtml</file>
+>>>>>>> 2b54f5567aa28348f9faa719db371ce7b6755b0c
         </group>
     </open-files>
 </project-private>

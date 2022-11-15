@@ -9,9 +9,14 @@
     </h:head>
 
     <section class="contenido-contenedor">
-        <div class="border contenedor top">
+        <div class=" contenedor top">
+            <p:card>
             <h1 class="tittle">Gestor Profesor Lider</h1>
+            
             <span class="aviso">Asigna Profesor Lider</span>
+            
+                
+            
             <p:tabView>
                 <p:tab id="test" title="Profesores">
                     
@@ -68,7 +73,7 @@
                     <div class="plider-seleccionado">
                         <span>Seleccionado:</span>
                         <span>#{liderPAController.liderPA.profesor.toString()}</span>
-                        <span>#{liderPAController.liderPA.seccion.programa.nombreCompleto}</span>
+                        <span>#{liderPAController.liderPA.seccion.programa.toString()}</span>
                     </div>
          
                     <p:dataTable class="tabla-reporte" var="per" value="#{periodoController.periodos}" >
@@ -95,50 +100,41 @@
                 </p:tab>
 
                 <p:tab id="tmat" title="Vincular">
-                    <p:panelGrid columns="3">
-                        <h:outputText value="#{liderPAController.liderPA.profesor.toString()}" />
-                        <h:outputText value="#{liderPAController.programa.nombreCompleto}" />
-                        <h:outputText value="#{liderPAController.periodo.anio}-#{liderPAController.periodo.numero}" />
+                        <div class="plider-seleccionado">
+                        <span>Seleccionado:</span>
+                        <span>#{liderPAController.liderPA.profesor.toString()}</span>
+                        <span>#{liderPAController.liderPA.seccion.programa.nombreCompleto}</span>
+                        <span>#{liderPAController.periodo.anio}-#{liderPAController.periodo.numero}</span>
+                    </div>
+                        
                         <p:dataGrid columns="4" var="sec"  value="#{liderPAController.secciones}">
+                            <div class="card img-negra">
+                        <figure >
+                            <h:graphicImage style="max-width: 100%; height: auto;  " value="/resources/img/imgsemestres.jpg"/> 
+                        </figure>
+                                <div class="contenido-grid " style="top: 100px;">
                             
-                            <p:panel>
-                                <div class="contsecc1">
-                                    <div class="csem">#{sec.semestre.denominacion}</div>
-                                    <div class="csec">#{sec.denominacion}</div>
-                                    <div class="cop"><h:commandButton value="+" action="#{liderPAController.agregarSeccion(sec)}" /></div>
-                                </div>
-                            </p:panel>                        
+                                    <span>Semestre <span style="font-weight: bold;font-size: 18px;">#{sec.semestre.denominacion}</span> </span>
+                                    <span >Seccion <span style="font-weight: bold">#{sec.denominacion}</span></span>
+                            
+                        </div>
+                        <h:commandButton   class="btn" value="Abrir" action="#{liderPAController.agregarSeccion(sec)}" />
+                    </div>
+     
                         </p:dataGrid>
-                        <h:commandButton id="salsem" value="Registrar" action="#{liderPAController.registrarLiderPA()}" />
-                    </p:panelGrid>
+                    <div class="tanone">
+                        <h:commandButton id="salsem" class="boton" value="Registrar" action="#{liderPAController.registrarLiderPA()}" />
+                    </div>
+                        
+                    
 
                 </p:tab>
             </p:tabView>
+                </p:card>
         </div>
     </section>
     <style>
-        .contsecc1 {  display: grid;
-                      grid-template-columns: 96px 80px;
-                      grid-template-rows: 50px 50px;
-                      grid-auto-columns: 1fr;
-                      gap: 0px 0px;
-                      grid-auto-flow: row;
-                      justify-items: center;
-                      align-items: center;
-                      grid-template-areas:
-                          "csem cop"
-                          "csec cop";
-        }
-
-        .csem { grid-area: csem; }
-
-        .csec { grid-area: csec; }
-
-        .cop { grid-area: cop; }
-
-
        
-    
     </style>
 </html>
 

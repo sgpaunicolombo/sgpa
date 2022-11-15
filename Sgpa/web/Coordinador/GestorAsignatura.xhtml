@@ -12,7 +12,7 @@
             <div class="border contenedor top">
                 <h1 class="tittle">Gestor Asignaturas</h1>
                 <p:panel rendered="#{!asignaturaController.mostPCsecc}">
-                    <p:dataTable var="prog" value="#{programaController.programas}">
+                    <p:dataTable class="tabla-reporte"  var="prog" value="#{programaController.programas}">
                         <p:column headerText="Codigo">
                             #{prog.codigo}
                         </p:column>
@@ -20,7 +20,12 @@
                             #{prog.nombreCompleto}
                         </p:column>
                         <p:column headerText="">
-                            <h:commandButton value="+" action="#{asignaturaController.obtenerseccionesPeriodo(prog)}" />
+                            <div class="Acciones">
+                                <div class="accion">
+                                    <i class="fa fa-hand-pointer" style="color: #005CB9"></i>
+                                    <h:commandButton class="icono" value="+" action="#{asignaturaController.obtenerseccionesPeriodo(pa)}" />
+                                </div>
+                                </div>
                         </p:column>
                     </p:dataTable>                     
 
@@ -38,8 +43,8 @@
                     -->
                     <p:panel rendered="#{asignaturaController.mostPCsecc}">
                         <p:tab title="Semestre">
-                        <p:dataTable class="tabla-reporte" style="font-size: 10pt" var="secc" value="#{seccionController.secciones}">
-                            <p:column headerText="Seccion">
+                        <p:dataTable class="tabla-reporte" style="font-size: 10pt; margin-bottom: 3rem" var="secc" value="#{seccionController.secciones}">
+                            <p:column headerText="Semestre">
                                 #{secc.semestre.denominacion}
                             </p:column>
                             <p:column headerText="Seccion">
@@ -76,7 +81,11 @@
                             </p:tab>
                         
                     
-                    <h:commandButton value="volver" action="#{asignaturaController.volverprogramas()}" />
+                    <div class="btns" style="background-color: #005CB9">
+                                    <i class="uil uil-angle-left-b" ></i>
+                                    Volver
+                                    <h:commandButton class="btn" value="volver" action="#{asignaturaController.volverprogramas()}" />
+                                </div>
                 </p:panel>    
             </div>
         </section>

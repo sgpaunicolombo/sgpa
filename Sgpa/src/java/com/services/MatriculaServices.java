@@ -74,9 +74,7 @@ public class MatriculaServices extends ImplDao<Matricula, Long> implements IMatr
              Query qu=em.createQuery(q)
                      .setParameter(1, p.getId())
                      .setParameter(2, pa.getId());
-             matriculas=qu.getResultList();
-             
-             
+             matriculas=qu.getResultList();  
              em.close();             
          }catch(Exception ex){
              ex.printStackTrace();

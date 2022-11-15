@@ -187,6 +187,11 @@ public class EstudianteController implements Serializable {
     public void obtenerEstudiantes() {
         estudiantes = estser.consultarTodo(Estudiante.class);
     }
+    
+     public void obtenerEstudiantesNoMatriculados() {
+        estudiantes = estser.consultarTodo(Estudiante.class);
+    }
+    
 
     public void obtenerEstudiante(Long id) {
         estudiante = estser.consultar(Estudiante.class, id);

@@ -121,10 +121,11 @@ public class UsuarioController implements Serializable {
                 }
                 mpanelLogin = false;
             }
-        } catch (java.lang.NullPointerException npe) {
-
-        }
-
+        
+       }catch(java.lang.NullPointerException npe){
+           FacesUtil.addErrorMessage("Usuario, tipo de usuario o matricula inexistente");
+       }
+        
     }
 
     public void gregistroEstudiantes() {

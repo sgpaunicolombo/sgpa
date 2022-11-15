@@ -7,6 +7,8 @@ package com.controller;
 
 import com.entity.Area;
 import com.entity.Coordinador;
+import com.entity.Periodo;
+import com.entity.ProgramaAcademico;
 import com.entity.Seccion;
 import com.services.AreaServices;
 import com.services.CoordinadorServices;
@@ -42,7 +44,9 @@ public class CoordinadorController implements Serializable{
     //Controllers
     @ManagedProperty("#{asignaturaController}")
     private AsignaturaController asigcon =new AsignaturaController();
-    
+    @ManagedProperty("#{matriculaController}")
+    private MatriculaController matcont = new MatriculaController();
+
    //variables de control
     private String paginaActualC = "";
     
@@ -55,9 +59,15 @@ public class CoordinadorController implements Serializable{
       public void gprofesores(){
         paginaActualC="/Profesor/GestorProfesores.xhtml";
     }
+      
+      
       public void gmatriculas(){
+        matcont.setExistematricula(false);
         paginaActualC="/Coordinador/GestorMatricula.xhtml";
     }
+      
+      
+      
     public void gareas(){
         paginaActualC ="/General/GestorAreas.xhtml";
     }
@@ -110,6 +120,10 @@ public class CoordinadorController implements Serializable{
         coordinador=coordser.consultar(Coordinador.class, id);
     }
      
+    public void consultarMatriculasXPeriodo(Periodo p) {
+        matcont.consultarEstudiantesMatriculadosXPeriodo(p);
+    }
+    
      
     /**
      * @return the coordinadores
@@ -186,8 +200,23 @@ public class CoordinadorController implements Serializable{
     }
 
     /**
+<<<<<<< HEAD
      * @return the secciones
      */
   
+=======
+     * @return the matcont
+     */
+    public MatriculaController getMatcont() {
+        return matcont;
+    }
+
+    /**
+     * @param matcont the matcont to set
+     */
+    public void setMatcont(MatriculaController matcont) {
+        this.matcont = matcont;
+    }
+>>>>>>> 2b54f5567aa28348f9faa719db371ce7b6755b0c
     
 }
