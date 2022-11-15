@@ -14,4 +14,5 @@ import java.io.Serializable;
  */
 public class Tipo_EntregableServices extends ImplDao<Tipo_Entregable, Long> implements ITipo_Entregable,Serializable{
    
+    
 }

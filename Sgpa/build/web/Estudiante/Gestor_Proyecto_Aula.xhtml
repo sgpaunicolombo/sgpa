@@ -117,10 +117,46 @@
                         
                 </p:tab>
                     
-                  <p:tab title="Gestor avances">
-            
+                  <p:tab title="Gestor avances">                      
+                      <p:panel >
+                           <p:dataTable class="tabla-reporte" var="fas" value="#{faseController.fases}">
+                                <p:column headerText="Tipo"> 
+                                    #{fas.periodo.anio}-#{fas.periodo.numero}
+                                </p:column>
+                                <p:column headerText="Contenido"> 
+                                    #{fas.programa.nombre}
+                                </p:column>                              
+                                <p:column headerText="Contenido"> 
+                                    #{fas.numero}
+                                </p:column>
+                               
+                                <p:column headerText="FechaInicial"> 
+                                    #{fas.fechaInicial}
+                                </p:column>
+                               
+                                <p:column headerText="FechaFinal"> 
+                                    #{fas.fechaFinal}
+                                </p:column>
+                               <p:column headerText="Seleccionar">
+                            <div class="Acciones">
+                                <div class="accion">
+                                    <i class="fa fa-hand-pointer" style="color: #005CB9"></i>
+                                    <h:commandButton value="+" class="icono" action="#{liderPAController.agregarPeriodo(per)}" />
+                                </div>
+                            </div>
+                                   
+                            
+                        </p:column>
+                                
+                            </p:dataTable>
+                        </p:panel>
+            <div class="input-form-410">
+                         Descripcion
+                         <p:inputTextarea  class="iform" value="#{tipo_EntregableController.tipo_entregable.descripcion}"/>
+                     </div>
                
                  </p:tab>
+                    
                     
                     
                 </p:tabView>

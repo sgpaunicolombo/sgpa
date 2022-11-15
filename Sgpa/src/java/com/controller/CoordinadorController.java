@@ -34,7 +34,7 @@ public class CoordinadorController implements Serializable{
     
     //Seccion (para manejar el panel)
     private Seccion seccion = new Seccion();
-    
+ 
    //servicios
     CoordinadorServices coordser=new CoordinadorServices();
     AreaServices areaser = new AreaServices();
@@ -83,6 +83,8 @@ public class CoordinadorController implements Serializable{
         areaser.eliminar(area);
         consultarAreas();
     }
+    
+    
 
     public void registrar() {
         if (coordinador.validarUsuario()) {
@@ -182,5 +184,10 @@ public class CoordinadorController implements Serializable{
     public void setSeccion(Seccion seccion) {
         this.seccion = seccion;
     }
+
+    /**
+     * @return the secciones
+     */
+  
     
 }

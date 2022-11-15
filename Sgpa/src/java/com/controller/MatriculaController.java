@@ -76,7 +76,7 @@ public class MatriculaController implements Serializable {
         getMatricula().setEstudiante(e);
         activeIndex = 1;
     }
-
+ 
     public void agregarPrograma(ProgramaAcademico pa) {
         setPrograma(pa);
         activeIndex = 2;

@@ -35,7 +35,6 @@ public class UsuarioController implements Serializable {
 
     //Objetos de Negocio
     private Usuario usuario = new Usuario();
-    
 
     //Colecciones
     private List<Usuario> usuarios = new LinkedList();
@@ -46,108 +45,110 @@ public class UsuarioController implements Serializable {
     //Variables de control
     private boolean mpanelLogin = true;
     private String paginaActual = "";
-    private String paginaSU="";
+    private String paginaSU = "";
     private UploadedFile archivoDatos;
-    private MArchivos marchivos=new MArchivos(); 
-    
+    private MArchivos marchivos = new MArchivos();
 
     //controladores asociados
     @ManagedProperty("#{coordinadorController}")
-    private CoordinadorController coorcon=new CoordinadorController();
+    private CoordinadorController coorcon = new CoordinadorController();
     @ManagedProperty("#{programaController}")
-    private ProgramaController procon=new ProgramaController();
+    private ProgramaController procon = new ProgramaController();
     @ManagedProperty("#{periodoController}")
-    private PeriodoController percon=new PeriodoController();
+    private PeriodoController percon = new PeriodoController();
     @ManagedProperty("#{estudianteController}")
-    private EstudianteController estcon=new EstudianteController();
+    private EstudianteController estcon = new EstudianteController();
     @ManagedProperty("#{profesorController}")
-    private ProfesorController profcon=new ProfesorController();
+    private ProfesorController profcon = new ProfesorController();
     @ManagedProperty("#{semestreController}")
-    private SemestreController semcon=new SemestreController();
+    private SemestreController semcon = new SemestreController();
     @ManagedProperty("#{seccionController}")
-    private SeccionController seccon=new SeccionController();
-    
+    private SeccionController seccon = new SeccionController();
+
     /**
      * Creates a new instance of UsuarioController
      */
     public UsuarioController() {
     }
-    
+
     public void iniciar() {
-       try{
-        setUsuario(ususer.ingresar(getUsuario().getLogin(), getUsuario().getPassword()));
-        if (!getUsuario().getIdentificacion().equals("")) {
-            percon.establecerPeriodoActual();
-            estcon.getTipicon().consultarTipos_Items();
-            if (getUsuario().getTipo().equals("Coordinador")) {
-                coorcon.obtenerCoordinador(getUsuario().getId());
-                profcon.obtenerProfesores();
-                estcon.obtenerEstudiantes();
-                percon.obtenerPeriodos();
-                procon.consultarProgramasXCoordinador(coorcon.getCoordinador());
-                coorcon.consultarAreas();
-                seccon.setPeriodo(percon.getPeriodoActual());                
-                semcon.obtenerSemestres();
-                paginaActual = "/Coordinador/GUICoordinador.xhtml";
+        try {
+            setUsuario(ususer.ingresar(getUsuario().getLogin(), getUsuario().getPassword()));
+            if (!getUsuario().getIdentificacion().equals("")) {
+                percon.establecerPeriodoActual();
+                estcon.getTipicon().consultarTipos_Items();
+                if (getUsuario().getTipo().equals("Coordinador")) {
+                    coorcon.obtenerCoordinador(getUsuario().getId());
+                    profcon.obtenerProfesores();
+                    estcon.obtenerEstudiantes();
+                    percon.obtenerPeriodos();
+                    procon.consultarProgramasXCoordinador(coorcon.getCoordinador());
+                    coorcon.consultarAreas();
+                    seccon.setPeriodo(percon.getPeriodoActual());
+                    semcon.obtenerSemestres();
+                    paginaActual = "/Coordinador/GUICoordinador.xhtml";
 
-            }
-            if (getUsuario().getTipo().equals("Estudiante")) {
-                estcon.obtenerEstudiante(getUsuario().getId());
-                estcon.setPeriodo(percon.getPeriodoActual());
-                estcon.consultarMatriculaEstudiante();   
-                estcon.consultarProyectoXMatricula();
-                paginaActual = "/Estudiante/GUIEstudiante.xhtml";
+                }
+                if (getUsuario().getTipo().equals("Estudiante")) {
+                    estcon.obtenerEstudiante(getUsuario().getId());
+                    estcon.setPeriodo(percon.getPeriodoActual());
+                    estcon.consultarMatriculaEstudiante();
+                    estcon.consultarProyectoXMatricula();
+                    
+                    estcon.consultarFases();
+                    
+                    paginaActual = "/Estudiante/GUIEstudiante.xhtml";
 
-            }
-            if (getUsuario().getTipo().equals("Profesor")) {
-                profcon.obtenerPrtofesor(getUsuario().getId());
-                profcon.setPeriodo(percon.getPeriodoActual());
-                procon.obtenerProgramaCoordinadorPA(profcon.getProfesor());
-                profcon.consultarMatriculasXPeriodo();
-                profcon.consultarProfesores();
-                procon.consultarProgramas();
-                percon.obtenerPeriodos();
-                profcon.esLiderPA();
-                paginaActual = "/Profesor/GUIProfesor.xhtml";
+                }
+                if (getUsuario().getTipo().equals("Profesor")) {
+                    profcon.obtenerPrtofesor(getUsuario().getId());
+                    profcon.setPeriodo(percon.getPeriodoActual());
+                    procon.obtenerProgramaCoordinadorPA(profcon.getProfesor());
+                    profcon.consultarMatriculasXPeriodo();
+                    profcon.consultarProfesores();
+                    procon.consultarProgramas();
+                    percon.obtenerPeriodos();
+                    profcon.esLiderPA();
+                    paginaActual = "/Profesor/GUIProfesor.xhtml";
 
-            }
-            if (getUsuario().getTipo().equals("Super")) {
-                coorcon.consultarCoordinadores();
-                procon.consultarProgramas();
-                percon.obtenerPeriodos();
-                paginaActual = "/GUISuperUsuario.xhtml";
+                }
+                if (getUsuario().getTipo().equals("Super")) {
+                    coorcon.consultarCoordinadores();
+                    procon.consultarProgramas();
+                    percon.obtenerPeriodos();
+                    paginaActual = "/GUISuperUsuario.xhtml";
 
+                }
+                mpanelLogin = false;
             }
-            mpanelLogin = false;
+        } catch (java.lang.NullPointerException npe) {
+
         }
-       }catch(java.lang.NullPointerException npe){
-           
-       }
-        
+
     }
 
-    public void gregistroEstudiantes(){
-         estcon.setMpanelInscripcion(true);
-         paginaActual = "/Estudiante/InscripcionEstudiante.xhtml";
-         mpanelLogin = false;
+    public void gregistroEstudiantes() {
+        estcon.setMpanelInscripcion(true);
+        paginaActual = "/Estudiante/InscripcionEstudiante.xhtml";
+        mpanelLogin = false;
     }
-    
-    
-    
-    
-    public void gcoordinadores(){
-        paginaSU="/General/GestorCoordinadores.xhtml";
+
+    public void gcoordinadores() {
+        paginaSU = "/General/GestorCoordinadores.xhtml";
     }
-      public void gprogramas(){
-        paginaSU="/General/GestorProgramas.xhtml";
+
+    public void gprogramas() {
+        paginaSU = "/General/GestorProgramas.xhtml";
     }
-       public void gperiodos(){
-        paginaSU="/General/GestorPeriodos.xhtml";
+
+    public void gperiodos() {
+        paginaSU = "/General/GestorPeriodos.xhtml";
     }
-          public void gcargamasiva(){
-        paginaSU="/General/CargaMasiva.xhtml";
+
+    public void gcargamasiva() {
+        paginaSU = "/General/CargaMasiva.xhtml";
     }
-       
+
     public void salir() {
         paginaActual = "";
         mpanelLogin = true;
@@ -160,26 +161,24 @@ public class UsuarioController implements Serializable {
         percon.setPeriodo(new Periodo());
         usuario = new Usuario();
     }
-    
-     public void subirArchivoPlano() {
+
+    public void subirArchivoPlano() {
         try {
-               System.out.println("  "+archivoDatos.getFileName());
-               ServletContext servletContext = (ServletContext) 
-               FacesContext.getCurrentInstance().getExternalContext().getContext();
-               String path = servletContext.getRealPath("/imagenInicial.jpg").replace("imagenInicial.jpg", "Imagenes\\Archivos\\");
-               System.out.println(path);
-               ImageUtils.copyFile("datos.txt", archivoDatos.getInputStream(),path);               
-               marchivos.cargarArhivoEstudiante(path+"datos.txt");
+            System.out.println("  " + archivoDatos.getFileName());
+            ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+            String path = servletContext.getRealPath("/imagenInicial.jpg").replace("imagenInicial.jpg", "Imagenes\\Archivos\\");
+            System.out.println(path);
+            ImageUtils.copyFile("datos.txt", archivoDatos.getInputStream(), path);
+            marchivos.cargarArhivoEstudiante(path + "datos.txt");
         } catch (IOException ex) {
-           ex.printStackTrace();
-        }	
+            ex.printStackTrace();
+        }
     }
-    
-    public void almacenamientoMasivo(){
+
+    public void almacenamientoMasivo() {
         marchivos.almacenamiento();
     }
-    
-    
+
     /**
      * @return the usuario
      */
@@ -375,6 +374,5 @@ public class UsuarioController implements Serializable {
     public void setMarchivos(MArchivos marchivos) {
         this.marchivos = marchivos;
     }
-
 
 }

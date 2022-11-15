@@ -46,6 +46,8 @@ public class EstudianteController implements Serializable {
     private ProyectoAulaController proacon = new ProyectoAulaController();
     @ManagedProperty("#{tipo_itemController}")
     private Tipo_itemController tipicon = new Tipo_itemController();
+    @ManagedProperty("#{faseController}")
+    private FaseController fascon = new FaseController();
 
     //Servicios
     EstudianteServices estser = new EstudianteServices();
@@ -68,11 +70,15 @@ public class EstudianteController implements Serializable {
         }
 
     }
+    public void consultarFases(){
+        
+        getFascon().obtenerFases(matcont.getMatricula().getSeccion().getPrograma());
+    }
 
     public void consultarProyectoXMatricula() {
         try {
             proacon.obtenerProyectoAulaXMatricula(matcont.getMatricula());
-        } catch (java.lang.NullPointerException npe) {
+             } catch (java.lang.NullPointerException npe) {
             paginaActualE = "";
             FacesUtil.addWarnMessage("Usuario, no tiene proyecto de aula asignado en el periodo");
         }
@@ -338,6 +344,20 @@ public class EstudianteController implements Serializable {
      */
     public void setTipicon(Tipo_itemController tipicon) {
         this.tipicon = tipicon;
+    }
+
+    /**
+     * @return the fascon
+     */
+    public FaseController getFascon() {
+        return fascon;
+    }
+
+    /**
+     * @param fascon the fascon to set
+     */
+    public void setFascon(FaseController fascon) {
+        this.fascon = fascon;
     }
 
 }

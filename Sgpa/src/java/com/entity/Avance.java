@@ -164,7 +164,7 @@ public class Avance implements Serializable {
         this.numero = numero;
     }
 
-    /**
+    /** 
      * @return the fechaEntrega
      */
     public Date getFechaEntrega() {
