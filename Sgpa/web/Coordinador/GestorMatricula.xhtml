@@ -78,15 +78,7 @@
                     </p:dataTable>
 
 
-                            <p:column headerText="Seleccionar">
-                                <div class="Acciones">
-                                    <div class="accion">
-                                        <i class="fa fa-hand-pointer" style="color: #005CB9"></i>
-                                        <h:commandButton value="+" class="icono" action="#{matriculaController.agregarEstudiante(est)}" />
-                                    </div>
-                                </div>                            
-                            </p:column>
-                        </p:dataTable>
+                           
                     </p:tab>
                     <p:tab id="tpro" title="Programa">
                         <div class="plider-seleccionado">
@@ -190,7 +182,7 @@
                         </div>
                     </p:tab>
                 </p:tabView>
-            </p:panel>
+            
             <p:panel rendered="#{matriculaController.existematricula}">                
                 <ui:include src="GUIMatricula.xhtml" />
             </p:panel>
