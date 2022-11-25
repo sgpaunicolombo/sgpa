@@ -8,11 +8,13 @@ package com.entity;
 import com.controller.FacesUtil;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 /**
@@ -38,6 +40,8 @@ public class Avance implements Serializable {
     private String estado;
     //Date fechaUltimaModificacion;
     private String descripcion;
+    @OneToMany(mappedBy = "avance")
+    private List<Entregable> entregables;
 
     public Avance() {
     }

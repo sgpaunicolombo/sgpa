@@ -8,6 +8,7 @@ package com.controller;
 import com.entity.Fase;
 import com.entity.ProgramaAcademico;
 import com.services.FaseServices;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -22,7 +23,7 @@ import javax.faces.bean.SessionScoped;
 
 
 
-public class FaseController {
+public class FaseController implements Serializable{
 
    private List<Fase> fases = new LinkedList();
      
@@ -37,6 +38,9 @@ public class FaseController {
     public FaseController() {
     }
 
+    
+    
+    
     /**
      * @return the fases
      */

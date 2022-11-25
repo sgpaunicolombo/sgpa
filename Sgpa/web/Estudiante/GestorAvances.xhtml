@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <p:tabView activeIndex="#{avanceController.indexTab}">
+            <p:tab title="Fases">
+                <p:panel >
+                    <p:dataTable class="tabla-reporte" var="fas" value="#{faseController.fases}">
+                        <p:column headerText="Periodo"> 
+                            #{fas.periodo.anio}-#{fas.periodo.numero}
+                        </p:column>
+                        <p:column headerText="Programa"> 
+                            #{fas.programa.nombre}
+                        </p:column>                              
+                        <p:column headerText="Fase"> 
+                            #{fas.numero}
+                        </p:column>
+
+                        <p:column headerText="FechaInicial"> 
+                            #{fas.fechaInicial}
+                        </p:column>
+
+                        <p:column headerText="FechaFinal"> 
+                            #{fas.fechaFinal}
+                        </p:column>
+                        <p:column headerText="Seleccionar">
+                            <div class="Acciones">
+                                <div class="accion">
+                                    <i class="fa fa-hand-pointer" style="color: #005CB9"></i>
+                                    <h:commandButton value="+" class="icono" action="#{avanceController.agregarFase(fas)}" />
+                                </div>
+                            </div>
+
+
+                        </p:column>
+
+                    </p:dataTable>
+                </p:panel>
+
+            </p:tab>
+            <p:tab title="Avance" >
+                <div class="plider-seleccionado" style="column-gap: 3rem">
+                    <span>Seleccionado:</span>
+                    <span > Periodo : #{avanceController.avance.fase.periodo.anio}-#{avanceController.avance.fase.periodo.numero} </span>
+                    <span> Fase : #{avanceController.avance.fase.numero}</span>
+                    <span> Fecha Inicial : #{avanceController.avance.fase.fechaInicial}</span>
+                    <span  > Fecha final : #{avanceController.avance.fase.fechaFinal}</span>
+                </div>
+
+                <p:panel rendered="#{!avanceController.mostPEntregable}">
+                    <div class="form-dere">
+                        <div class="input-form-410">
+                            Descripcion
+                            <p:inputTextarea value="#{avanceController.avance.descripcion}" class="iform" />
+                        </div>
+                        <h:commandButton value="+entregabe" action="#{avanceController.irEntregable()}" /><br></br>
+                        Entregables del Avance:
+                        <p:dataTable  class="tabla-reporte" var="ent" value="#{avanceController.entregables}" >
+                            <p:column headerText="Descripcion">
+                                #{ent.descripcion}
+                            </p:column>
+                            <p:column headerText="Tipo">
+                                #{ent.tipo.nombre}
+                            </p:column>
+                            <p:column headerText="Fecha">
+                                #{ent.fechaEntrega}
+                            </p:column>
+                        </p:dataTable>     
+                    </div> 
+                    <h:commandButton  action="#{avanceController.almacenarAvance()}" value="almacenar" /> 
+                    
+                </p:panel>
+                <p:panel rendered="#{avanceController.mostPEntregable}">
+                    <h:commandButton value="Avance" action="#{avanceController.volverAvance()}" />
+                    <h:panelGrid columns="1">
+                        <p:panel>
+                            <p:dataTable class="tabla-reporte" var="tpe" value="#{tipo_EntregableController.tipos_Entregable}" >
+                                <p:column headerText="Nombre">
+                                    #{tpe.nombre}
+                                </p:column>
+                                <p:column headerText="Descripcion">
+                                    #{tpe.descripcion}
+                                </p:column>
+                                <p:column headerText="Seleccionar Tipo Entregable">
+                                    <div class="Acciones">
+                                        <div class="accion">
+                                            <i class="fa fa-hand-pointer" style="color: #005CB9"></i>
+                                            <h:commandButton value="se" class="icono" action="#{entregableController.seleccionarTipoE(tpe)}"  />
+                                        </div>
+                                    </div>
+                                </p:column>
+                            </p:dataTable>  
+                        </p:panel>
+                        <p:panel>
+                            <h:outputText value="#{entregableController.entregable.tipo.nombre}" />
+                        </p:panel>
+                        <p:panel >
+                            <div class="contsoporte">
+                                <div class="cdes">
+                                    <div class="input-form-410">
+                                        Descripcion
+                                        <p:inputTextarea value="#{entregableController.entregable.descripcion}" class="iform" />
+                                    </div>
+                                </div>
+                                <div class="cimg">
+
+                                </div>
+                                <div class="ccho">
+                                    <div class="perfil-buttons">
+                                        <p:fileUpload  value="#{entregableController.ientregable}"  mode="simple" skinSimple="true"/>
+                                    </div>
+                                </div>
+                                <div class="ccarg">
+                                    <div class="btn-delete" style="background-color: #005CB9"> 
+                                        <i class="uil uil-image-times"></i>
+                                        Agregar
+                                        <h:commandButton class="btn" action="#{avanceController.agregarEntregable()}" value="cargar" /> 
+                                    </div>
+                                </div>
+                            </div>  
+                        </p:panel>
+                    </h:panelGrid>                                    
+                </p:panel>
+            </p:tab>
+        </p:tabView>
+    </h:body>
+</html>
+

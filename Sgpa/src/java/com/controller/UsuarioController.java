@@ -94,6 +94,7 @@ public class UsuarioController implements Serializable {
                     estcon.setPeriodo(percon.getPeriodoActual());
                     estcon.consultarMatriculaEstudiante();
                     estcon.consultarProyectoXMatricula();
+                    estcon.consultarTipo_Entregable();
                     
                     estcon.consultarFases();
                     

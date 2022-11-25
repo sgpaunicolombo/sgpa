@@ -6,6 +6,7 @@
 package com.entity;
 
 import com.controller.FacesUtil;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 
 /**
  *
@@ -31,6 +33,10 @@ public class Entregable implements Serializable {
     private Tipo_Entregable tipo;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaEntrega;
+    @ManyToOne
+    private Avance avance;
+    @Transient
+    private InputStream dirArchivo;
 
     public Entregable() {
     }
@@ -44,19 +50,19 @@ public class Entregable implements Serializable {
 
     public boolean validarEntregable() {
         boolean valido = true;
-        
-        if (this.getTipo().getDescripcion().equals("")){
+
+        if (this.getTipo().getDescripcion().equals("")) {
             FacesUtil.addErrorMessage("Estos campos son requeridos");
             valido = false;
         }
-        
+
         if (this.descripcion.equals("") || this.fechaEntrega.equals("")) {
             FacesUtil.addErrorMessage("Estos campos son requeridos");
             valido = false;
         }
         return valido;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -145,5 +151,35 @@ public class Entregable implements Serializable {
     public void setFechaEntrega(Date fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
     }
+
+    /**
+     * @return the avance
+     */
+    public Avance getAvance() {
+        return avance;
+    }
+
+    /**
+     * @param avance the avance to set
+     */
+    public void setAvance(Avance avance) {
+        this.avance = avance;
+    }
+
+    /**
+     * @return the dirArchivo
+     */
+    public InputStream getDirArchivo() {
+        return dirArchivo;
+    }
+
+    /**
+     * @param dirArchivo the dirArchivo to set
+     */
+    public void setDirArchivo(InputStream dirArchivo) {
+        this.dirArchivo = dirArchivo;
+    }
+
     
+
 }

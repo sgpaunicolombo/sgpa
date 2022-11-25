@@ -200,11 +200,10 @@ public class CoordinadorController implements Serializable{
     }
 
     /**
-<<<<<<< HEAD
      * @return the secciones
      */
-  
-=======
+  /*
+
      * @return the matcont
      */
     public MatriculaController getMatcont() {
@@ -217,6 +216,6 @@ public class CoordinadorController implements Serializable{
     public void setMatcont(MatriculaController matcont) {
         this.matcont = matcont;
     }
->>>>>>> 2b54f5567aa28348f9faa719db371ce7b6755b0c
+
     
 }

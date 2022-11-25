@@ -48,6 +48,10 @@ public class EstudianteController implements Serializable {
     private Tipo_itemController tipicon = new Tipo_itemController();
     @ManagedProperty("#{faseController}")
     private FaseController fascon = new FaseController();
+    @ManagedProperty("#{tipo_EntregableController}")
+    private Tipo_EntregableController tipcon= new Tipo_EntregableController();
+    @ManagedProperty("#{avanceController}")
+    private AvanceController avancon= new AvanceController();
 
     //Servicios
     EstudianteServices estser = new EstudianteServices();
@@ -70,6 +74,12 @@ public class EstudianteController implements Serializable {
         }
 
     }
+    
+    public void consultarTipo_Entregable(){
+        getTipcon().consultarTipos_Entregable();
+    }
+    
+    
     public void consultarFases(){
         
         getFascon().obtenerFases(matcont.getMatricula().getSeccion().getPrograma());
@@ -180,6 +190,8 @@ public class EstudianteController implements Serializable {
 
     public void g_proyecto() {
         if (!proacon.getProyecto().getCodigo().trim().equals("")) {
+            avancon.setProyecto(proacon.getProyecto());
+           // avancon.setIntegrante();
             paginaActualE = "/Estudiante/Gestor_Proyecto_Aula.xhtml";
         }
     }
@@ -364,5 +376,37 @@ public class EstudianteController implements Serializable {
     public void setFascon(FaseController fascon) {
         this.fascon = fascon;
     }
+
+    /**
+     * @return the tipcon
+     */
+    public Tipo_EntregableController getTipcon() {
+        return tipcon;
+    }
+
+    /**
+     * @param tipcon the tipcon to set
+     */
+    public void setTipcon(Tipo_EntregableController tipcon) {
+        this.tipcon = tipcon;
+    }
+
+    /**
+     * @return the avancon
+     */
+    public AvanceController getAvancon() {
+        return avancon;
+    }
+
+    /**
+     * @param avancon the avancon to set
+     */
+    public void setAvancon(AvanceController avancon) {
+        this.avancon = avancon;
+    }
+
+    
+
+   
 
 }

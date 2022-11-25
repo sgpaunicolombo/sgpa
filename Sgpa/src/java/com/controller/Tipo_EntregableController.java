@@ -12,6 +12,8 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 
 /**
  *
@@ -25,7 +27,7 @@ public class Tipo_EntregableController implements Serializable{
 
     private Tipo_EntregableServices tipenser = new Tipo_EntregableServices();
 
-    private List<Tipo_Entregable> tipo_Entregables = new LinkedList();
+    private List<Tipo_Entregable> tipos_Entregable = new LinkedList();
 
     /**
      * Creates a new instance of PeriodoController
@@ -38,24 +40,23 @@ public class Tipo_EntregableController implements Serializable{
         if(tipo_entregable.validar()){
          tipo_entregable=tipenser.modificar(tipo_entregable);
             tipo_entregable = new Tipo_Entregable();
-            consultarTipo_Entregable();
+            consultarTipos_Entregable();
     
         }
     }
     public void eliminartipo_Entregable(Tipo_Entregable te){
         tipenser.eliminar(te);
-          consultarTipo_Entregable();   
+          consultarTipos_Entregable();   
         
     }
+    
+   
         
-       public void consultarTipo_Entregable(){
-           setTipo_Entregables(tipenser.consultarTodo(Tipo_Entregable.class));
+       public void consultarTipos_Entregable(){
+           setTipos_Entregable(tipenser.consultarTodo(Tipo_Entregable.class));
     }
        
       
-        
-        
-           
 
     public Tipo_Entregable getTipo_entregable() {
         return tipo_entregable;
@@ -66,18 +67,20 @@ public class Tipo_EntregableController implements Serializable{
     }
 
     /**
-     * @return the tipo_Entregables
+     * @return the tipos_Entregable
      */
-    public List<Tipo_Entregable> getTipo_Entregables() {
-        return tipo_Entregables;
+    public List<Tipo_Entregable> getTipos_Entregable() {
+        return tipos_Entregable;
     }
 
     /**
-     * @param tipo_Entregables the tipo_Entregables to set
+     * @param tipos_Entregable the tipos_Entregable to set
      */
-    public void setTipo_Entregables(List<Tipo_Entregable> tipo_Entregables) {
-        this.tipo_Entregables = tipo_Entregables;
+    public void setTipos_Entregable(List<Tipo_Entregable> tipos_Entregable) {
+        this.tipos_Entregable = tipos_Entregable;
     }
+
+   
 
  
         
