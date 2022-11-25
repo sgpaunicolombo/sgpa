@@ -204,8 +204,10 @@ public class CoordinadorController implements Serializable{
      */
   /*
 
+
      * @return the matcont
-     */
+    */
+     
     public MatriculaController getMatcont() {
         return matcont;
     }

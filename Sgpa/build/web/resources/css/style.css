@@ -136,9 +136,10 @@ body .ui-button{
             border-bottom: .5px solid #D9D9D9;
             padding: 1.25rem 2.5rem;
             margin-bottom: 2.5rem;
+            
         }
         .perfil-img{
-            background-color: red;
+            
             width: 150px;
             height: 150px;
             border-radius: 50%;
@@ -168,6 +169,31 @@ box-shadow: 1px 2px 10px -3px rgba(0,0,0,0.41)
         }
         .perfil-data-tipe{
             font-weight: 500;
+        }
+        .Paletaestados{
+            width: 400px;
+            display: flex;
+            box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+            border-radius: 4px;
+            padding: 20px 20px;
+            justify-content: space-between;
+            
+            border-bottom: .5px solid #D9D9D9;
+            
+        }
+        .estado-data{
+            display: flex;
+            gap:.5rem;
+        }
+        .textopaleta{
+            font-size: 14px;
+            font-weight: 600;
+            
+        }
+        .circulo{
+            height: 20px;
+            width: 20px;
+            border-radius: 20px;
         }
         .agg{
             background-color: #a39e9e;
@@ -409,10 +435,18 @@ header{
     
 }
 
-
+body .ui-datagrid .ui-datagrid-content {
+    border: none !important;
+    
+}
+.Datagrids{
+    display: grid;
+    gap:2rem;
+    
+}
 .tabla-reporte thead{
     text-align: center !important;
-    font-size: 14px !important;
+    font-size: 10px !important;
     background: #005CB9!important;
     color: white!important;
     border-bottom: 5px solid #ddd !important;
