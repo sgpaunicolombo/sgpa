@@ -11,8 +11,6 @@
     <section class="contenido-contenedor">
         <div class="border contenedor top">
             <h1 class="tittle">GESTOR MATRICULAS</h1>
-            <span class="aviso">Matricula Estudiante</span>
-            <p:panel rendered="#{!matriculaController.existematricula}">
             <p:tabView activeIndex="#{matriculaController.activeIndex}" rendered="#{!matriculaController.existematricula}">
                 <p:tab id="test" title="Estudiante">
 
@@ -76,13 +74,6 @@
                 </p:tab>
                 <p:tab id="tper" title="Periodo">
 
-
-                    
-                </p:tab>
-                
-                <p:tab id="tper" title="Periodo">
-
-                 
                     <div class="plider-seleccionado">
                         <span>Seleccionado:</span>
                         <span>#{matriculaController.matricula.estudiante.toString()}</span>
@@ -161,8 +152,8 @@
                         <h:commandButton id="salsem" class="boton" value="Matricular" action="#{matriculaController.matricular()}" />
                     </div>
                 </p:tab>
+
             </p:tabView>
-           </p:panel>
             <p:panel rendered="#{matriculaController.existematricula}">                
                 <ui:include src="GUIMatricula.xhtml" />
             </p:panel>
