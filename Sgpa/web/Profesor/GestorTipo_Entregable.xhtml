@@ -8,58 +8,58 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-       <section class="contenido-contenedor">
-        <div class=" contenedor top">
-            <p:card>
-             <h1 class="tittle">Gestor Tipo de Entregable</h1>
-             <span class="aviso">Crear Tipo De Entregable</span>
-             <div class="contenedor-form periodos" style="align-items: center">
-                 <div class="form-izq">
-                     <div class="input-form-310">
-                         Nombre
-                         <p:inputText class="iform" value="#{tipo_EntregableController.tipo_entregable.nombre}" />
-                     </div>
-                     
-                 </div>
-                 <div class="form-dere">
-                     <div class="input-form-410">
-                         Descripcion
-                         <p:inputTextarea  class="iform" value="#{tipo_EntregableController.tipo_entregable.descripcion}"/>
-                     </div>
-                 </div>
-             </div>
-             <div class="tanone">
-                 <h:commandButton class="boton " value="agregar" action="#{tipo_EntregableController.registrarTipo_Entregable()}" />
-                
-             </div>
-       
+        <section class="contenido-contenedor">
+            <div class=" contenedor border top">
 
-                
-                
-             <p:dataTable class="tabla-reporte" var="per" value="#{tipo_EntregableController.tipo_Entregables}" >
+                <h1 class="tittle">Gestor Tipo de Entregable</h1>
+                <span class="aviso">Crear Tipo De Entregable</span>
+                <div class="contenedor-form periodos" style="align-items: center">
+                    <div class="form-izq">
+                        <div class="input-form-310">
+                            Nombre
+                            <p:inputText class="iform" value="#{tipo_EntregableController.tipo_entregable.nombre}" />
+                        </div>
+
+                    </div>
+                    <div class="form-dere">
+                        <div class="input-form-410">
+                            Descripcion
+                            <p:inputTextarea  class="iform" value="#{tipo_EntregableController.tipo_entregable.descripcion}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="tanone">
+                    <h:commandButton class="boton" value="agregar" action="#{tipo_EntregableController.registrarTipo_Entregable()}" />
+
+                </div>
+
+
+
+
+                <p:dataTable class="tabla-reporte" var="per" value="#{tipo_EntregableController.tipo_Entregables}" >
                     <p:column headerText="Nombre">
                         #{per.nombre}
-                      </p:column>
+                    </p:column>
                     <p:column headerText="Descripcion">
                         #{per.descripcion}
-                     </p:column>
+                    </p:column>
                     <p:column headerText="Eliminar">
                         <div class="Acciones">
                             <div class="accion">
-                            <i class="uil uil-trash-alt" style="color: red; font-size: 25px"></i>
-                            <h:commandButton class="icono" value="Eliminar" action="#{tipo_EntregableController.eliminartipo_Entregable(per)}" />
+                                <i class="uil uil-trash-alt" style="color: red; font-size: 25px"></i>
+                                <h:commandButton class="icono" value="Eliminar" action="#{tipo_EntregableController.eliminartipo_Entregable(per)}" />
+                            </div>
                         </div>
-                        </div>
-                        
+
                     </p:column>
                 </p:dataTable>
-    
-             </p:card>
-        </div>
-    </section>
+
+
+            </div>
+        </section>
     </h:body>
-    
-       
+
+
 
 </html>
 
