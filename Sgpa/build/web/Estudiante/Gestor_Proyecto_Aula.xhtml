@@ -57,14 +57,17 @@
                                 </div>
                             </p:tab>
                             <p:tab title="Itenes del Proyecto">
-                                <h:commandButton rendered="#{!estudianteController.mpanelAItems}"  value="+" action="#{estudianteController.agregarItem()}" />
+                                <h:commandButton rendered="#{!estudianteController.mpanelAItems}" class="add"  value="+" action="#{estudianteController.agregarItem()}" />
                                 <p:panel rendered="#{estudianteController.mpanelAItems}" >                            
                                     <p:dataTable class="tabla-reporte" style="overflow-y: scroll;height: 350px"  var="ite" value="#{tipo_itemController.tipos_Items}" >
                                         <p:column headerText="Nombre">
                                             <h:outputText title="#{ite.descripcion}" value="#{ite.nombre}" />
                                         </p:column>                            
-                                        <p:column  >
-                                            <h:commandButton value="+" action="#{estudianteController.seleccionarTItem(ite)}"  />
+                                        <p:column headerText="ageregar"  >
+                                            <div class="accion">
+                                                <i class="uil uil-plus" style="color: #004F9E; "></i>
+                                                <h:commandButton class="icono" value="+" action="#{estudianteController.seleccionarTItem(ite)}"  />
+                                            </div>
                                         </p:column>
                                     </p:dataTable>
                                     <h:commandButton value="volver" action="#{estudianteController.volverItems()}" />
@@ -127,26 +130,7 @@
     </h:body>
 
     <style>
-        .contsoporte {  display: grid;
-                        grid-template-columns: 100px 100px 100px;
-                        grid-template-rows: 100px 100px 100px;
-                        grid-auto-columns: 1fr;
-                        gap: 0px 0px;
-                        grid-auto-flow: row;
-                        grid-template-areas:
-                            "cdes cdes cdes"
-                            "cimg cimg ccho"
-                            "cimg cimg ccarg";
-        }
 
-        .cdes { grid-area: cdes; }
-
-        .cimg { grid-area: cimg; }
-
-        .ccho { grid-area: ccho; }
-
-        .ccarg { grid-area: ccarg; } 
-        
         .img-entregable {
             background-color: red;
             width:120px;
